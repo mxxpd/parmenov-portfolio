@@ -1,15 +1,25 @@
 {
-  "name": "banking-portfolio",
+  "name": "parmenov-portfolio",
   "private": true,
   "type": "module",
   "scripts": {
     "build": "nuxt build",
-    "dev": "nuxt dev",
+    "dev": "docker compose -f docker-compose.yml -f docker-compose.dev.yml up --build",
+    "dev:down": "docker compose -f docker-compose.yml -f docker-compose.dev.yml down",
+    "dev:local": "nuxt dev",
+    "docker:dev": "docker compose -f docker-compose.yml -f docker-compose.dev.yml up --build",
+    "docker:dev:down": "docker compose -f docker-compose.yml -f docker-compose.dev.yml down",
+    "docker:prod": "docker compose up --build -d",
+    "docker:prod:down": "docker compose down",
     "generate": "nuxt generate",
     "preview": "nuxt preview"
   },
   "dependencies": {
+    "@tailwindcss/vite": "^4.2.2",
     "nuxt": "^4.4.2",
+    "tailwindcss": "^4.2.2",
+    "typograf": "^7.6.0",
+    "vite-svg-loader": "^5.1.1",
     "vue": "^3.5.0"
   }
 }

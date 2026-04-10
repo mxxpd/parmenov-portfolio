@@ -1,0 +1,74 @@
+<script setup lang="ts">
+defineProps<{ isOpen: boolean }>()
+defineEmits<{ toggle: [] }>()
+</script>
+
+<template>
+  <button
+    type="button"
+    class="menu-btn"
+    :class="{ 'menu-btn--open': isOpen }"
+    :aria-expanded="isOpen"
+    aria-label="Меню"
+    @click="$emit('toggle')"
+  >
+    <span class="menu-btn__icon">
+      <span class="bar" />
+      <span class="bar" />
+      <span class="bar" />
+    </span>
+  </button>
+</template>
+
+<style scoped>
+.menu-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border: none;
+  border-radius: var(--radius-md);
+  background: transparent;
+  cursor: pointer;
+  color: var(--color-text-primary);
+  transition: background 0.18s ease;
+  flex-shrink: 0;
+}
+
+.menu-btn:hover {
+  background: color-mix(in srgb, var(--color-bg-surface-muted) 80%, transparent);
+}
+
+.menu-btn__icon {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  width: 20px;
+}
+
+.bar {
+  display: block;
+  height: 2px;
+  width: 100%;
+  background: currentColor;
+  border-radius: 2px;
+  transform-origin: center;
+  transition:
+    transform 0.28s cubic-bezier(0.34, 1.56, 0.64, 1),
+    opacity 0.18s ease;
+}
+
+.menu-btn--open .bar:nth-child(1) {
+  transform: translateY(7px) rotate(45deg);
+}
+
+.menu-btn--open .bar:nth-child(2) {
+  opacity: 0;
+  transform: scaleX(0);
+}
+
+.menu-btn--open .bar:nth-child(3) {
+  transform: translateY(-7px) rotate(-45deg);
+}
+</style>
