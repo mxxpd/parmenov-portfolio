@@ -19,7 +19,7 @@ const reasons = [
 </script>
 
 <template>
-  <section class="section" :class="{ 'is-visible': isVisible }" :ref="bind">
+  <section :ref="bind" class="section" :class="{ 'is-visible': isVisible }">
     <p class="label">Результаты</p>
     <h2 class="heading">Результаты превзошли ожидания в 10 раз</h2>
 
@@ -31,7 +31,7 @@ const reasons = [
       <table class="table">
         <thead>
           <tr>
-            <th class="th"></th>
+            <th class="th"/>
             <th class="th">До пивота</th>
             <th class="th th--after">После пивота</th>
           </tr>

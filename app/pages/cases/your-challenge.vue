@@ -1,10 +1,20 @@
 <script setup lang="ts">
+const { getCaseBySlug } = useCases()
+const caseEntry = getCaseBySlug('your-challenge')
+
+if (!caseEntry) {
+  throw createError({
+    statusCode: 404,
+    statusMessage: 'Case not found',
+  })
+}
+
 useSeoMeta({
-  title: 'Your Challenge — Парменов',
-  description: 'Как я перезапустил skill-based gaming platform и вырастил базу пользователей в 13 раз за 2 месяца.',
-  ogTitle: 'Your Challenge — Парменов',
+  title: caseEntry.seo.title,
+  description: caseEntry.seo.description,
+  ogTitle: caseEntry.seo.title,
   ogLocale: 'ru_RU',
-  robots: 'noindex, nofollow, noarchive, nosnippet, noimageindex',
+  robots: caseEntry.seo.robots,
 })
 </script>
 

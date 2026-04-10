@@ -29,7 +29,7 @@ const mechanics = [
 </script>
 
 <template>
-  <section class="section" :class="{ 'is-visible': isVisible }" :ref="bind">
+  <section :ref="bind" class="section" :class="{ 'is-visible': isVisible }">
     <p class="label">Гипотеза и решение</p>
     <h2 class="heading">Как я пришёл к идее быстрых матчей</h2>
 
@@ -75,7 +75,7 @@ const mechanics = [
       <table class="table">
         <thead>
           <tr>
-            <th class="th th--label"></th>
+            <th class="th th--label"/>
             <th class="th">Челленджи</th>
             <th class="th">Турниры</th>
             <th class="th th--win">Быстрые матчи</th>

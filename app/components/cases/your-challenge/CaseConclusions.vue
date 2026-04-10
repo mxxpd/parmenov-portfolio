@@ -23,7 +23,7 @@ const shifts = [
 </script>
 
 <template>
-  <section class="section" :class="{ 'is-visible': isVisible }" :ref="bind">
+  <section :ref="bind" class="section" :class="{ 'is-visible': isVisible }">
     <p class="label">Выводы</p>
     <h2 class="heading">Этот проект изменил то, как я думаю о дизайне</h2>
 
@@ -46,7 +46,7 @@ const shifts = [
   </section>
 
   <footer class="case-footer">
-    <AppButton label="← Все кейсы" variant="ghost" href="/cases" />
+    <AppButton label="← Все кейсы" variant="secondary" href="/cases" />
   </footer>
 </template>
 

@@ -1,6 +1,6 @@
-import type { Case } from '~/types'
+import type { CaseCard, CaseEntry } from '~/types'
 
-const cases: Case[] = [
+const cases: CaseEntry[] = [
   {
     slug: 'forkies',
     title: 'Forkies',
@@ -10,6 +10,14 @@ const cases: Case[] = [
     year: 2026,
     coverFrom: '#2D9E2B',
     coverTo: '#B6DDB4',
+    featured: true,
+    status: 'stub',
+    page: 'stub',
+    seo: {
+      title: 'Forkies — Парменов',
+      description: 'Кейс о продукте для автоматизации ресторанного бизнеса: от заказов до аналитики.',
+      robots: 'noindex, nofollow',
+    },
   },
   {
     slug: 'iona',
@@ -20,6 +28,13 @@ const cases: Case[] = [
     year: 2026,
     coverFrom: '#E88A00',
     coverTo: '#FFD08A',
+    status: 'stub',
+    page: 'stub',
+    seo: {
+      title: 'TBD — Парменов',
+      description: 'Кейс об AI Analytics продукте находится в подготовке.',
+      robots: 'noindex, nofollow',
+    },
   },
   {
     slug: 'your-challenge',
@@ -30,6 +45,13 @@ const cases: Case[] = [
     year: 2025,
     coverFrom: '#C95228',
     coverTo: '#FABFA0',
+    status: 'published',
+    page: 'custom',
+    seo: {
+      title: 'Your Challenge — Парменов',
+      description: 'Как я перезапустил skill-based gaming platform и вырастил базу пользователей в 13 раз за 2 месяца.',
+      robots: 'noindex, nofollow, noarchive, nosnippet, noimageindex',
+    },
   },
   {
     slug: 'adsource',
@@ -40,11 +62,35 @@ const cases: Case[] = [
     year: 2024,
     coverFrom: '#1A6FD6',
     coverTo: '#A8CCF0',
+    status: 'stub',
+    page: 'stub',
+    seo: {
+      title: 'TBD — Парменов',
+      description: 'Кейс об AdTech платформе находится в подготовке.',
+      robots: 'noindex, nofollow',
+    },
   },
 ]
 
 export function useCases() {
-  const getCaseBySlug = (slug: string) => cases.find(c => c.slug === slug)
+  const listedCases = cases
+  const getCaseBySlug = (slug: string) => listedCases.find(item => item.slug === slug)
+  const getFeaturedCase = () => listedCases.find(item => item.featured) ?? listedCases[0]
+  const toCaseCard = (item: CaseEntry): CaseCard => ({
+    slug: item.slug,
+    title: item.title,
+    type: item.type,
+    description: item.description,
+    role: item.role,
+    year: item.year,
+    coverFrom: item.coverFrom,
+    coverTo: item.coverTo,
+  })
 
-  return { cases, getCaseBySlug }
+  return {
+    cases: listedCases,
+    getCaseBySlug,
+    getFeaturedCase,
+    toCaseCard,
+  }
 }

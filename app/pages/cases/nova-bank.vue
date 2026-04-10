@@ -53,7 +53,7 @@
       <section class="hero">
         <div class="hero__content">
           <div class="eyebrow">
-            <span class="eyebrow__dot"></span>
+            <span class="eyebrow__dot"/>
             <TypoText
               text="Спокойный цифровой банк для личных и командных финансов"
             />
@@ -110,9 +110,9 @@
               text="Лимиты и сценарии"
             />
             <div class="panel__bars">
-              <span></span>
-              <span></span>
-              <span></span>
+              <span/>
+              <span/>
+              <span/>
             </div>
           </div>
 
@@ -202,10 +202,10 @@
               text="+18% к свободному остатку"
             />
             <div class="panel__chart">
-              <span></span>
-              <span></span>
-              <span></span>
-              <span></span>
+              <span/>
+              <span/>
+              <span/>
+              <span/>
             </div>
           </div>
         </div>

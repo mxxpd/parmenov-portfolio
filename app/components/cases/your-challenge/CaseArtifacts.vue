@@ -5,7 +5,7 @@ const { bind, isVisible } = useScrollReveal()
 </script>
 
 <template>
-  <section class="section" :class="{ 'is-visible': isVisible }" :ref="bind">
+  <section :ref="bind" class="section" :class="{ 'is-visible': isVisible }">
     <p class="label">Артефакты</p>
     <h2 class="heading">Рабочие материалы</h2>
 

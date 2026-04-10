@@ -1,4 +1,14 @@
-export interface Case {
+export type CaseStatus = 'published' | 'stub'
+
+export type CasePageKind = 'custom' | 'stub'
+
+export interface CaseSeoMeta {
+  title: string
+  description: string
+  robots?: string
+}
+
+export interface CaseCard {
   slug: string
   title: string
   type: string
@@ -7,4 +17,11 @@ export interface Case {
   year: number
   coverFrom: string
   coverTo: string
+}
+
+export interface CaseEntry extends CaseCard {
+  featured?: boolean
+  status: CaseStatus
+  page: CasePageKind
+  seo: CaseSeoMeta
 }

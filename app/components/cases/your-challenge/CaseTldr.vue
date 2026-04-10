@@ -12,7 +12,7 @@ const text = computed(() =>
 </script>
 
 <template>
-  <div class="tldr" :class="{ 'is-visible': isVisible }" :ref="bind">
+  <div :ref="bind" class="tldr" :class="{ 'is-visible': isVisible }">
     <div class="tldr__lead">
       <p class="tldr__label">TL;DR</p>
     </div>

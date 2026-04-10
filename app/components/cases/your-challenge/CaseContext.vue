@@ -12,7 +12,7 @@ const roles = [
 </script>
 
 <template>
-  <section class="section" :class="{ 'is-visible': isVisible }" :ref="bind">
+  <section :ref="bind" class="section" :class="{ 'is-visible': isVisible }">
     <div class="content">
       <div class="text-col">
         <p class="label">Контекст</p>

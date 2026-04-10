@@ -1,15 +1,32 @@
 <script setup lang="ts">
-useHead({
-  title: 'Кейс — Парменов',
-  meta: [{ name: 'robots', content: 'noindex, nofollow' }],
+const route = useRoute()
+const { getCaseBySlug } = useCases()
+
+const slug = computed(() => String(route.params.slug))
+const caseEntry = computed(() => getCaseBySlug(slug.value))
+
+if (!caseEntry.value) {
+  throw createError({
+    statusCode: 404,
+    statusMessage: 'Case not found',
+  })
+}
+
+useSeoMeta({
+  title: () => caseEntry.value!.seo.title,
+  description: () => caseEntry.value!.seo.description,
+  ogTitle: () => caseEntry.value!.seo.title,
+  ogLocale: 'ru_RU',
+  robots: () => caseEntry.value!.seo.robots ?? 'index, follow',
 })
 </script>
 
 <template>
   <div class="stub">
-    <p class="stub__label">В разработке</p>
-    <p class="stub__text">Здесь скоро будет кейс</p>
-    <AppButton label="Все кейсы" variant="ghost" href="/cases" />
+    <p class="stub__label">{{ caseEntry?.status === 'stub' ? 'В разработке' : 'Кейс' }}</p>
+    <h1 class="stub__title">{{ caseEntry?.title }}</h1>
+    <p class="stub__text">{{ caseEntry?.description }}</p>
+    <AppButton label="Все кейсы" variant="secondary" href="/cases" />
   </div>
 </template>
 
@@ -32,10 +49,17 @@ useHead({
   letter-spacing: 0.08em;
 }
 
-.stub__text {
+.stub__title {
   font-size: var(--text-h2);
   font-weight: var(--font-weight-display);
   color: var(--color-text-primary);
   line-height: var(--line-height-heading);
+}
+
+.stub__text {
+  max-width: 34ch;
+  font-size: var(--text-body);
+  color: var(--color-text-secondary);
+  line-height: var(--line-height-body-relaxed);
 }
 </style>

@@ -14,7 +14,7 @@ const items = [
 </script>
 
 <template>
-  <section class="section" :class="{ 'is-visible': isVisible }" :ref="bind">
+  <section :ref="bind" class="section" :class="{ 'is-visible': isVisible }">
     <p class="label">Что я сделал</p>
     <h2 class="heading">Этапы работы</h2>
 

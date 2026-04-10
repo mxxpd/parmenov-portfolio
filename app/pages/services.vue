@@ -14,7 +14,7 @@ useSeoMeta({
     <p class="stub__text">
       Здесь появится описание форматов работы, процессов и того, с какими продуктами я помогаю.
     </p>
-    <AppButton label="Смотреть кейсы" variant="ghost" href="/cases" />
+    <AppButton label="Смотреть кейсы" variant="secondary" href="/cases" />
   </div>
 </template>
 

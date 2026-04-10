@@ -12,7 +12,7 @@ const improvements = [
 </script>
 
 <template>
-  <section class="section" :class="{ 'is-visible': isVisible }" :ref="bind">
+  <section :ref="bind" class="section" :class="{ 'is-visible': isVisible }">
     <p class="label">Проблемы и ограничения</p>
     <h2 class="heading">Рост обнажил узкие места</h2>
 

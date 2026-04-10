@@ -14,7 +14,7 @@ useSeoMeta({
     <p class="stub__text">
       Здесь появятся заметки о продуктовой логике, UX, исследованиях и работе с интерфейсами.
     </p>
-    <AppButton label="Вернуться на главную" variant="ghost" href="/" />
+    <AppButton label="Вернуться на главную" variant="secondary" href="/" />
   </div>
 </template>
 

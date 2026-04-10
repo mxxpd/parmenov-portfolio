@@ -1,31 +1,34 @@
 <template>
   <section class="hero">
     <div class="hero__copy">
-      <span class="hero__label">UX/UI дизайнер</span>
+      <div class="hero__intro">
+        <span class="hero__label">UX/UI дизайнер</span>
 
-      <h1 class="hero__title">
-        Создаю системный дизайн<br>
-        для любых цифровых продуктов
-      </h1>
+        <h1 class="hero__title">
+          Проектирую интерфейсы для сложных цифровых продуктов
+        </h1>
+      </div>
 
-      <p class="hero__description">
-        Проектирую интерфейсы, упрощаю сложное и помогаю продуктам расти
-        через дизайн и системный подход.
-      </p>
+      <div class="hero__body">
+        <p class="hero__description">
+          Помогаю продуктам становиться понятнее, быстрее и полезнее: от структуры и пользовательских сценариев до
+          визуальной системы и ключевых продуктовых решений.
+        </p>
 
-      <div class="hero__actions">
-        <AppButton label="Связаться со мной" size="lg" :icon="true" />
-        <AppButton label="Посмотреть кейсы" variant="ghost" size="lg" href="/cases" />
+        <div class="hero__actions">
+          <AppButton label="Связаться со мной" size="lg" :icon="true" />
+          <AppButton label="Посмотреть кейсы" variant="secondary" size="lg" href="/cases" />
+        </div>
       </div>
 
       <p class="hero__tagline">
-        B2B&nbsp;• B2C&nbsp;• iGaming&nbsp;• HoReCa&nbsp;• Data-heavy интерфейсы
+        HoReCa • AI Analytics • iGaming • AdTech
       </p>
     </div>
 
     <div class="hero__visual" aria-hidden="true">
-      <div class="hero__visual-orb hero__visual-orb--1"></div>
-      <div class="hero__visual-orb hero__visual-orb--2"></div>
+      <div class="hero__visual-orb hero__visual-orb--1" />
+      <div class="hero__visual-orb hero__visual-orb--2" />
     </div>
   </section>
 </template>
@@ -38,16 +41,21 @@
   align-items: stretch;
 }
 
-/* ── Left: copy ─────────────────────────────────────── */
 .hero__copy {
   display: flex;
   flex-direction: column;
-  gap: var(--spacing-6);
+  gap: var(--spacing-8);
   padding: var(--spacing-8);
   border: 1px solid color-mix(in srgb, var(--color-border-subtle) 72%, transparent);
   border-radius: 32px;
   background: color-mix(in srgb, var(--color-bg-surface) 92%, transparent);
   box-shadow: var(--shadow-raised);
+}
+
+.hero__intro {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-6);
 }
 
 .hero__label {
@@ -63,15 +71,22 @@
 }
 
 .hero__title {
-  font-size: clamp(26px, 2.7vw, 44px);
+  max-width: 18ch;
+  font-size: clamp(28px, 2.8vw, 46px);
   font-weight: var(--font-weight-display);
-  line-height: 1.1;
-  letter-spacing: -0.03em;
+  line-height: 1.05;
+  letter-spacing: -0.035em;
   color: var(--color-text-primary);
 }
 
+.hero__body {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-6);
+}
+
 .hero__description {
-  max-width: 42ch;
+  max-width: 40ch;
   font-size: var(--text-body);
   line-height: var(--line-height-body-relaxed);
   color: var(--color-text-secondary);
@@ -85,12 +100,13 @@
 
 .hero__tagline {
   margin-top: auto;
+  padding-top: var(--spacing-4);
+  border-top: 1px solid color-mix(in srgb, var(--color-border-subtle) 72%, transparent);
   font-size: var(--text-body-sm);
-  color: var(--color-text-secondary);
-  opacity: 0.72;
+  line-height: 1.5;
+  color: color-mix(in srgb, var(--color-text-secondary) 88%, transparent);
 }
 
-/* ── Right: visual ──────────────────────────────────── */
 .hero__visual {
   position: relative;
   overflow: hidden;
@@ -127,10 +143,13 @@
   background: color-mix(in srgb, var(--color-brand-primary) 24%, transparent);
 }
 
-/* ── Responsive ─────────────────────────────────────── */
 @media (max-width: 1024px) {
   .hero {
     grid-template-columns: 1fr;
+  }
+
+  .hero__copy {
+    gap: var(--spacing-7);
   }
 
   .hero__visual {
@@ -140,8 +159,22 @@
 
 @media (max-width: 640px) {
   .hero__copy {
+    gap: var(--spacing-6);
     padding: var(--spacing-6);
     border-radius: var(--radius-xl);
+  }
+
+  .hero__intro {
+    gap: var(--spacing-5);
+  }
+
+  .hero__body {
+    gap: var(--spacing-5);
+  }
+
+  .hero__title {
+    max-width: 100%;
+    font-size: clamp(28px, 8vw, 40px);
   }
 
   .hero__visual {
@@ -156,6 +189,10 @@
   .hero__actions .app-btn {
     width: 100%;
     justify-content: center;
+  }
+
+  .hero__tagline {
+    padding-top: var(--spacing-3);
   }
 }
 </style>

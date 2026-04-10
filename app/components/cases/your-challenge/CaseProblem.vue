@@ -14,7 +14,7 @@ const steps = [
 </script>
 
 <template>
-  <section class="section" :class="{ 'is-visible': isVisible }" :ref="bind">
+  <section :ref="bind" class="section" :class="{ 'is-visible': isVisible }">
     <p class="label">Проблема</p>
     <h2 class="heading">Что не работало и почему</h2>
 
@@ -57,13 +57,15 @@ const steps = [
         <line x1="0" y1="40"  x2="600" y2="40"  class="chart__grid" />
         <line x1="0" y1="90"  x2="600" y2="90"  class="chart__grid" />
         <line x1="0" y1="140" x2="600" y2="140" class="chart__grid" />
-        <path class="chart__fill"
+        <path
+class="chart__fill"
           d="M0,148 C40,148 70,148 95,148 C120,148 148,72 178,38 C208,4 228,4 248,36
              C268,68 298,145 350,148 C385,148 405,148 425,148
              C445,148 465,44 492,18 C519,-8 530,-4 548,22
              C566,48 578,142 600,148 L600,148 L0,148 Z"
         />
-        <path class="chart__line" fill="none"
+        <path
+class="chart__line" fill="none"
           d="M0,148 C40,148 70,148 95,148 C120,148 148,72 178,38 C208,4 228,4 248,36
              C268,68 298,145 350,148 C385,148 405,148 425,148
              C445,148 465,44 492,18 C519,-8 530,-4 548,22
