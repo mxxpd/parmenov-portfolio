@@ -1,81 +1,9 @@
-import type { CaseCard, CaseEntry } from '~/types'
-
-const cases: CaseEntry[] = [
-  {
-    slug: 'forkies',
-    title: 'Forkies',
-    type: 'HoReCa',
-    description: 'Создание продукта для автоматизации ресторанного бизнеса — от заказов до аналитики',
-    role: 'Product Designer',
-    year: 2026,
-    coverFrom: '#2D9E2B',
-    coverTo: '#B6DDB4',
-    featured: true,
-    status: 'stub',
-    page: 'stub',
-    seo: {
-      title: 'Forkies — Парменов',
-      description: 'Кейс о продукте для автоматизации ресторанного бизнеса: от заказов до аналитики.',
-      robots: 'noindex, nofollow',
-    },
-  },
-  {
-    slug: 'iona',
-    title: 'TBD',
-    type: 'AI Analytics',
-    description: 'Аналитическая платформа на базе AI для структурированной работы с данными и инсайтами',
-    role: 'Product Designer',
-    year: 2026,
-    coverFrom: '#E88A00',
-    coverTo: '#FFD08A',
-    status: 'stub',
-    page: 'stub',
-    seo: {
-      title: 'TBD — Парменов',
-      description: 'Кейс об AI Analytics продукте находится в подготовке.',
-      robots: 'noindex, nofollow',
-    },
-  },
-  {
-    slug: 'your-challenge',
-    title: 'Your Challenge',
-    type: 'iGaming',
-    description: 'Пивот продукта, который вырастил базу пользователей в 13 раз за 2 месяца',
-    role: 'Product Designer',
-    year: 2025,
-    coverFrom: '#C95228',
-    coverTo: '#FABFA0',
-    status: 'published',
-    page: 'custom',
-    seo: {
-      title: 'Your Challenge — Парменов',
-      description: 'Как я перезапустил skill-based gaming platform и вырастил базу пользователей в 13 раз за 2 месяца.',
-      robots: 'noindex, nofollow, noarchive, nosnippet, noimageindex',
-    },
-  },
-  {
-    slug: 'adsource',
-    title: 'TBD',
-    type: 'AdTech',
-    description: 'Платформа для управления рекламными кампаниями с фокусом на эффективность и прозрачность',
-    role: 'UX/UI-дизайнер',
-    year: 2024,
-    coverFrom: '#1A6FD6',
-    coverTo: '#A8CCF0',
-    status: 'stub',
-    page: 'stub',
-    seo: {
-      title: 'TBD — Парменов',
-      description: 'Кейс об AdTech платформе находится в подготовке.',
-      robots: 'noindex, nofollow',
-    },
-  },
-]
+import type { CaseCard, CaseEntry } from '~/types/case'
+import { cases } from '~/const/cases'
 
 export function useCases() {
-  const listedCases = cases
-  const getCaseBySlug = (slug: string) => listedCases.find(item => item.slug === slug)
-  const getFeaturedCase = () => listedCases.find(item => item.featured) ?? listedCases[0]
+  const getCaseBySlug = (slug: string) => cases.find(item => item.slug === slug)
+  const getFeaturedCase = () => cases.find(item => item.featured) ?? cases[0]
   const toCaseCard = (item: CaseEntry): CaseCard => ({
     slug: item.slug,
     title: item.title,
@@ -88,7 +16,7 @@ export function useCases() {
   })
 
   return {
-    cases: listedCases,
+    cases,
     getCaseBySlug,
     getFeaturedCase,
     toCaseCard,

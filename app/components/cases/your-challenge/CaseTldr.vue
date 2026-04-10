@@ -21,7 +21,7 @@ const text = computed(() =>
   </div>
 </template>
 
-<style scoped>
+<style lang="scss" scoped>
 .tldr {
   display: grid;
   grid-template-columns: 96px minmax(0, 1fr);

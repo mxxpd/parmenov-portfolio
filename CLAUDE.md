@@ -31,7 +31,7 @@
 ## Current Stack
 
 ```text
-Frontend: Nuxt 4, Vue 3, TypeScript, Tailwind CSS v4
+Frontend: Nuxt 4, Vue 3, TypeScript, SCSS (sass-embedded)
 Backend:  Nuxt Nitro
 Runtime:  Node 22 + Docker
 Quality:  ESLint, nuxt typecheck
@@ -57,21 +57,34 @@ Infra:   Docker, Docker Compose, Mailpit
 d:/PROJECTS/pf/
 |- app/
 |  |- assets/
-|  |  |- css/main.css
+|  |  |- styles/
+|  |  |  |- main.scss              ← точка входа, только @use
+|  |  |  |- base/                  ← токены, reset, base, dark theme
+|  |  |  |- layouts/               ← _default.scss
+|  |  |  `- components/            ← по одному файлу на компонент
+|  |  |     |- _app-button.scss
+|  |  |     |- _placeholder-image.scss
+|  |  |     |- header/
+|  |  |     |- hero/
+|  |  |     `- cases/
 |  |  `- icons/
 |  |- components/
 |  |  |- AppButton.vue
 |  |  |- PlaceholderImage.vue
 |  |  |- TypoText.vue
 |  |  |- cases/
-|  |  |  `- your-challenge/
+|  |  |  |- Card.vue
+|  |  |  |- Hero.vue
+|  |  |  `- your-challenge/        ← секции детального кейса
 |  |  |- header/
 |  |  `- hero/
 |  |- composables/
-|  |  |- useCases.ts
+|  |  |- useCases.ts               ← только логика, данные в const/
 |  |  |- useScrollReveal.ts
 |  |  |- useTheme.ts
 |  |  `- useTypograf.ts
+|  |- const/
+|  |  `- cases.ts                  ← статические данные кейсов
 |  |- layouts/default.vue
 |  |- pages/
 |  |  |- index.vue
@@ -80,10 +93,12 @@ d:/PROJECTS/pf/
 |  |  `- cases/
 |  |     |- index.vue
 |  |     |- [slug].vue
-|  |     |- nova-bank.vue
 |  |     `- your-challenge.vue
-|  `- plugins/
-|     `- typograf.ts
+|  |- plugins/
+|  |  `- typograf.ts
+|  `- types/
+|     |- index.ts                  ← только re-export
+|     `- case.ts                   ← типы по домену
 |- public/favicon.svg
 |- nuxt.config.ts
 |- eslint.config.mjs
@@ -97,8 +112,7 @@ d:/PROJECTS/pf/
 
 ## Important Notes
 
-- `app/pages/cases/nova-bank.vue` — временный визуальный референс дизайн-системы. Не удалять и не рефакторить без причины.
-- Данные по кейсам лежат в `app/composables/useCases.ts`.
+- Данные по кейсам лежат в `app/const/cases.ts`, composable `useCases.ts` — только логика.
 - Детальный кейс `your-challenge` собран из отдельных секций в `app/components/cases/your-challenge/`.
 - `vite-svg-loader` должен оставаться в `dependencies`, потому что нужен Nuxt во время загрузки конфига.
 - Типограф сейчас включён и работает глобально через директиву `v-typo` в `app/layouts/default.vue`.
@@ -106,19 +120,65 @@ d:/PROJECTS/pf/
 
 ## Design System
 
-Основные токены лежат в `app/assets/css/main.css`.
+Токены в `app/assets/styles/base/`:
 
-- брендовая палитра: peach / ink / sand + status colors
-- шрифт: Onest
-- семантические токены для текста, фонов, границ, радиусов, теней и spacing
-- тёмная тема управляется через `data-theme="dark"` на `<html>`
+- `_vars.scss` — примитивы (цвета, типографика, spacing, радиусы, тени) + семантические алиасы
+- `_dark.scss` — переопределения семантических токенов для `html[data-theme="dark"]`
+- `_reset.scss` — box-sizing, margin/padding reset
+- `_base.scss` — базовые стили html, body, a, button
+
+Брендовая палитра: peach / ink / sand + status colors.  
+Шрифт: Onest.  
+Тёмная тема управляется через `data-theme="dark"` на `<html>`.
+
+## Principles: Styles
+
+**Архитектура:** глобальные SCSS-файлы, без Tailwind, без scoped-стилей в переиспользуемых компонентах.
+
+**Когда scoped, когда глобальный файл:**
+- Переиспользуемые компоненты (AppButton, Header, Card и т.д.) → глобальный SCSS-файл в `assets/styles/components/`
+- Уникальные секции страниц (компоненты `cases/your-challenge/`) → `<style lang="scss" scoped>` внутри SFC
+
+**Правило специфичности:** при конфликте между классом компонента (`.menu-btn`) и классом-модификатором из родителя (`.header__menu-btn`) используй контекстный селектор с двумя классами:
+```scss
+// Неправильно — одинаковая специфичность, побеждает тот, кто позже в файле
+.header__menu-btn { display: none; }
+
+// Правильно — два класса, всегда выигрывает
+.header .header__menu-btn { display: none; }
+```
+
+**Добавление нового компонента:**
+1. Создать `assets/styles/components/_имя-компонента.scss`
+2. Добавить `@use 'components/имя-компонента'` в `main.scss`
+3. Удалить `<style>` блок из Vue-файла
+
+**Docker и node_modules:** при изменении `package.json` нужно пересоздать тома:
+```bash
+npm run dev:down
+docker compose -f docker-compose.yml -f docker-compose.dev.yml down -v
+npm run dev
+```
+
+## Principles: Types & Data
+
+- Типы группируются по домену: `app/types/case.ts`, `app/types/user.ts` и т.д.
+- `app/types/index.ts` — только re-export, не содержит деклараций
+- Статические данные (массивы, конфиги) живут в `app/const/`, а не в composables
+- Composables содержат только логику: фильтрацию, трансформацию, реактивность
+
+## Principles: Components
+
+- BEM-нейминг классов: `.block`, `.block__element`, `.block--modifier`
+- `PlaceholderImage.vue` — заглушка для медиа, принимает `label` и `height`
+- `useScrollReveal` — паттерн с `bind`-функцией: `:ref="bind"` в шаблоне, `isVisible` реактивный
 
 ## Navigation
 
-- `/` -> главная
-- `/cases` -> кейсы
-- `/services` -> сервисы
-- `/articles` -> статьи
+- `/` → главная
+- `/cases` → кейсы
+- `/services` → сервисы
+- `/articles` → статьи
 
 ## Run
 
@@ -127,12 +187,6 @@ d:/PROJECTS/pf/
 ```bash
 npm install
 npm run dev
-```
-
-Локальный запуск без Docker:
-
-```bash
-npm run dev:local
 ```
 
 Остановка Docker dev-окружения:
@@ -150,7 +204,8 @@ npm run typecheck
 
 ## Current State
 
-- Базовая архитектура и маршрутизация собраны.
+- Базовая архитектура, маршрутизация и дизайн-система собраны.
+- Стили полностью переведены на SCSS (без Tailwind).
 - Разделы `services` и `articles` пока являются аккуратными заглушками.
-- `Your Challenge` — основной активный кейс в разработке.
-- В проекте уже настроены линтинг, typecheck и глобальный типограф.
+- `Your Challenge` — основной активный кейс, страница собрана из компонентов-секций.
+- Настроены линтинг, typecheck и глобальный типограф.

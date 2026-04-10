@@ -51,7 +51,7 @@ const roles = [
   </section>
 </template>
 
-<style scoped>
+<style lang="scss" scoped>
 .section {
   opacity: 0;
   transform: translateY(12px);

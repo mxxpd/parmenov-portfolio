@@ -1,0 +1,49 @@
+// ─── Header ───────────────────────────────────────────────────────────────────
+
+.header {
+  position: sticky;
+  top: var(--spacing-4);
+  z-index: 20;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--spacing-6);
+  padding: var(--spacing-4) var(--spacing-6);
+  border: 1px solid color-mix(in srgb, var(--color-border-subtle) 72%, transparent);
+  border-radius: 32px;
+  background: color-mix(in srgb, var(--color-bg-surface) 92%, transparent);
+  box-shadow: var(--shadow-raised);
+  backdrop-filter: blur(18px);
+}
+
+// Desktop: hide menu button (two-class specificity beats .menu-btn { display: flex })
+.header .header__menu-btn {
+  display: none;
+}
+
+// Mobile: hide nav + actions, show menu button
+@media (max-width: 768px) {
+  .header .header__nav,
+  .header .header__actions {
+    display: none;
+  }
+
+  .header .header__menu-btn {
+    display: flex;
+  }
+}
+
+// ── Mobile menu transition (global) ──────────────────────────────────────────
+
+.mmenu-enter-active {
+  transition: opacity 0.22s ease;
+}
+
+.mmenu-leave-active {
+  transition: opacity 0.18s ease;
+}
+
+.mmenu-enter-from,
+.mmenu-leave-to {
+  opacity: 0;
+}

@@ -61,7 +61,7 @@ const reasons = [
   </section>
 </template>
 
-<style scoped>
+<style lang="scss" scoped>
 .section {
   display: flex;
   flex-direction: column;

@@ -1,10 +1,9 @@
-import tailwindcss from '@tailwindcss/vite'
 import svgLoader from 'vite-svg-loader'
 
 export default defineNuxtConfig({
   devtools: { enabled: process.env.NODE_ENV === 'development' },
   modules: ['@nuxt/eslint'],
-  css: ['~/assets/css/main.css'],
+  css: ['~/assets/styles/main.scss'],
   compatibilityDate: '2024-11-01',
   routeRules: {
     '/cases/your-challenge': {
@@ -41,6 +40,14 @@ export default defineNuxtConfig({
     },
   },
   vite: {
-    plugins: [tailwindcss(), svgLoader({ defaultImport: 'component' })],
+    plugins: [svgLoader({ defaultImport: 'component' })],
+    css: {
+      preprocessorOptions: {
+        scss: {
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          api: 'modern-compiler' as any,
+        },
+      },
+    },
   },
 })

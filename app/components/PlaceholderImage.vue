@@ -22,26 +22,3 @@ withDefaults(defineProps<{
     <p class="placeholder__label">{{ label }}</p>
   </div>
 </template>
-
-<style scoped>
-.placeholder {
-  width: 100%;
-  border-radius: var(--radius-lg);
-  border: 1.5px dashed var(--color-border-default);
-  background: var(--color-bg-surface-muted);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: var(--spacing-3);
-  padding: var(--spacing-8);
-  text-align: center;
-  color: var(--color-text-tertiary);
-}
-
-.placeholder__label {
-  font-size: var(--text-body-sm);
-  line-height: var(--line-height-body);
-  max-width: 320px;
-}
-</style>
