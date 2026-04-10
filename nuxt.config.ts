@@ -3,6 +3,7 @@ import svgLoader from 'vite-svg-loader'
 
 export default defineNuxtConfig({
   devtools: { enabled: process.env.NODE_ENV === 'development' },
+  modules: ['@nuxt/eslint'],
   css: ['~/assets/css/main.css'],
   compatibilityDate: '2024-11-01',
   app: {

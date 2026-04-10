@@ -1,5 +1,5 @@
 <template>
-  <div class="layout">
+  <div v-typo class="layout">
     <Header />
     <main class="layout__main">
       <slot />

@@ -54,8 +54,9 @@ const DUR = '0.72s'
 function digitStyle(i: number): Record<string, string> {
   if (phase.value === 'broken') {
     const set = isMobile.value ? BROKEN_DIGITS_MOBILE : BROKEN_DIGITS_DESKTOP
-    return { transform: set[i] }
+    return { transform: set[i] ?? 'translate(0,0) rotate(0deg)' }
   }
+
   return {
     transform: 'translate(0,0) rotate(0deg)',
     transition: `transform ${DUR} ${SPRING} ${i * 60}ms`,
@@ -65,8 +66,12 @@ function digitStyle(i: number): Record<string, string> {
 const subtitleStyle = computed<Record<string, string>>(() => {
   if (phase.value === 'broken') {
     const x = isMobile.value ? '28px' : '52px'
-    return { transform: `translate(${x}, 6px) rotate(-4deg)` }
+    return {
+      transform: `translate(${x}, 6px) rotate(-4deg)`,
+      transition: 'none',
+    }
   }
+
   return {
     transform: 'translate(0,0) rotate(0deg)',
     transition: `transform ${DUR} ${SPRING} 100ms`,
@@ -76,8 +81,14 @@ const subtitleStyle = computed<Record<string, string>>(() => {
 const ctaStyle = computed<Record<string, string>>(() => {
   if (phase.value === 'broken') {
     const x = isMobile.value ? '-24px' : '-40px'
-    return { transform: `translate(${x}, 32px) rotate(3deg)`, opacity: '0.3', pointerEvents: 'none' }
+    return {
+      transform: `translate(${x}, 32px) rotate(3deg)`,
+      opacity: '0.3',
+      pointerEvents: 'none',
+      transition: 'none',
+    }
   }
+
   return {
     transform: 'translate(0,0) rotate(0deg)',
     opacity: '1',
@@ -150,7 +161,6 @@ const ctaStyle = computed<Record<string, string>>(() => {
   overflow: clip;
 }
 
-/* ── Logo ── */
 .error-logo {
   display: inline-flex;
   align-items: center;
@@ -167,7 +177,6 @@ const ctaStyle = computed<Record<string, string>>(() => {
   border-radius: var(--radius-sm);
 }
 
-/* ── Main ── */
 .error-main {
   flex: 1;
   display: flex;
@@ -177,7 +186,6 @@ const ctaStyle = computed<Record<string, string>>(() => {
   position: relative;
 }
 
-/* ── Badge anchor — out of flow, no layout impact ── */
 .al-badge-anchor {
   position: absolute;
   top: var(--spacing-8);
@@ -186,7 +194,6 @@ const ctaStyle = computed<Record<string, string>>(() => {
   white-space: nowrap;
 }
 
-/* ── AL Badge ── */
 .al-badge {
   display: inline-flex;
   align-items: center;
@@ -200,7 +207,6 @@ const ctaStyle = computed<Record<string, string>>(() => {
   box-shadow: var(--shadow-subtle);
 }
 
-/* ── Toggle ── */
 .al-toggle {
   width: 44px;
   height: 26px;
@@ -215,7 +221,6 @@ const ctaStyle = computed<Record<string, string>>(() => {
   background: #62c06a;
 }
 
-/* | — always in the track on the left; knob covers it in OFF, reveals it in ON */
 .al-toggle::before {
   content: '';
   position: absolute;
@@ -228,7 +233,6 @@ const ctaStyle = computed<Record<string, string>>(() => {
   background: rgba(255, 255, 255, 0.82);
 }
 
-/* Knob — large rounded-rect, physically hides the | when OFF */
 .al-toggle__thumb {
   position: absolute;
   top: 3px;
@@ -242,7 +246,6 @@ const ctaStyle = computed<Record<string, string>>(() => {
   z-index: 1;
 }
 
-/* travel = 44 - 3*2 - 22 = 16px */
 .al-toggle--on .al-toggle__thumb {
   transform: translateX(16px);
 }
@@ -251,13 +254,13 @@ const ctaStyle = computed<Record<string, string>>(() => {
 .badge-leave-active {
   transition: opacity 0.3s ease, transform 0.3s ease;
 }
+
 .badge-enter-from,
 .badge-leave-to {
   opacity: 0;
   transform: translateY(-8px) scale(0.95);
 }
 
-/* ── Content ── */
 .error-block {
   display: flex;
   flex-direction: column;
@@ -266,7 +269,6 @@ const ctaStyle = computed<Record<string, string>>(() => {
   text-align: center;
 }
 
-/* ── Digits ── */
 .error-digits {
   display: flex;
   align-items: center;
@@ -284,7 +286,6 @@ const ctaStyle = computed<Record<string, string>>(() => {
   user-select: none;
 }
 
-/* ── Subtitle ── */
 .error-subtitle {
   font-size: var(--text-body);
   color: var(--color-text-secondary);
@@ -294,12 +295,10 @@ const ctaStyle = computed<Record<string, string>>(() => {
   will-change: transform;
 }
 
-/* ── CTA ── */
 .error-cta {
   will-change: transform, opacity;
 }
 
-/* ── Generic error ── */
 .error-code-generic {
   font-size: clamp(64px, 12vw, 120px);
   font-weight: var(--font-weight-display);
@@ -311,13 +310,16 @@ const ctaStyle = computed<Record<string, string>>(() => {
   .error-page {
     padding: var(--spacing-3);
   }
+
   .error-block {
     gap: var(--spacing-4);
   }
+
   .error-subtitle {
     font-size: var(--text-body-sm);
     max-width: 280px;
   }
+
   .al-badge-anchor {
     top: var(--spacing-4);
   }

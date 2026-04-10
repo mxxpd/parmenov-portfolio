@@ -12,7 +12,11 @@
     "docker:prod": "docker compose up --build -d",
     "docker:prod:down": "docker compose down",
     "generate": "nuxt generate",
-    "preview": "nuxt preview"
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
+    "postinstall": "nuxt prepare",
+    "preview": "nuxt preview",
+    "typecheck": "nuxt typecheck"
   },
   "dependencies": {
     "@tailwindcss/vite": "^4.2.2",
@@ -21,5 +25,12 @@
     "typograf": "^7.6.0",
     "vite-svg-loader": "^5.1.1",
     "vue": "^3.5.0"
+  },
+  "devDependencies": {
+    "@nuxt/eslint": "^1.15.2",
+    "@types/node": "^25.6.0",
+    "eslint": "^9.39.4",
+    "typescript": "^6.0.2",
+    "vue-tsc": "^3.2.6"
   }
 }

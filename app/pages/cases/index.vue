@@ -7,7 +7,8 @@ useSeoMeta({
 })
 
 const { cases } = useCases()
-const [hero, ...rest] = cases
+const hero = cases[0]!
+const rest = cases.slice(1)
 </script>
 
 <template>
