@@ -4,6 +4,7 @@ useSeoMeta({
   description: 'Как я перезапустил skill-based gaming platform и вырастил базу пользователей в 13 раз за 2 месяца.',
   ogTitle: 'Your Challenge — Парменов',
   ogLocale: 'ru_RU',
+  robots: 'noindex, nofollow, noarchive, nosnippet, noimageindex',
 })
 </script>
 

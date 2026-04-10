@@ -13,7 +13,7 @@ const cases: Case[] = [
   },
   {
     slug: 'iona',
-    title: 'Иона',
+    title: 'TBD',
     type: 'AI Analytics',
     description: 'Аналитическая платформа на базе AI для структурированной работы с данными и инсайтами',
     role: 'Product Designer',
@@ -33,7 +33,7 @@ const cases: Case[] = [
   },
   {
     slug: 'adsource',
-    title: 'Adsource',
+    title: 'TBD',
     type: 'AdTech',
     description: 'Платформа для управления рекламными кампаниями с фокусом на эффективность и прозрачность',
     role: 'UX/UI-дизайнер',
@@ -45,5 +45,6 @@ const cases: Case[] = [
 
 export function useCases() {
   const getCaseBySlug = (slug: string) => cases.find(c => c.slug === slug)
+
   return { cases, getCaseBySlug }
 }

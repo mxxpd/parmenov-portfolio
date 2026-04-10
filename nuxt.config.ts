@@ -6,6 +6,13 @@ export default defineNuxtConfig({
   modules: ['@nuxt/eslint'],
   css: ['~/assets/css/main.css'],
   compatibilityDate: '2024-11-01',
+  routeRules: {
+    '/cases/your-challenge': {
+      headers: {
+        'X-Robots-Tag': 'noindex, nofollow, noarchive, nosnippet, noimageindex',
+      },
+    },
+  },
   app: {
     head: {
       script: [
