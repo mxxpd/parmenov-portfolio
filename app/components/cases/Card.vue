@@ -10,6 +10,7 @@ interface Props {
   year: number
   coverFrom: string
   coverTo: string
+  coverImage?: string
 }
 
 const props = defineProps<Props>()
@@ -44,7 +45,14 @@ const handleClick = (event: MouseEvent) => {
     @click="handleClick"
   >
     <div class="case-card__cover-wrap">
-      <div class="case-card__cover" :style="coverStyle" />
+      <img
+        v-if="coverImage"
+        :src="coverImage"
+        alt=""
+        class="case-card__cover case-card__cover-image"
+        aria-hidden="true"
+      >
+      <div v-else class="case-card__cover" :style="coverStyle" />
       <AppTag class="case-card__tag" size="s" variant="brand" appearance="tonal">{{ type }}</AppTag>
     </div>
     <div class="case-card__info">

@@ -1,4 +1,5 @@
 import type { CaseEntry } from '~/types/case'
+import yourChallengeCoverUrl from '~/assets/images/cases/your-challenge/case-cover.png'
 
 export const cases: CaseEntry[] = [
   {
@@ -45,6 +46,7 @@ export const cases: CaseEntry[] = [
     year: 2025,
     coverFrom: '#C95228',
     coverTo: '#FABFA0',
+    coverImage: yourChallengeCoverUrl,
     status: 'published',
     page: 'custom',
     seo: {

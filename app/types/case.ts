@@ -17,6 +17,7 @@ export interface CaseCard {
   year: number
   coverFrom: string
   coverTo: string
+  coverImage?: string
 }
 
 export interface CaseEntry extends CaseCard {

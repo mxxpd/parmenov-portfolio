@@ -37,6 +37,11 @@
   transition: transform 0.5s ease;
 }
 
+.case-card__cover-image {
+  display: block;
+  object-fit: cover;
+}
+
 // ── Tag (frosted glass overlay on cover) ─────────────────────────────────────
 
 .case-card__tag {

@@ -10,6 +10,7 @@ interface Props {
   year: number
   coverFrom: string
   coverTo: string
+  coverImage?: string
 }
 
 const props = defineProps<Props>()
@@ -62,7 +63,14 @@ const handleClick = (event: MouseEvent) => {
       </div>
     </div>
     <div class="case-hero__cover-wrap">
-      <div class="case-hero__cover" :style="coverStyle" />
+      <img
+        v-if="coverImage"
+        :src="coverImage"
+        alt=""
+        class="case-hero__cover case-hero__cover-image"
+        aria-hidden="true"
+      >
+      <div v-else class="case-hero__cover" :style="coverStyle" />
     </div>
   </NuxtLink>
 </template>

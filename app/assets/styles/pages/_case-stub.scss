@@ -1,0 +1,31 @@
+.case-stub {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing-4);
+  min-height: 50vh;
+  text-align: center;
+}
+
+.case-stub__label {
+  font-size: var(--text-caption);
+  font-weight: var(--font-weight-heading);
+  color: var(--color-text-accent);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.case-stub__title {
+  font-size: var(--text-h2);
+  font-weight: var(--font-weight-display);
+  color: var(--color-text-primary);
+  line-height: var(--line-height-heading);
+}
+
+.case-stub__text {
+  max-width: 34ch;
+  font-size: var(--text-body);
+  color: var(--color-text-secondary);
+  line-height: var(--line-height-body-relaxed);
+}

@@ -13,6 +13,7 @@ export function useCases() {
     year: item.year,
     coverFrom: item.coverFrom,
     coverTo: item.coverTo,
+    coverImage: item.coverImage,
   })
 
   return {

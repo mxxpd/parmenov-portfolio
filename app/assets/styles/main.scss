@@ -10,9 +10,17 @@
 // ── Layouts ───────────────────────────────────────────────────────────────────
 @use 'layouts/default';
 
+// ── Pages ─────────────────────────────────────────────────────────────────────
+@use 'pages/stub';
+@use 'pages/case-stub';
+@use 'pages/cases-index';
+@use 'pages/your-challenge';
+@use 'pages/error';
+
 // ── Components ────────────────────────────────────────────────────────────────
 @use 'components/app-button';
 @use 'components/app-field';
+@use 'components/app-image-slider';
 @use 'components/app-tag';
 @use 'components/contact-form';
 @use 'components/contact-modal';
@@ -26,3 +34,13 @@
 @use 'components/hero/hero';
 @use 'components/cases/card';
 @use 'components/cases/hero' as cases-hero;
+@use 'components/cases/your-challenge/activity-chart';
+@use 'components/cases/your-challenge/case-context';
+@use 'components/cases/your-challenge/case-hero' as yc-case-hero;
+@use 'components/cases/your-challenge/case-problem';
+@use 'components/cases/your-challenge/case-solution';
+@use 'components/cases/your-challenge/case-work';
+@use 'components/cases/your-challenge/case-results';
+@use 'components/cases/your-challenge/case-problems';
+@use 'components/cases/your-challenge/case-conclusions';
+@use 'components/cases/your-challenge/case-tldr';

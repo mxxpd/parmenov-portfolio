@@ -1,17 +1,18 @@
 <script setup lang="ts">
 useSeoMeta({
-  title: 'Кейсы — Парменов',
-  description: 'Проекты в сфере продуктового дизайна: iGaming, AdTech, HoReCa, AI Analytics.',
-  ogTitle: 'Кейсы — Парменов',
-  ogLocale: 'ru_RU',
-})
+  title: "Кейсы — Парменов",
+  description:
+    "Проекты в сфере продуктового дизайна: iGaming, AdTech, HoReCa, AI Analytics.",
+  ogTitle: "Кейсы — Парменов",
+  ogLocale: "ru_RU",
+});
 
-const { cases, getFeaturedCase, toCaseCard } = useCases()
-const featuredCase = getFeaturedCase()
-const hero = featuredCase ? toCaseCard(featuredCase) : null
+const { cases, getFeaturedCase, toCaseCard } = useCases();
+const featuredCase = getFeaturedCase();
+const hero = featuredCase ? toCaseCard(featuredCase) : null;
 const rest = cases
-  .filter(item => item.slug !== featuredCase?.slug)
-  .map(toCaseCard)
+  .filter((item) => item.slug !== featuredCase?.slug)
+  .map(toCaseCard);
 </script>
 
 <template>
@@ -23,47 +24,3 @@ const rest = cases
     </div>
   </div>
 </template>
-
-<style scoped>
-@keyframes fade-up {
-  from { opacity: 0; transform: translateY(20px); }
-  to   { opacity: 1; transform: translateY(0); }
-}
-
-.cases-page {
-  display: flex;
-  flex-direction: column;
-  gap: var(--spacing-6);
-}
-
-.cases-title {
-  font-size: clamp(48px, 6vw, 72px);
-  font-weight: var(--font-weight-display);
-  line-height: var(--line-height-display);
-  color: var(--color-text-primary);
-  animation: fade-up 0.5s ease both;
-}
-
-:deep(.case-hero) {
-  animation: fade-up 0.5s ease 0.08s both;
-}
-
-.cases-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: var(--spacing-4);
-  animation: fade-up 0.5s ease 0.18s both;
-}
-
-@media (max-width: 768px) {
-  .cases-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
-
-@media (max-width: 540px) {
-  .cases-grid {
-    grid-template-columns: 1fr;
-  }
-}
-</style>
