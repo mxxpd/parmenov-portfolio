@@ -12,6 +12,10 @@
 
 // ── Components ────────────────────────────────────────────────────────────────
 @use 'components/app-button';
+@use 'components/app-field';
+@use 'components/app-tag';
+@use 'components/contact-form';
+@use 'components/contact-modal';
 @use 'components/placeholder-image';
 @use 'components/header/header';
 @use 'components/header/header-logo';

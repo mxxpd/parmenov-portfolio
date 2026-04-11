@@ -1,3 +1,10 @@
+<script setup lang="ts">
+import ArrowDownIcon from '~/assets/icons/arrow-down.svg'
+
+const { theme, setTheme } = useTheme()
+const { openContact } = useModal()
+</script>
+
 <template>
   <div class="header-actions">
     <div
@@ -29,10 +36,11 @@
       </button>
     </div>
 
-    <AppButton label="Связаться со мной" size="md" :icon="true" />
+    <AppButton label="Связаться со мной" size="md" :icon="true" @click="openContact" />
+    <AppButton class="header-actions__cv" label="CV" variant="secondary" size="md" :icon="true">
+      <template #icon>
+        <ArrowDownIcon class="app-btn__icon" />
+      </template>
+    </AppButton>
   </div>
 </template>
-
-<script setup lang="ts">
-const { theme, setTheme } = useTheme()
-</script>

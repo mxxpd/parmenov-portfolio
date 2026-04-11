@@ -41,13 +41,5 @@ export default defineNuxtConfig({
   },
   vite: {
     plugins: [svgLoader({ defaultImport: 'component' })],
-    css: {
-      preprocessorOptions: {
-        scss: {
-          // eslint-disable-next-line @typescript-eslint/no-explicit-any
-          api: 'modern-compiler' as any,
-        },
-      },
-    },
   },
 })

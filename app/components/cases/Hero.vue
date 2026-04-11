@@ -13,17 +13,39 @@ interface Props {
 }
 
 const props = defineProps<Props>()
+const isLoading = ref(false)
 
 const coverStyle = computed(() => ({
   background: `linear-gradient(145deg, ${props.coverFrom}, ${props.coverTo})`,
 }))
+
+const handleClick = (event: MouseEvent) => {
+  if (
+    event.defaultPrevented
+    || event.button !== 0
+    || event.metaKey
+    || event.ctrlKey
+    || event.shiftKey
+    || event.altKey
+  ) {
+    return
+  }
+
+  isLoading.value = true
+}
 </script>
 
 <template>
-  <NuxtLink :to="`/cases/${slug}`" class="case-hero">
+  <NuxtLink
+    :to="`/cases/${slug}`"
+    class="case-hero"
+    :class="{ 'case-hero--loading': isLoading }"
+    :aria-busy="isLoading"
+    @click="handleClick"
+  >
     <div class="case-hero__info">
       <div class="case-hero__top">
-        <span class="case-tag">{{ type }}</span>
+        <AppTag class="case-hero__tag" size="s" variant="brand" appearance="tonal">{{ type }}</AppTag>
         <span class="case-hero__year">{{ year }}</span>
       </div>
       <div class="case-hero__bottom">
@@ -32,6 +54,10 @@ const coverStyle = computed(() => ({
         <div class="case-hero__footer">
           <p class="case-hero__role">{{ role }}</p>
           <ArrowIcon class="case-hero__arrow" />
+          <span v-if="isLoading" class="case-hero__loader" aria-live="polite">
+            <span class="case-hero__loader-dot" aria-hidden="true" />
+            Открываю
+          </span>
         </div>
       </div>
     </div>

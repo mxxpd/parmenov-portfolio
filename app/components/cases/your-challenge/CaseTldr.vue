@@ -14,7 +14,7 @@ const text = computed(() =>
 <template>
   <div :ref="bind" class="tldr" :class="{ 'is-visible': isVisible }">
     <div class="tldr__lead">
-      <p class="tldr__label">TL;DR</p>
+      <AppTag size="s" appearance="tonal">TL;DR</AppTag>
     </div>
 
     <p class="tldr__text">{{ text }}</p>
@@ -46,14 +46,6 @@ const text = computed(() =>
 
 .tldr__lead {
   padding-top: 2px;
-}
-
-.tldr__label {
-  font-size: var(--text-label);
-  font-weight: var(--font-weight-heading);
-  color: var(--color-text-accent);
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
 }
 
 .tldr__text {

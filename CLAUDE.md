@@ -2,7 +2,7 @@
 
 ## Owner
 
-**Максим Парменов** — UX/UI и продуктовый дизайнер.
+**Максим Парменов** — Product дизайнер.
 
 Специализация:
 - сервисные продукты любой сложности
@@ -20,6 +20,7 @@
 Текущее ядро проекта:
 - главная
 - кейсы
+- контактная модалка
 - сервисы
 - статьи
 
@@ -63,6 +64,10 @@ d:/PROJECTS/pf/
 |  |  |  |- layouts/               ← _default.scss
 |  |  |  `- components/            ← по одному файлу на компонент
 |  |  |     |- _app-button.scss
+|  |  |     |- _app-field.scss
+|  |  |     |- _app-tag.scss
+|  |  |     |- _contact-form.scss
+|  |  |     |- _contact-modal.scss
 |  |  |     |- _placeholder-image.scss
 |  |  |     |- header/
 |  |  |     |- hero/
@@ -70,6 +75,12 @@ d:/PROJECTS/pf/
 |  |  `- icons/
 |  |- components/
 |  |  |- AppButton.vue
+|  |  |- AppInput.vue
+|  |  |- AppSelect.vue
+|  |  |- AppTag.vue
+|  |  |- AppTextarea.vue
+|  |  |- ContactForm.vue
+|  |  |- ContactModal.vue
 |  |  |- PlaceholderImage.vue
 |  |  |- TypoText.vue
 |  |  |- cases/
@@ -80,6 +91,7 @@ d:/PROJECTS/pf/
 |  |  `- hero/
 |  |- composables/
 |  |  |- useCases.ts               ← только логика, данные в const/
+|  |  |- useModal.ts               ← глобальное состояние контактной модалки
 |  |  |- useScrollReveal.ts
 |  |  |- useTheme.ts
 |  |  `- useTypograf.ts
@@ -117,6 +129,8 @@ d:/PROJECTS/pf/
 - `vite-svg-loader` должен оставаться в `dependencies`, потому что нужен Nuxt во время загрузки конфига.
 - Типограф сейчас включён и работает глобально через директиву `v-typo` в `app/layouts/default.vue`.
 - Для точечной типографики доступны `useTypograf()` и компонент `TypoText.vue`.
+- Контактная модалка подключена глобально в `app/layouts/default.vue`; открытие идёт через `useModal()`.
+- SVG-иконки лежат в `app/assets/icons/` и подключаются как компоненты через `vite-svg-loader`.
 
 ## Design System
 
@@ -153,6 +167,11 @@ d:/PROJECTS/pf/
 2. Добавить `@use 'components/имя-компонента'` в `main.scss`
 3. Удалить `<style>` блок из Vue-файла
 
+**Form controls:**
+- Для новых форм использовать `AppInput`, `AppSelect`, `AppTextarea` и `AppButton`.
+- Ошибки полей должны быть связаны через `aria-describedby`.
+- Для модалок сохранять focus trap, автофокус при открытии и возврат фокуса на кнопку-триггер.
+
 **Docker и node_modules:** при изменении `package.json` нужно пересоздать тома:
 ```bash
 npm run dev:down
@@ -170,6 +189,9 @@ npm run dev
 ## Principles: Components
 
 - BEM-нейминг классов: `.block`, `.block__element`, `.block--modifier`
+- `AppButton` поддерживает состояния `disabled` и `loading`, `nativeType`, `href`, слот иконки.
+- `AppInput`, `AppSelect`, `AppTextarea` — базовые переиспользуемые поля для форм.
+- `ContactModal` и `ContactForm` — глобальная контактная форма: валидация, success-состояние, сброс при закрытии.
 - `PlaceholderImage.vue` — заглушка для медиа, принимает `label` и `height`
 - `useScrollReveal` — паттерн с `bind`-функцией: `:ref="bind"` в шаблоне, `isVisible` реактивный
 
@@ -187,6 +209,12 @@ npm run dev
 ```bash
 npm install
 npm run dev
+```
+
+Локальный запуск без Docker:
+
+```bash
+npm run dev:local
 ```
 
 Остановка Docker dev-окружения:
@@ -209,3 +237,8 @@ npm run typecheck
 - Разделы `services` и `articles` пока являются аккуратными заглушками.
 - `Your Challenge` — основной активный кейс, страница собрана из компонентов-секций.
 - Настроены линтинг, typecheck и глобальный типограф.
+- Главная обновлена под позиционирование “Product дизайнер”.
+- Добавлена контактная модалка с валидацией, success-состоянием и доступностью.
+- Добавлены переиспользуемые компоненты формы и кастомный select.
+- Добавлено мобильное меню, которое выезжает под хедером.
+- В карточках/hero кейсов есть микро-лоадер перехода.

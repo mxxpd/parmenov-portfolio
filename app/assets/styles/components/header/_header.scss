@@ -1,9 +1,12 @@
 // ─── Header ───────────────────────────────────────────────────────────────────
 
 .header {
+  --header-mobile-top: var(--spacing-4);
+  --header-mobile-height: 76px;
+
   position: sticky;
-  top: var(--spacing-4);
-  z-index: 20;
+  top: var(--header-mobile-top);
+  z-index: 60;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -36,14 +39,19 @@
 // ── Mobile menu transition (global) ──────────────────────────────────────────
 
 .mmenu-enter-active {
-  transition: opacity 0.22s ease;
+  transition:
+    opacity 0.22s ease,
+    transform 0.28s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 .mmenu-leave-active {
-  transition: opacity 0.18s ease;
+  transition:
+    opacity 0.18s ease,
+    transform 0.2s ease;
 }
 
 .mmenu-enter-from,
 .mmenu-leave-to {
   opacity: 0;
+  transform: translateY(-16px);
 }

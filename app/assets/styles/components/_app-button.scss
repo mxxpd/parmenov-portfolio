@@ -123,8 +123,22 @@
 }
 
 .app-btn__icon {
+  display: block;
+  flex-shrink: 0;
   width: var(--btn-icon-glyph-size);
   height: var(--btn-icon-glyph-size);
+  fill: currentColor;
+}
+
+.app-btn__spinner {
+  flex-shrink: 0;
+  width: var(--btn-icon-glyph-size);
+  height: var(--btn-icon-glyph-size);
+  margin-right: var(--spacing-2);
+  border: 2px solid color-mix(in srgb, currentColor 28%, transparent);
+  border-top-color: currentColor;
+  border-radius: var(--radius-pill);
+  animation: app-btn-spin 0.72s linear infinite;
 }
 
 // ── States: primary ───────────────────────────────────────────────────────────
@@ -157,10 +171,35 @@
   transform: translateY(0px);
 }
 
+// ── States: disabled / loading ───────────────────────────────────────────────
+
+.app-btn--disabled,
+.app-btn:disabled {
+  cursor: not-allowed;
+  filter: saturate(0.72);
+  opacity: 0.72;
+  pointer-events: none;
+  transform: none;
+  box-shadow: none;
+}
+
+.app-btn--disabled:hover,
+.app-btn:disabled:hover {
+  transform: none;
+  box-shadow: none;
+  filter: saturate(0.72);
+}
+
 // ── Focus ─────────────────────────────────────────────────────────────────────
 
 .app-btn:focus-visible {
   outline: 2px solid var(--color-brand-primary);
   outline-offset: 3px;
   box-shadow: 0 0 0 4px color-mix(in srgb, var(--color-brand-primary) 20%, transparent);
+}
+
+@keyframes app-btn-spin {
+  to {
+    transform: rotate(360deg);
+  }
 }

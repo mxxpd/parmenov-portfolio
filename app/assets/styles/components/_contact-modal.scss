@@ -1,0 +1,130 @@
+// ─── ContactModal ────────────────────────────────────────────────────────────
+
+body.contact-modal-open {
+  overflow: hidden;
+}
+
+.contact-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  display: grid;
+  place-items: center;
+  padding: var(--spacing-6);
+  background: color-mix(in srgb, var(--primitive-color-ink-900) 48%, transparent);
+  backdrop-filter: blur(18px) saturate(112%);
+  -webkit-backdrop-filter: blur(18px) saturate(112%);
+}
+
+.contact-modal__dialog {
+  position: relative;
+  width: min(100%, 680px);
+  overflow: visible;
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-8);
+  padding: clamp(var(--spacing-6), 5vw, var(--spacing-8));
+  border: 1px solid color-mix(in srgb, var(--color-border-subtle) 72%, transparent);
+  border-radius: 32px;
+  background: color-mix(in srgb, var(--color-bg-surface) 98%, var(--color-bg-canvas-alt));
+  box-shadow: var(--shadow-overlay);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+}
+
+html[data-theme='dark'] .contact-modal__dialog {
+  background: color-mix(in srgb, var(--color-bg-surface) 94%, transparent);
+}
+
+.contact-modal__close {
+  position: absolute;
+  top: var(--spacing-4);
+  right: var(--spacing-4);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border: 1px solid color-mix(in srgb, var(--color-border-subtle) 78%, transparent);
+  border-radius: var(--radius-pill);
+  background: color-mix(in srgb, var(--color-bg-surface-muted) 82%, transparent);
+  color: var(--color-text-secondary);
+  cursor: pointer;
+  font-size: 22px;
+  line-height: 1;
+  transition: background 0.18s ease, color 0.18s ease, transform 0.18s ease;
+}
+
+.contact-modal__close:hover {
+  background: color-mix(in srgb, var(--color-brand-primary) 12%, var(--color-bg-surface));
+  color: var(--color-text-accent);
+  transform: translateY(-1px);
+}
+
+.contact-modal__close:focus-visible {
+  outline: 2px solid var(--color-brand-primary);
+  outline-offset: 3px;
+}
+
+.contact-modal__header {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-2);
+  padding-right: var(--spacing-12);
+}
+
+.contact-modal__title {
+  color: var(--color-text-primary);
+  font-size: var(--text-h1);
+  font-weight: var(--font-weight-display);
+  line-height: 1.05;
+  letter-spacing: -0.035em;
+  white-space: nowrap;
+}
+
+.contact-modal__description {
+  color: var(--color-text-secondary);
+  font-size: var(--text-body);
+  line-height: var(--line-height-body-relaxed);
+}
+
+.contact-modal-enter-active,
+.contact-modal-leave-active {
+  transition: opacity 0.2s ease;
+}
+
+.contact-modal-enter-active .contact-modal__dialog,
+.contact-modal-leave-active .contact-modal__dialog {
+  transition: opacity 0.22s ease, transform 0.22s ease;
+}
+
+.contact-modal-enter-from,
+.contact-modal-leave-to {
+  opacity: 0;
+}
+
+.contact-modal-enter-from .contact-modal__dialog,
+.contact-modal-leave-to .contact-modal__dialog {
+  opacity: 0;
+  transform: translateY(18px);
+}
+
+@media (max-width: 640px) {
+  .contact-modal {
+    align-items: end;
+    padding: var(--spacing-3);
+  }
+
+  .contact-modal__dialog {
+    padding: var(--spacing-6);
+    border-radius: var(--radius-xl);
+  }
+
+  .contact-modal__header {
+    padding-right: var(--spacing-8);
+  }
+
+  .contact-modal__title {
+    white-space: normal;
+  }
+}

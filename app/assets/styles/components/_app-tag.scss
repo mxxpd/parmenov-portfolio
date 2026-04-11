@@ -1,0 +1,85 @@
+.app-tag {
+  --tag-bg: color-mix(in srgb, var(--color-brand-primary) 14%, transparent);
+  --tag-border: color-mix(in srgb, var(--color-brand-primary) 20%, transparent);
+  --tag-text: var(--color-brand-primary);
+  --tag-fill-bg: var(--color-brand-primary);
+  --tag-fill-border: var(--color-brand-primary);
+  --tag-fill-text: var(--color-brand-contrast);
+  --tag-py: 6px;
+  --tag-px: 14px;
+  --tag-font-size: var(--text-body-sm);
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: fit-content;
+  padding: var(--tag-py) var(--tag-px);
+  border-radius: var(--radius-pill);
+  border: 1px solid var(--tag-border);
+  background: var(--tag-bg);
+  color: var(--tag-text);
+  font-size: var(--tag-font-size);
+  font-weight: var(--font-weight-heading);
+  letter-spacing: 0.02em;
+  white-space: nowrap;
+}
+
+.app-tag--s {
+  --tag-py: 5px;
+  --tag-px: 14px;
+  --tag-font-size: var(--text-label);
+}
+
+.app-tag--m {
+  --tag-py: 6px;
+  --tag-px: 14px;
+  --tag-font-size: var(--text-body-sm);
+}
+
+.app-tag--tonal {
+  background: var(--tag-bg);
+  border-color: var(--tag-border);
+  color: var(--tag-text);
+}
+
+.app-tag--fill {
+  background: var(--tag-fill-bg);
+  border-color: var(--tag-fill-border);
+  color: var(--tag-fill-text);
+}
+
+.app-tag--brand {
+  --tag-bg: color-mix(in srgb, var(--color-brand-primary) 14%, transparent);
+  --tag-border: color-mix(in srgb, var(--color-brand-primary) 20%, transparent);
+  --tag-text: var(--color-brand-primary);
+  --tag-fill-bg: var(--color-brand-primary);
+  --tag-fill-border: var(--color-brand-primary);
+  --tag-fill-text: var(--color-brand-contrast);
+}
+
+.app-tag--warning {
+  --tag-bg: var(--color-warning-bg);
+  --tag-border: var(--color-warning-border);
+  --tag-text: var(--color-warning-text);
+  --tag-fill-bg: var(--color-warning);
+  --tag-fill-border: var(--color-warning);
+  --tag-fill-text: var(--primitive-color-ink-900);
+}
+
+.app-tag--error {
+  --tag-bg: var(--color-error-bg);
+  --tag-border: var(--color-error-border);
+  --tag-text: var(--color-error-text);
+  --tag-fill-bg: var(--color-error);
+  --tag-fill-border: var(--color-error);
+  --tag-fill-text: var(--primitive-color-ink-0);
+}
+
+.app-tag--success {
+  --tag-bg: var(--color-success-bg);
+  --tag-border: var(--color-success-border);
+  --tag-text: var(--color-success-text);
+  --tag-fill-bg: var(--color-success);
+  --tag-fill-border: var(--color-success);
+  --tag-fill-text: var(--primitive-color-ink-0);
+}

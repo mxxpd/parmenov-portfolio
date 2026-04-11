@@ -30,8 +30,10 @@ const mechanics = [
 
 <template>
   <section :ref="bind" class="section" :class="{ 'is-visible': isVisible }">
-    <p class="label">Гипотеза и решение</p>
-    <h2 class="heading">Как я пришёл к идее быстрых матчей</h2>
+    <div class="section__header">
+      <AppTag size="s" appearance="tonal">Гипотеза и решение</AppTag>
+      <h2 class="heading">Как я пришёл к идее быстрых матчей</h2>
+    </div>
 
     <blockquote class="quote">
       Пользователь не должен «работать» — продукт должен развлекать. Если убрать всё, что не
@@ -41,17 +43,17 @@ const mechanics = [
     <figure class="card" aria-label="Сравнение старого и нового флоу">
       <div class="compare">
         <div class="compare__col">
-          <p class="compare__title compare__title--bad">Старый флоу — 6 шагов</p>
+          <AppTag size="s" variant="error" appearance="tonal">Старый флоу — 6 шагов</AppTag>
           <div class="flow-list">
             <div v-for="s in oldFlow" :key="s.n" class="step" :class="{ 'step--work': s.isWork }">
               <span class="step__n">{{ s.n }}</span>
               <span class="step__text">{{ s.text }}</span>
-              <span v-if="s.isWork" class="step__tag">работа</span>
+              <AppTag v-if="s.isWork" class="step__tag" size="s" variant="error" appearance="tonal">работа</AppTag>
             </div>
           </div>
         </div>
         <div class="compare__col">
-          <p class="compare__title compare__title--good">Новый флоу — 5 шагов</p>
+          <AppTag size="s" variant="success" appearance="tonal">Новый флоу — 5 шагов</AppTag>
           <div class="flow-list">
             <div v-for="s in newFlow" :key="s.n" class="step step--ok">
               <span class="step__n step__n--ok">{{ s.n }}</span>
@@ -70,6 +72,17 @@ const mechanics = [
       участников, длинный цикл до результата. Быстрые 1v1-матчи давали мгновенный цикл и
       возможность играть в любое время.
     </p>
+
+    <figure class="materials-card">
+      <div class="materials-card__header">
+        <AppTag size="s" appearance="tonal">Материалы решения</AppTag>
+        <p>Сюда можно положить фрагменты user flow, схему матчмейкинга или первые wireframes нового сценария.</p>
+      </div>
+      <div class="materials-card__grid">
+        <PlaceholderImage label="User flow — онбординг и поиск матча" :height="240" />
+        <PlaceholderImage label="Схема: быстрый 1v1 матч" :height="240" />
+      </div>
+    </figure>
 
     <div class="table-wrap" role="region" aria-label="Сравнение механик">
       <table class="table">
@@ -98,26 +111,24 @@ const mechanics = [
 .section {
   display: flex;
   flex-direction: column;
-  gap: var(--spacing-6);
+  gap: clamp(var(--spacing-8), 3vw, var(--spacing-12));
   opacity: 0;
   transform: translateY(12px);
   transition: opacity 0.45s ease, transform 0.45s ease;
 }
 .section.is-visible { opacity: 1; transform: translateY(0); }
 
-.label {
-  font-size: var(--text-label);
-  font-weight: var(--font-weight-heading);
-  color: var(--color-text-accent);
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
+.section__header {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--spacing-3);
 }
 .heading {
   font-size: var(--text-h1);
   font-weight: var(--font-weight-display);
   line-height: var(--line-height-heading);
   color: var(--color-text-primary);
-  margin-top: calc(-1 * var(--spacing-3));
 }
 .body {
   font-size: var(--text-body);
@@ -156,17 +167,23 @@ const mechanics = [
   grid-template-columns: 1fr 1fr;
   gap: var(--spacing-6);
 }
-.compare__title {
-  font-size: var(--text-caption);
-  font-weight: var(--font-weight-heading);
-  text-transform: uppercase;
-  letter-spacing: 0.06em;
-  margin-bottom: var(--spacing-3);
+.compare__col {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--spacing-4);
+  padding: var(--spacing-5);
+  border: 1px solid color-mix(in srgb, var(--color-border-subtle) 78%, transparent);
+  border-radius: var(--radius-lg);
+  background: color-mix(in srgb, var(--color-bg-surface-muted) 36%, transparent);
 }
-.compare__title--bad  { color: var(--color-error-text); }
-.compare__title--good { color: var(--color-success-text); }
 
-.flow-list { display: flex; flex-direction: column; gap: var(--spacing-2); }
+.flow-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-2);
+  width: 100%;
+}
 
 .step {
   display: flex;
@@ -174,10 +191,16 @@ const mechanics = [
   gap: var(--spacing-3);
   padding: var(--spacing-2) var(--spacing-3);
   border-radius: var(--radius-md);
-  background: var(--color-bg-surface-muted);
+  background: color-mix(in srgb, var(--color-bg-surface-muted) 78%, transparent);
 }
-.step--work { background: var(--color-error-bg); }
-.step--ok   { background: var(--color-success-bg); }
+.step--work {
+  border: 1px solid color-mix(in srgb, var(--color-error-border) 60%, transparent);
+  background: color-mix(in srgb, var(--color-error-bg) 56%, var(--color-bg-surface));
+}
+.step--ok {
+  border: 1px solid color-mix(in srgb, var(--color-success-border) 44%, transparent);
+  background: color-mix(in srgb, var(--color-success-bg) 34%, var(--color-bg-surface));
+}
 
 .step__n {
   width: 20px;
@@ -198,17 +221,11 @@ const mechanics = [
 
 .step__text { font-size: var(--text-body-sm); color: var(--color-text-secondary); flex: 1; line-height: 1.4; }
 .step--work .step__text { color: var(--color-error-text); }
-.step__text--ok { color: var(--color-success-text); }
+.step__text--ok {
+  color: var(--color-text-primary);
+}
 
 .step__tag {
-  font-size: 10px;
-  font-weight: var(--font-weight-heading);
-  color: var(--color-error-text);
-  background: var(--color-error-bg);
-  border: 1px solid var(--color-error-border);
-  border-radius: var(--radius-xs);
-  padding: 1px 6px;
-  white-space: nowrap;
   flex-shrink: 0;
 }
 
@@ -217,6 +234,38 @@ const mechanics = [
   border-radius: var(--radius-xl);
   overflow: hidden;
   box-shadow: var(--shadow-subtle);
+}
+
+.materials-card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-5);
+  margin: 0;
+  padding: var(--spacing-6);
+  border: 1px solid var(--color-border-subtle);
+  border-radius: var(--radius-xl);
+  background: var(--color-bg-surface);
+  box-shadow: var(--shadow-subtle);
+}
+
+.materials-card__header {
+  display: flex;
+  align-items: end;
+  justify-content: space-between;
+  gap: var(--spacing-6);
+}
+
+.materials-card__header p {
+  max-width: 56ch;
+  color: var(--color-text-secondary);
+  font-size: var(--text-body-sm);
+  line-height: var(--line-height-body-relaxed);
+}
+
+.materials-card__grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--spacing-3);
 }
 .table { width: 100%; border-collapse: collapse; font-size: var(--text-body-sm); }
 .th {
@@ -243,6 +292,14 @@ const mechanics = [
 .td--win { color: var(--color-success-text); font-weight: var(--font-weight-heading); background: var(--color-success-bg); }
 
 @media (max-width: 640px) {
-  .compare { grid-template-columns: 1fr; }
+  .compare,
+  .materials-card__grid {
+    grid-template-columns: 1fr;
+  }
+
+  .materials-card__header {
+    align-items: flex-start;
+    flex-direction: column;
+  }
 }
 </style>

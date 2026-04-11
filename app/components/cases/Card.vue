@@ -13,17 +13,39 @@ interface Props {
 }
 
 const props = defineProps<Props>()
+const isLoading = ref(false)
 
 const coverStyle = computed(() => ({
   background: `linear-gradient(145deg, ${props.coverFrom}, ${props.coverTo})`,
 }))
+
+const handleClick = (event: MouseEvent) => {
+  if (
+    event.defaultPrevented
+    || event.button !== 0
+    || event.metaKey
+    || event.ctrlKey
+    || event.shiftKey
+    || event.altKey
+  ) {
+    return
+  }
+
+  isLoading.value = true
+}
 </script>
 
 <template>
-  <NuxtLink :to="`/cases/${slug}`" class="case-card">
+  <NuxtLink
+    :to="`/cases/${slug}`"
+    class="case-card"
+    :class="{ 'case-card--loading': isLoading }"
+    :aria-busy="isLoading"
+    @click="handleClick"
+  >
     <div class="case-card__cover-wrap">
       <div class="case-card__cover" :style="coverStyle" />
-      <span class="case-tag">{{ type }}</span>
+      <AppTag class="case-card__tag" size="s" variant="brand" appearance="tonal">{{ type }}</AppTag>
     </div>
     <div class="case-card__info">
       <div class="case-card__body">
@@ -36,6 +58,10 @@ const coverStyle = computed(() => ({
         <span>{{ year }}</span>
       </div>
       <ArrowIcon class="case-arrow" />
+      <span v-if="isLoading" class="case-card__loader" aria-live="polite">
+        <span class="case-card__loader-dot" aria-hidden="true" />
+        Открываю
+      </span>
     </div>
   </NuxtLink>
 </template>

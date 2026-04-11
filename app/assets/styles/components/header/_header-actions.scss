@@ -7,6 +7,14 @@
   flex-shrink: 0;
 }
 
+.header-actions .app-btn--secondary {
+  --btn-px: var(--spacing-4);
+}
+
+.header-actions__cv {
+  --btn-icon-glyph-size: 18px;
+}
+
 // ── Theme switcher ────────────────────────────────────────────────────────────
 
 .theme-switcher {

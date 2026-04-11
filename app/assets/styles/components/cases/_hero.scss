@@ -1,6 +1,7 @@
 // ─── CasesHero ────────────────────────────────────────────────────────────────
 
 .case-hero {
+  position: relative;
   display: flex;
   min-height: 460px;
   border-radius: var(--radius-xl);
@@ -29,18 +30,14 @@
 
 // ── Tag ───────────────────────────────────────────────────────────────────────
 
-.case-hero .case-tag {
-  display: inline-flex;
-  align-items: center;
-  padding: 4px var(--spacing-3);
-  border-radius: var(--radius-pill);
-  background: var(--color-bg-accent-soft);
-  border: 1px solid var(--color-border-accent);
-  color: var(--color-text-accent);
-  font-size: var(--text-caption);
-  font-weight: var(--font-weight-heading);
-  white-space: nowrap;
-  width: fit-content;
+.case-hero__top .app-tag {
+  flex-shrink: 0;
+}
+
+.case-hero__tag {
+  --tag-bg: color-mix(in srgb, var(--color-brand-primary) 14%, var(--color-bg-surface));
+  --tag-border: color-mix(in srgb, var(--color-brand-primary) 24%, var(--color-border-subtle));
+  --tag-text: var(--color-brand-primary);
 }
 
 // ── Info panel ────────────────────────────────────────────────────────────────
@@ -87,6 +84,7 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
+  gap: var(--spacing-3);
 }
 
 .case-hero__role {
@@ -102,6 +100,34 @@
   opacity: 0;
   transform: translate(-4px, 4px);
   transition: opacity 0.22s ease, transform 0.22s ease, color 0.22s ease;
+}
+
+.case-hero--loading {
+  pointer-events: none;
+}
+
+.case-hero--loading .case-hero__arrow {
+  opacity: 0;
+}
+
+.case-hero__loader {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-2);
+  margin-left: auto;
+  color: var(--color-text-accent);
+  font-size: var(--text-caption);
+  font-weight: var(--font-weight-heading);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.case-hero__loader-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: var(--radius-pill);
+  background: currentColor;
+  animation: case-loader-pulse 0.75s ease-in-out infinite alternate;
 }
 
 // ── Cover panel ───────────────────────────────────────────────────────────────

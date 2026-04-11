@@ -15,7 +15,7 @@ const roles = [
   <section :ref="bind" class="section" :class="{ 'is-visible': isVisible }">
     <div class="content">
       <div class="text-col">
-        <p class="label">Контекст</p>
+        <AppTag size="s" appearance="tonal">Контекст</AppTag>
         <p class="body">
           Я пришёл в проект на стадии идеи и проработал в нём 3 года — с первого дня до закрытия. Команда из 18 человек:
           frontend, backend, marketing, devops, тестировщики, PM и PO.
@@ -28,8 +28,8 @@ const roles = [
       </div>
 
       <aside class="aside">
-        <div class="card card--role">
-          <p class="card__title">Моя роль</p>
+        <div class="info-card">
+          <AppTag size="s" appearance="tonal">Моя роль</AppTag>
 
           <ul class="roles">
             <li v-for="role in roles" :key="role" class="role">
@@ -39,12 +39,12 @@ const roles = [
               {{ role }}
             </li>
           </ul>
+        </div>
 
-          <div class="team-mini">
-            <p class="team-mini__label">Команда</p>
-            <p class="team-num">18</p>
-            <p class="team-sub">человек · 3 года</p>
-          </div>
+        <div class="info-card info-card--team">
+          <AppTag size="s" appearance="tonal">Команда</AppTag>
+          <p class="team-num">18</p>
+          <p class="team-sub">человек · 3 года</p>
         </div>
       </aside>
     </div>
@@ -73,17 +73,9 @@ const roles = [
 .text-col {
   display: flex;
   flex-direction: column;
-  gap: var(--spacing-4);
+  gap: var(--spacing-6);
+  align-items: flex-start;
   max-width: 72ch;
-}
-
-.label {
-  margin-bottom: var(--spacing-2);
-  font-size: var(--text-label);
-  font-weight: var(--font-weight-heading);
-  color: var(--color-text-accent);
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
 }
 
 .body {
@@ -94,31 +86,23 @@ const roles = [
 
 .aside {
   position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-4);
 }
 
-.card {
+.info-card {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--spacing-5);
   padding: var(--spacing-6);
   border: 1px solid var(--color-border-subtle);
   border-radius: var(--radius-xl);
-  background: var(--color-bg-surface);
-  box-shadow: var(--shadow-subtle);
-}
-
-.card--role {
-  display: flex;
-  flex-direction: column;
-  gap: var(--spacing-5);
   background:
     radial-gradient(circle at top right, color-mix(in srgb, var(--color-brand-primary) 8%, transparent), transparent 38%),
     var(--color-bg-surface);
-}
-
-.card__title {
-  font-size: var(--text-caption);
-  font-weight: var(--font-weight-heading);
-  color: var(--color-text-tertiary);
-  text-transform: uppercase;
-  letter-spacing: 0.06em;
+  box-shadow: var(--shadow-subtle);
 }
 
 .roles {
@@ -141,29 +125,16 @@ const roles = [
   flex-shrink: 0;
 }
 
-.team-mini {
-  padding-top: var(--spacing-5);
-  border-top: 1px solid color-mix(in srgb, var(--color-border-subtle) 78%, transparent);
-}
-
-.team-mini__label {
-  margin-bottom: var(--spacing-3);
-  font-size: var(--text-caption);
-  font-weight: var(--font-weight-heading);
-  color: var(--color-text-tertiary);
-  text-transform: uppercase;
-  letter-spacing: 0.06em;
-}
-
 .team-num {
-  font-size: var(--text-display);
+  margin-top: var(--spacing-1);
+  font-size: var(--text-h1);
   font-weight: var(--font-weight-display);
   line-height: 1;
   color: var(--color-brand-primary);
 }
 
 .team-sub {
-  margin-top: var(--spacing-2);
+  margin-top: 0;
   font-size: var(--text-body-sm);
   color: var(--color-text-tertiary);
 }
@@ -176,5 +147,6 @@ const roles = [
   .text-col {
     max-width: 100%;
   }
+
 }
 </style>

@@ -1,0 +1,219 @@
+// ─── AppField / AppInput / AppTextarea / AppSelect ───────────────────────────
+
+.app-field {
+  --field-bg: color-mix(in srgb, var(--color-bg-surface) 92%, var(--color-bg-canvas-alt));
+  --field-bg-focus: var(--color-bg-surface);
+  --field-bg-error: color-mix(in srgb, var(--color-error-bg) 34%, var(--color-bg-surface));
+  --field-border: color-mix(in srgb, var(--color-border-default) 62%, var(--color-bg-surface));
+  --field-border-focus: color-mix(in srgb, var(--color-brand-primary) 64%, var(--color-border-default));
+  --field-shadow: inset 0 1px 0 color-mix(in srgb, var(--primitive-color-ink-0) 74%, transparent);
+  --field-shadow-focus:
+    0 0 0 4px color-mix(in srgb, var(--color-brand-primary) 14%, transparent),
+    var(--shadow-subtle),
+    var(--field-shadow);
+
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-2);
+}
+
+.app-field__label {
+  color: var(--color-text-tertiary);
+  font-size: var(--text-caption);
+  font-weight: var(--font-weight-heading);
+  letter-spacing: 0.04em;
+  line-height: var(--line-height-body);
+  text-transform: uppercase;
+}
+
+.app-field__error {
+  color: var(--color-error-text);
+  font-size: var(--text-label);
+  line-height: var(--line-height-body);
+}
+
+.app-control {
+  width: 100%;
+  min-height: 54px;
+  padding: 0 18px;
+  border: 1px solid var(--field-border);
+  border-radius: 18px;
+  background: var(--field-bg);
+  box-shadow: var(--field-shadow);
+  color: var(--color-text-primary);
+  font-family: var(--font-sans);
+  font-size: var(--text-body-sm);
+  line-height: var(--line-height-body);
+  outline: none;
+  transition:
+    height 0.18s ease,
+    border-color 0.18s ease,
+    box-shadow 0.18s ease,
+    background 0.18s ease,
+    transform 0.18s ease;
+}
+
+.app-control::placeholder {
+  color: var(--color-text-tertiary);
+}
+
+.app-control:focus {
+  border-color: var(--field-border-focus);
+  background: var(--field-bg-focus);
+  box-shadow: var(--field-shadow-focus);
+  transform: translateY(-1px);
+}
+
+.app-control:disabled {
+  cursor: not-allowed;
+  opacity: 0.68;
+}
+
+.app-control--error {
+  border-color: color-mix(in srgb, var(--color-error) 72%, var(--color-border-subtle));
+  background: var(--field-bg-error);
+}
+
+.app-control--error:focus {
+  border-color: var(--color-error);
+  box-shadow:
+    0 0 0 4px color-mix(in srgb, var(--color-error) 14%, transparent),
+    var(--shadow-subtle);
+}
+
+.app-textarea {
+  --scrollbar-size: 12px;
+  --scrollbar-track: transparent;
+  --scrollbar-thumb: color-mix(in srgb, var(--color-brand-primary) 38%, var(--color-border-default));
+  --scrollbar-thumb-hover: color-mix(in srgb, var(--color-brand-primary) 64%, var(--color-border-default));
+
+  min-height: 136px;
+  max-height: 272px;
+  padding-block: 16px;
+  padding-right: 28px;
+  overflow-y: hidden;
+  resize: none;
+  scrollbar-gutter: stable;
+}
+
+.app-textarea::-webkit-scrollbar-button {
+  display: none;
+  width: 0;
+  height: 0;
+}
+
+.app-textarea::-webkit-scrollbar-button:single-button,
+.app-textarea::-webkit-scrollbar-button:start:decrement,
+.app-textarea::-webkit-scrollbar-button:end:increment {
+  display: none;
+  width: 0;
+  height: 0;
+}
+
+.app-textarea::-webkit-scrollbar-track,
+.app-textarea::-webkit-scrollbar-corner {
+  background: transparent;
+}
+
+.app-textarea::-webkit-scrollbar-thumb {
+  border: 4px solid transparent;
+  background-clip: content-box;
+}
+
+.app-select {
+  position: relative;
+}
+
+.app-select__button {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--spacing-3);
+  cursor: pointer;
+  text-align: left;
+}
+
+.app-select__icon {
+  flex-shrink: 0;
+  width: 9px;
+  height: 9px;
+  border-right: 2px solid currentColor;
+  border-bottom: 2px solid currentColor;
+  color: var(--color-text-tertiary);
+  transform: translateY(-2px) rotate(45deg);
+  transition: transform 0.18s ease, color 0.18s ease;
+}
+
+.app-select__button[aria-expanded='true'] .app-select__icon {
+  color: var(--color-text-accent);
+  transform: translateY(2px) rotate(225deg);
+}
+
+.app-select__menu {
+  position: absolute;
+  z-index: 2;
+  top: calc(100% + var(--spacing-2));
+  left: 0;
+  right: 0;
+  display: grid;
+  gap: var(--spacing-1);
+  padding: var(--spacing-2);
+  border: 1px solid color-mix(in srgb, var(--color-border-subtle) 72%, transparent);
+  border-radius: 18px;
+  background: color-mix(in srgb, var(--color-bg-surface) 96%, transparent);
+  box-shadow: var(--shadow-surface);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+}
+
+html[data-theme='dark'] .app-field {
+  --field-bg: color-mix(in srgb, var(--color-bg-surface-muted) 88%, var(--color-bg-surface));
+  --field-bg-focus: color-mix(in srgb, var(--color-bg-surface-muted) 76%, var(--color-bg-surface));
+  --field-bg-error: color-mix(in srgb, var(--color-error-bg) 52%, var(--color-bg-surface-muted));
+  --field-border: color-mix(in srgb, var(--color-border-default) 74%, transparent);
+  --field-border-focus: color-mix(in srgb, var(--color-brand-primary) 58%, var(--color-border-default));
+  --field-shadow: none;
+  --field-shadow-focus:
+    0 0 0 4px color-mix(in srgb, var(--color-brand-primary) 16%, transparent),
+    var(--shadow-subtle);
+}
+
+.app-select__option {
+  width: 100%;
+  min-height: 42px;
+  padding: 0 var(--spacing-4);
+  border: 1px solid transparent;
+  border-radius: var(--radius-md);
+  background: transparent;
+  color: var(--color-text-secondary);
+  cursor: pointer;
+  font-family: var(--font-sans);
+  font-size: var(--text-body-sm);
+  font-weight: var(--font-weight-body-strong);
+  text-align: left;
+  transition: background 0.18s ease, border-color 0.18s ease, color 0.18s ease;
+}
+
+.app-select__option:hover,
+.app-select__option:focus-visible {
+  background: color-mix(in srgb, var(--color-brand-primary) 10%, var(--color-bg-surface));
+  color: var(--color-text-primary);
+  outline: none;
+}
+
+.app-select__option--active {
+  border-color: color-mix(in srgb, var(--color-brand-primary) 22%, transparent);
+  background: color-mix(in srgb, var(--color-brand-primary) 14%, transparent);
+  color: var(--color-text-accent);
+}
+
+.app-select-menu-enter-active,
+.app-select-menu-leave-active {
+  transition: opacity 0.16s ease, transform 0.16s ease;
+}
+
+.app-select-menu-enter-from,
+.app-select-menu-leave-to {
+  opacity: 0;
+  transform: translateY(-6px);
+}

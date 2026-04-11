@@ -1,22 +1,25 @@
+<script setup lang="ts">
+const { openContact } = useModal()
+</script>
+
 <template>
   <section class="hero">
     <div class="hero__copy">
       <div class="hero__intro">
-        <span class="hero__label">UX/UI дизайнер</span>
+        <AppTag>Product дизайнер</AppTag>
 
         <h1 class="hero__title">
-          Проектирую интерфейсы для сложных цифровых продуктов
+          Проектирую интерфейсы. Думаю продуктом.
         </h1>
       </div>
 
       <div class="hero__body">
         <p class="hero__description">
-          Помогаю продуктам становиться понятнее, быстрее и полезнее: от структуры и пользовательских сценариев до
-          визуальной системы и ключевых продуктовых решений.
+          UX-архитектура, сценарии, визуальная система — и понимание, зачем всё это нужно бизнесу.
         </p>
 
         <div class="hero__actions">
-          <AppButton label="Связаться со мной" size="lg" :icon="true" />
+          <AppButton label="Связаться со мной" size="lg" :icon="true" @click="openContact" />
           <AppButton label="Посмотреть кейсы" variant="secondary" size="lg" href="/cases" />
         </div>
       </div>

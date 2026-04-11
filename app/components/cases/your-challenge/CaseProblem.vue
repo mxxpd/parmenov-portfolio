@@ -11,20 +11,38 @@ const steps = [
   { n: 5, text: 'Загрузить результаты', isWork: true },
   { n: 6, text: 'Согласовать победителя или пройти модерацию', isWork: false },
 ]
+
+const signals = [
+  { value: '2', label: 'рекламные кампании дали всплеск' },
+  { value: '0', label: 'органических волн после кампаний' },
+  { value: '150', label: 'регистраций за 5 месяцев' },
+]
 </script>
 
 <template>
   <section :ref="bind" class="section" :class="{ 'is-visible': isVisible }">
-    <p class="label">Проблема</p>
-    <h2 class="heading">Что не работало и почему</h2>
+    <div class="section__header">
+      <AppTag size="s" appearance="tonal">Проблема</AppTag>
+      <h2 class="heading">Что не работало и почему</h2>
+    </div>
 
     <p class="body">
-      Изначально продукт строился вокруг модели пользовательских челленджей: игрок сам придумывает
-      соревнование, сам его организует, находит соперника и проводит игру. На бумаге — логично. На
-      практике — механика требовала слишком много до получения первой ценности.
+      Изначально продукт строился вокруг пользовательских челленджей: игрок сам придумывает соревнование,
+      сам его организует, находит соперника и проводит игру. На бумаге это выглядело логично. На практике
+      механика требовала слишком много действий до первой ценности.
     </p>
 
-    <figure class="card" aria-label="Шаги старого флоу">
+    <figure class="media-card">
+      <div class="media-card__copy">
+        <AppTag size="s" appearance="tonal">Как выглядела платформа</AppTag>
+        <p>
+          Место под скриншоты старого продукта: главный экран, карточка челленджа или сценарий создания соревнования.
+        </p>
+      </div>
+      <PlaceholderImage label="Медиа: как выглядела платформа до пивота" :height="320" />
+    </figure>
+
+    <figure class="card flow-card" aria-label="Шаги старого пользовательского флоу">
       <div class="flow">
         <div
           v-for="step in steps"
@@ -37,53 +55,43 @@ const steps = [
         </div>
       </div>
       <figcaption class="card__caption">
-        Пользователь сам создаёт ценность — и уходит до того, как её получает.
-        <strong>4 из 6 шагов — это работа, а не удовольствие.</strong>
+        Пользователь сам создавал ценность и часто уходил до того, как ее получал.
+        <strong>4 из 6 шагов были работой, а не удовольствием.</strong>
       </figcaption>
     </figure>
 
     <div class="data-block">
-      <h3 class="subheading">Данные подтверждали диагноз</h3>
+      <div class="data-block__header">
+        <AppTag size="s" appearance="tonal">Данные</AppTag>
+        <h3 class="subheading">Поведение подтверждало диагноз</h3>
+      </div>
       <ul class="list">
-        <li>Пользователи появлялись только во время рекламных кампаний</li>
-        <li>После окончания рекламы активность исчезала полностью</li>
-        <li>Никаких признаков органического роста</li>
-        <li>За 5 месяцев — 150 зарегистрированных пользователей</li>
+        <li>Пользователи появлялись только во время рекламных кампаний.</li>
+        <li>После окончания рекламы активность почти сразу исчезала.</li>
+        <li>Признаков самостоятельного органического роста не было.</li>
       </ul>
     </div>
 
-    <figure class="card" aria-label="Схематичный график активности: рост только во время рекламных кампаний">
-      <svg class="chart" viewBox="0 0 600 160" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
-        <line x1="0" y1="40"  x2="600" y2="40"  class="chart__grid" />
-        <line x1="0" y1="90"  x2="600" y2="90"  class="chart__grid" />
-        <line x1="0" y1="140" x2="600" y2="140" class="chart__grid" />
-        <path
-class="chart__fill"
-          d="M0,148 C40,148 70,148 95,148 C120,148 148,72 178,38 C208,4 228,4 248,36
-             C268,68 298,145 350,148 C385,148 405,148 425,148
-             C445,148 465,44 492,18 C519,-8 530,-4 548,22
-             C566,48 578,142 600,148 L600,148 L0,148 Z"
-        />
-        <path
-class="chart__line" fill="none"
-          d="M0,148 C40,148 70,148 95,148 C120,148 148,72 178,38 C208,4 228,4 248,36
-             C268,68 298,145 350,148 C385,148 405,148 425,148
-             C445,148 465,44 492,18 C519,-8 530,-4 548,22
-             C566,48 578,142 600,148"
-        />
-        <text x="213" y="22" class="chart__tag" text-anchor="middle">Рекламная кампания</text>
-        <text x="510" y="10" class="chart__tag" text-anchor="middle">Рекламная кампания</text>
-        <line x1="0" y1="148" x2="600" y2="148" class="chart__axis" />
-      </svg>
-      <figcaption class="card__caption">
-        Рост только во время рекламы — органики нет
+    <figure class="activity-card" aria-label="График активности: рост только во время рекламных кампаний">
+      <div class="activity-card__header">
+        <h3 class="activity-card__title">Активность держалась только на рекламе</h3>
+      </div>
+
+      <div class="activity-card__stats">
+        <div v-for="signal in signals" :key="signal.label" class="activity-stat">
+          <strong>{{ signal.value }}</strong>
+          <span>{{ signal.label }}</span>
+        </div>
+      </div>
+
+      <div class="chart-shell">
+        <CasesYourChallengeActivityChart />
+      </div>
+
+      <figcaption class="activity-card__caption">
+        Вывод: продукту не хватало самостоятельной ценности. Нужен был структурный пивот, а не редизайн экранов.
       </figcaption>
     </figure>
-
-    <p class="body body--strong">
-      Вывод: продукту не хватало самостоятельной ценности. Нужен был структурный пивот, а не
-      редизайн экранов.
-    </p>
   </section>
 </template>
 
@@ -91,48 +99,51 @@ class="chart__line" fill="none"
 .section {
   display: flex;
   flex-direction: column;
-  gap: var(--spacing-6);
+  gap: clamp(var(--spacing-8), 3vw, var(--spacing-12));
   opacity: 0;
   transform: translateY(12px);
   transition: opacity 0.45s ease, transform 0.45s ease;
 }
-.section.is-visible { opacity: 1; transform: translateY(0); }
 
-.label {
-  font-size: var(--text-label);
-  font-weight: var(--font-weight-heading);
-  color: var(--color-text-accent);
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
+.section.is-visible {
+  opacity: 1;
+  transform: translateY(0);
 }
+
+.section__header,
+.data-block__header {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--spacing-3);
+}
+
 .heading {
   font-size: var(--text-h1);
   font-weight: var(--font-weight-display);
   line-height: var(--line-height-heading);
   color: var(--color-text-primary);
-  margin-top: calc(-1 * var(--spacing-3));
 }
+
 .subheading {
   font-size: var(--text-h4);
   font-weight: var(--font-weight-heading);
   color: var(--color-text-primary);
-  margin-bottom: var(--spacing-3);
 }
+
 .body {
   font-size: var(--text-body);
   line-height: var(--line-height-body-relaxed);
   color: var(--color-text-secondary);
 }
-.body--strong {
-  color: var(--color-text-primary);
-  font-weight: var(--font-weight-body-strong);
-}
+
 .list {
   list-style: none;
   display: flex;
   flex-direction: column;
   gap: var(--spacing-2);
 }
+
 .list li {
   font-size: var(--text-body);
   line-height: var(--line-height-body);
@@ -140,16 +151,24 @@ class="chart__line" fill="none"
   padding-left: var(--spacing-6);
   position: relative;
 }
+
 .list li::before {
-  content: '—';
+  content: '';
   position: absolute;
-  left: 0;
-  color: var(--color-text-tertiary);
+  left: 2px;
+  top: 0.72em;
+  width: 8px;
+  height: 8px;
+  border-radius: var(--radius-pill);
+  background: var(--color-brand-primary);
+  opacity: 0.7;
 }
+
 .data-block {
   display: flex;
   flex-direction: column;
-  gap: var(--spacing-3);
+  gap: var(--spacing-4);
+  padding-block: var(--spacing-2);
 }
 
 .card {
@@ -163,6 +182,41 @@ class="chart__line" fill="none"
   flex-direction: column;
   gap: var(--spacing-6);
 }
+
+.flow-card {
+  padding: clamp(var(--spacing-8), 4vw, var(--spacing-12));
+}
+
+.media-card {
+  display: grid;
+  grid-template-columns: minmax(220px, 0.38fr) minmax(0, 0.62fr);
+  gap: var(--spacing-6);
+  align-items: stretch;
+  margin: 0;
+  padding: var(--spacing-6);
+  border: 1px solid var(--color-border-subtle);
+  border-radius: var(--radius-xl);
+  background:
+    radial-gradient(circle at 10% 0%, color-mix(in srgb, var(--color-brand-primary) 8%, transparent), transparent 34%),
+    var(--color-bg-surface);
+  box-shadow: var(--shadow-subtle);
+}
+
+.media-card__copy {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--spacing-6);
+  padding: var(--spacing-4);
+}
+
+.media-card__copy p {
+  color: var(--color-text-secondary);
+  font-size: var(--text-body-sm);
+  line-height: var(--line-height-body-relaxed);
+}
+
 .card__caption {
   font-size: var(--text-body-sm);
   color: var(--color-text-tertiary);
@@ -170,10 +224,15 @@ class="chart__line" fill="none"
   text-align: center;
 }
 
+.card__caption strong {
+  color: var(--color-text-primary);
+  font-style: normal;
+}
+
 .flow {
   display: grid;
-  grid-template-columns: repeat(6, 1fr);
-  gap: var(--spacing-2);
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  gap: var(--spacing-4);
   position: relative;
 }
 
@@ -185,18 +244,20 @@ class="chart__line" fill="none"
   text-align: center;
   position: relative;
 }
+
 .step:not(:last-child)::after {
-  content: '→';
+  content: '';
   position: absolute;
-  right: -10px;
-  top: 10px;
-  font-size: 13px;
-  color: var(--color-text-tertiary);
+  top: 15px;
+  right: calc(-1 * var(--spacing-3));
+  width: var(--spacing-3);
+  height: 1px;
+  background: var(--color-border-default);
 }
 
 .step__circle {
-  width: 32px;
-  height: 32px;
+  width: 36px;
+  height: 36px;
   border-radius: var(--radius-pill);
   background: var(--color-bg-surface-muted);
   border: 1.5px solid var(--color-border-default);
@@ -208,37 +269,160 @@ class="chart__line" fill="none"
   color: var(--color-text-secondary);
   flex-shrink: 0;
 }
+
 .step--work .step__circle {
   background: var(--color-error-bg);
   border-color: var(--color-error-border);
   color: var(--color-error-text);
 }
+
 .step__text {
-  font-size: 11px;
-  line-height: 1.4;
+  font-size: clamp(12px, 1vw, 15px);
+  line-height: 1.45;
   color: var(--color-text-secondary);
 }
-.step--work .step__text { color: var(--color-error-text); }
 
-.chart { width: 100%; height: auto; overflow: visible; }
-.chart__grid { stroke: var(--color-border-subtle); stroke-width: 1; }
-.chart__axis { stroke: var(--color-border-default); stroke-width: 1; }
-.chart__fill { fill: var(--color-bg-accent-soft); }
-.chart__line {
-  stroke: var(--color-brand-primary);
-  stroke-width: 2.5;
-  stroke-linejoin: round;
-  stroke-linecap: round;
-}
-.chart__tag {
-  fill: var(--color-text-accent);
-  font-size: 11px;
-  font-family: var(--font-sans);
-  font-weight: 700;
+.step--work .step__text {
+  color: var(--color-error-text);
 }
 
-@media (max-width: 640px) {
-  .flow { grid-template-columns: repeat(3, 1fr); }
-  .step:nth-child(3)::after { display: none; }
+.activity-card {
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-6);
+  margin: 0;
+  padding: var(--spacing-8);
+  border: 1px solid color-mix(in srgb, var(--color-border-accent) 70%, transparent);
+  border-radius: var(--radius-xl);
+  background:
+    radial-gradient(circle at 18% 0%, color-mix(in srgb, var(--color-brand-primary) 18%, transparent), transparent 32%),
+    linear-gradient(145deg, var(--color-bg-surface), color-mix(in srgb, var(--color-bg-accent-soft) 46%, var(--color-bg-surface)));
+  box-shadow: var(--shadow-surface);
+}
+
+.activity-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background-image: linear-gradient(color-mix(in srgb, var(--color-border-subtle) 34%, transparent) 1px, transparent 1px);
+  background-size: 100% 42px;
+  mask-image: linear-gradient(to bottom, transparent, #000 18%, #000 78%, transparent);
+  opacity: 0.42;
+}
+
+.activity-card__header,
+.activity-card__stats,
+.chart-shell,
+.activity-card__caption {
+  position: relative;
+  z-index: 1;
+}
+
+.activity-card__title {
+  font-size: var(--text-h3);
+  font-weight: var(--font-weight-display);
+  line-height: var(--line-height-heading);
+  color: var(--color-text-primary);
+}
+
+.activity-card__stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--spacing-3);
+}
+
+.activity-stat {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-1);
+  padding: var(--spacing-4);
+  border: 1px solid color-mix(in srgb, var(--color-border-subtle) 72%, transparent);
+  border-radius: var(--radius-lg);
+  background: color-mix(in srgb, var(--color-bg-surface) 80%, transparent);
+  backdrop-filter: blur(14px);
+}
+
+.activity-stat strong {
+  font-size: var(--text-h3);
+  line-height: 1;
+  color: var(--color-brand-primary);
+}
+
+.activity-stat span {
+  font-size: var(--text-body-sm);
+  line-height: var(--line-height-body);
+  color: var(--color-text-secondary);
+}
+
+.chart-shell {
+  overflow: hidden;
+  min-height: 320px;
+  padding: var(--spacing-2) var(--spacing-2) 0;
+  border: 1px solid color-mix(in srgb, var(--color-border-subtle) 74%, transparent);
+  border-radius: calc(var(--radius-xl) + var(--spacing-2));
+  background:
+    radial-gradient(circle at 24% 6%, color-mix(in srgb, var(--color-brand-primary) 12%, transparent), transparent 28%),
+    linear-gradient(135deg, color-mix(in srgb, var(--color-bg-surface) 94%, var(--color-bg-accent-soft)), var(--color-bg-surface-muted));
+  box-shadow:
+    inset 0 1px 0 color-mix(in srgb, var(--color-text-inverse) 16%, transparent),
+    0 24px 80px color-mix(in srgb, var(--color-text-primary) 12%, transparent);
+}
+
+.activity-card__caption {
+  max-width: 760px;
+  color: var(--color-text-primary);
+  font-size: var(--text-body);
+  font-weight: var(--font-weight-body-strong);
+  line-height: var(--line-height-body-relaxed);
+}
+
+@media (max-width: 760px) {
+  .media-card {
+    grid-template-columns: 1fr;
+  }
+
+  .flow {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .step:nth-child(3)::after {
+    display: none;
+  }
+
+  .activity-card__header,
+  .activity-card__stats {
+    grid-template-columns: 1fr;
+  }
+
+  .activity-card__header {
+    flex-direction: column;
+  }
+}
+
+@media (max-width: 540px) {
+  .card,
+  .activity-card {
+    padding: var(--spacing-6);
+  }
+
+  .flow {
+    grid-template-columns: 1fr;
+  }
+
+  .step {
+    flex-direction: row;
+    text-align: left;
+  }
+
+  .step::after {
+    display: none;
+  }
+
+  .chart-shell {
+    min-height: 260px;
+  }
 }
 </style>

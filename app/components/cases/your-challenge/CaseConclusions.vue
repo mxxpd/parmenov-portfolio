@@ -24,8 +24,10 @@ const shifts = [
 
 <template>
   <section :ref="bind" class="section" :class="{ 'is-visible': isVisible }">
-    <p class="label">Выводы</p>
-    <h2 class="heading">Этот проект изменил то, как я думаю о дизайне</h2>
+    <div class="section__header">
+      <AppTag size="s" appearance="tonal">Выводы</AppTag>
+      <h2 class="heading">Этот проект изменил то, как я думаю о дизайне</h2>
+    </div>
 
     <p class="body">
       Я начинал как UX/UI дизайнер — строил флоу, рисовал экраны. К концу думал иначе: что влияет
@@ -54,26 +56,24 @@ const shifts = [
 .section {
   display: flex;
   flex-direction: column;
-  gap: var(--spacing-6);
+  gap: var(--spacing-8);
   opacity: 0;
   transform: translateY(12px);
   transition: opacity 0.45s ease, transform 0.45s ease;
 }
 .section.is-visible { opacity: 1; transform: translateY(0); }
 
-.label {
-  font-size: var(--text-label);
-  font-weight: var(--font-weight-heading);
-  color: var(--color-text-accent);
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
+.section__header {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--spacing-3);
 }
 .heading {
   font-size: var(--text-h1);
   font-weight: var(--font-weight-display);
   line-height: var(--line-height-heading);
   color: var(--color-text-primary);
-  margin-top: calc(-1 * var(--spacing-3));
 }
 .body {
   font-size: var(--text-body);

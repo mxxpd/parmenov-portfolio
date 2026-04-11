@@ -4,6 +4,6 @@
     <main class="layout__main">
       <slot />
     </main>
+    <ContactModal />
   </div>
 </template>
-

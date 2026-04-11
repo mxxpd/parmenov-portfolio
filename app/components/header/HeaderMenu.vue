@@ -1,9 +1,8 @@
 <script setup lang="ts">
-import LogoIcon from '~/assets/icons/logo.svg'
-
 const emit = defineEmits<{ close: [] }>()
 
 const { theme, setTheme } = useTheme()
+const { openContact } = useModal()
 
 const links = [
   { label: 'Главная', to: '/' },
@@ -11,18 +10,15 @@ const links = [
   { label: 'Сервисы', to: '/services' },
   { label: 'Статьи', to: '/articles' },
 ]
+
+const handleContactClick = () => {
+  openContact()
+  emit('close')
+}
 </script>
 
 <template>
   <div class="mmenu">
-    <div class="mmenu__bar">
-      <NuxtLink to="/" class="mmenu__logo" @click="emit('close')">
-        <LogoIcon class="mmenu__logo-icon" />
-        <span class="mmenu__logo-name">Парменов</span>
-      </NuxtLink>
-      <HeaderMenuButton :is-open="true" @toggle="emit('close')" />
-    </div>
-
     <nav class="mmenu__nav" aria-label="Мобильная навигация">
       <NuxtLink
         v-for="link in links"
@@ -35,6 +31,11 @@ const links = [
         {{ link.label }}
       </NuxtLink>
     </nav>
+
+    <div class="mmenu__actions" aria-label="Основные действия">
+      <AppButton label="Связаться со мной" size="md" @click="handleContactClick" />
+      <AppButton label="Скачать CV" variant="secondary" size="md" />
+    </div>
 
     <div class="mmenu__footer">
       <div

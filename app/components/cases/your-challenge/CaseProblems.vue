@@ -13,8 +13,10 @@ const improvements = [
 
 <template>
   <section :ref="bind" class="section" :class="{ 'is-visible': isVisible }">
-    <p class="label">Проблемы и ограничения</p>
-    <h2 class="heading">Рост обнажил узкие места</h2>
+    <div class="section__header">
+      <AppTag size="s" appearance="tonal">Проблемы и ограничения</AppTag>
+      <h2 class="heading">Рост обнажил узкие места</h2>
+    </div>
 
     <div class="issues">
       <div class="issue">
@@ -34,7 +36,7 @@ const improvements = [
     </div>
 
     <figure class="card" aria-label="Схема проблемного цикла: мало пользователей ведёт к плохому матчмейкингу, плохому опыту и оттоку">
-      <p class="card__title">Проблемный цикл</p>
+      <AppTag size="s" appearance="tonal">Проблемный цикл</AppTag>
       <div class="cycle" aria-hidden="true">
         <div class="cycle__node cycle__node--accent">
           <span class="cycle__n">1</span>
@@ -71,7 +73,7 @@ const improvements = [
     </figure>
 
     <div class="future">
-      <p class="future__label">Что бы я сделал сейчас</p>
+      <AppTag size="s" appearance="tonal">Что бы я сделал сейчас</AppTag>
       <ul class="future__list">
         <li v-for="item in improvements" :key="item">{{ item }}</li>
       </ul>
@@ -83,26 +85,24 @@ const improvements = [
 .section {
   display: flex;
   flex-direction: column;
-  gap: var(--spacing-6);
+  gap: var(--spacing-8);
   opacity: 0;
   transform: translateY(12px);
   transition: opacity 0.45s ease, transform 0.45s ease;
 }
 .section.is-visible { opacity: 1; transform: translateY(0); }
 
-.label {
-  font-size: var(--text-label);
-  font-weight: var(--font-weight-heading);
-  color: var(--color-text-accent);
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
+.section__header {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--spacing-3);
 }
 .heading {
   font-size: var(--text-h1);
   font-weight: var(--font-weight-display);
   line-height: var(--line-height-heading);
   color: var(--color-text-primary);
-  margin-top: calc(-1 * var(--spacing-3));
 }
 
 .issues {
@@ -142,14 +142,6 @@ const improvements = [
   flex-direction: column;
   gap: var(--spacing-6);
 }
-.card__title {
-  font-size: var(--text-caption);
-  font-weight: var(--font-weight-heading);
-  color: var(--color-text-tertiary);
-  text-transform: uppercase;
-  letter-spacing: 0.06em;
-}
-
 .cycle {
   display: grid;
   grid-template-columns: 1fr 40px 1fr;
@@ -196,13 +188,6 @@ const improvements = [
   display: flex;
   flex-direction: column;
   gap: var(--spacing-4);
-}
-.future__label {
-  font-size: var(--text-label);
-  font-weight: var(--font-weight-heading);
-  color: var(--color-text-accent);
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
 }
 .future__list {
   list-style: none;

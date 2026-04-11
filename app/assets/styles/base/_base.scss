@@ -10,6 +10,49 @@ body {
   scroll-behavior: smooth;
 }
 
+html {
+  scrollbar-gutter: stable;
+}
+
+* {
+  --scrollbar-size: 10px;
+  --scrollbar-track: color-mix(in srgb, var(--color-bg-surface-muted) 54%, transparent);
+  --scrollbar-thumb: color-mix(in srgb, var(--color-brand-primary) 42%, var(--color-border-default));
+  --scrollbar-thumb-hover: color-mix(in srgb, var(--color-brand-primary) 68%, var(--color-border-default));
+
+  scrollbar-color: var(--scrollbar-thumb) var(--scrollbar-track);
+  scrollbar-width: thin;
+}
+
+*::-webkit-scrollbar {
+  width: var(--scrollbar-size);
+  height: var(--scrollbar-size);
+}
+
+*::-webkit-scrollbar-button,
+*::-webkit-scrollbar-button:single-button,
+*::-webkit-scrollbar-button:start:decrement,
+*::-webkit-scrollbar-button:end:increment {
+  display: none;
+  width: 0;
+  height: 0;
+}
+
+*::-webkit-scrollbar-track {
+  background: var(--scrollbar-track);
+  border-radius: var(--radius-pill);
+}
+
+*::-webkit-scrollbar-thumb {
+  border: 2px solid var(--scrollbar-track);
+  border-radius: var(--radius-pill);
+  background: var(--scrollbar-thumb);
+}
+
+*::-webkit-scrollbar-thumb:hover {
+  background: var(--scrollbar-thumb-hover);
+}
+
 a {
   text-decoration: none;
   color: inherit;

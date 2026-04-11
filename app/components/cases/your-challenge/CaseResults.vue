@@ -20,8 +20,10 @@ const reasons = [
 
 <template>
   <section :ref="bind" class="section" :class="{ 'is-visible': isVisible }">
-    <p class="label">Результаты</p>
-    <h2 class="heading">Результаты превзошли ожидания в 10 раз</h2>
+    <div class="section__header">
+      <AppTag size="s" appearance="tonal">Результаты</AppTag>
+      <h2 class="heading">Результаты превзошли ожидания в 10 раз</h2>
+    </div>
 
     <p class="body">
       3 стримера с аудиторией около 100 человек каждый привели примерно 2 000 пользователей за 2 месяца.
@@ -47,7 +49,7 @@ const reasons = [
     </div>
 
     <div class="reasons-block">
-      <p class="sub-label">Почему платили</p>
+      <AppTag size="s" appearance="tonal">Почему платили</AppTag>
       <div class="reasons">
         <div v-for="r in reasons" :key="r.pct" class="reason">
           <p class="reason__pct">{{ r.pct }}</p>
@@ -65,26 +67,24 @@ const reasons = [
 .section {
   display: flex;
   flex-direction: column;
-  gap: var(--spacing-6);
+  gap: var(--spacing-8);
   opacity: 0;
   transform: translateY(12px);
   transition: opacity 0.45s ease, transform 0.45s ease;
 }
 .section.is-visible { opacity: 1; transform: translateY(0); }
 
-.label {
-  font-size: var(--text-label);
-  font-weight: var(--font-weight-heading);
-  color: var(--color-text-accent);
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
+.section__header {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--spacing-3);
 }
 .heading {
   font-size: var(--text-h1);
   font-weight: var(--font-weight-display);
   line-height: var(--line-height-heading);
   color: var(--color-text-primary);
-  margin-top: calc(-1 * var(--spacing-3));
 }
 .body {
   font-size: var(--text-body);
@@ -130,13 +130,6 @@ const reasons = [
   display: flex;
   flex-direction: column;
   gap: var(--spacing-6);
-}
-.sub-label {
-  font-size: var(--text-label);
-  font-weight: var(--font-weight-heading);
-  color: var(--color-text-tertiary);
-  text-transform: uppercase;
-  letter-spacing: 0.06em;
 }
 .reasons {
   display: grid;
