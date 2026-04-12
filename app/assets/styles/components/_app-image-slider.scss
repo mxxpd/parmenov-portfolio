@@ -16,12 +16,15 @@
 .image-slider__track {
   display: grid;
   overflow: hidden;
+  touch-action: pan-y;
+  user-select: none;
 }
 
 .image-slider__track > * {
   grid-column: 1;
   grid-row: 1;
   min-width: 0;
+  user-select: none;
 }
 
 .image-slider__img {
@@ -29,6 +32,7 @@
   width: 100%;
   height: auto;
   cursor: zoom-in;
+  -webkit-user-drag: none;
 }
 
 .image-slider__arrow {
@@ -156,6 +160,9 @@
   object-fit: contain;
   border-radius: var(--radius-xl);
   box-shadow: 0 32px 80px rgba(0, 0, 0, 0.6);
+  touch-action: pan-y;
+  user-select: none;
+  -webkit-user-drag: none;
 }
 
 .image-slider-lightbox__close,

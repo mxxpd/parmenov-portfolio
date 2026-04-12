@@ -20,6 +20,14 @@ const slideDirection = ref<'next' | 'prev'>('next')
 const lightboxOpen = ref(false)
 
 let previousBodyOverflow = ''
+let dragStartX = 0
+let dragStartY = 0
+let dragPointerId: number | null = null
+let didDrag = false
+let suppressImageClick = false
+
+const SWIPE_MIN_DISTANCE = 48
+const SWIPE_AXIS_RATIO = 1.25
 
 const currentSlide = computed(() => props.slides[slideIndex.value] ?? null)
 const hasSlider = computed(() => props.slides.length > 1)
@@ -69,6 +77,11 @@ function goTo(index: number) {
 }
 
 function openLightbox() {
+  if (suppressImageClick) {
+    suppressImageClick = false
+    return
+  }
+
   if (!currentSlide.value) return
 
   lightboxOpen.value = true
@@ -83,11 +96,79 @@ function onKeydown(event: KeyboardEvent) {
   if (event.key === 'ArrowLeft') prev()
   if (event.key === 'ArrowRight') next()
 }
+
+function onDragStart(event: PointerEvent) {
+  if (!hasSlider.value || event.button !== 0) return
+
+  dragPointerId = event.pointerId
+  dragStartX = event.clientX
+  dragStartY = event.clientY
+  didDrag = false
+
+  if (event.currentTarget instanceof HTMLElement) {
+    event.currentTarget.setPointerCapture(event.pointerId)
+  }
+}
+
+function onDragMove(event: PointerEvent) {
+  if (dragPointerId !== event.pointerId) return
+
+  const deltaX = event.clientX - dragStartX
+  const deltaY = event.clientY - dragStartY
+
+  if (Math.abs(deltaX) > 8 && Math.abs(deltaX) > Math.abs(deltaY)) {
+    didDrag = true
+  }
+}
+
+function onDragEnd(event: PointerEvent) {
+  if (dragPointerId !== event.pointerId) return
+
+  const deltaX = event.clientX - dragStartX
+  const deltaY = event.clientY - dragStartY
+
+  if (
+    Math.abs(deltaX) >= SWIPE_MIN_DISTANCE
+    && Math.abs(deltaX) > Math.abs(deltaY) * SWIPE_AXIS_RATIO
+  ) {
+    if (deltaX < 0) next()
+    else prev()
+  }
+
+  if (didDrag) {
+    suppressImageClick = true
+    window.setTimeout(() => {
+      suppressImageClick = false
+    }, 0)
+  }
+
+  resetDrag(event)
+}
+
+function resetDrag(event?: PointerEvent) {
+  if (
+    event
+    && dragPointerId === event.pointerId
+    && event.currentTarget instanceof HTMLElement
+    && event.currentTarget.hasPointerCapture(event.pointerId)
+  ) {
+    event.currentTarget.releasePointerCapture(event.pointerId)
+  }
+
+  dragPointerId = null
+  didDrag = false
+}
 </script>
 
 <template>
   <div class="image-slider" :aria-label="ariaLabel">
-    <div class="image-slider__track">
+    <div
+      class="image-slider__track"
+      @pointerdown="onDragStart"
+      @pointermove="onDragMove"
+      @pointerup="onDragEnd"
+      @pointercancel="resetDrag"
+    >
       <Transition :name="`image-slider-slide-${slideDirection}`">
         <img
           v-if="currentSlide"
@@ -182,6 +263,10 @@ function onKeydown(event: KeyboardEvent) {
             class="image-slider-lightbox__img"
             loading="lazy"
             decoding="async"
+            @pointerdown="onDragStart"
+            @pointermove="onDragMove"
+            @pointerup="onDragEnd"
+            @pointercancel="resetDrag"
           >
         </Transition>
 
