@@ -176,6 +176,34 @@ onBeforeUnmount(() => {
           </table>
         </div>
 
+        <div
+          v-if="item.hasCompetitorTable"
+          class="competitor-cards"
+          aria-label="Сравнение конкурентов"
+        >
+          <article
+            v-for="row in competitorRows"
+            :key="`card-${row.platform}`"
+            class="competitor-card"
+          >
+            <h4 class="competitor-card__title">{{ row.platform }}</h4>
+            <dl class="competitor-card__list">
+              <div class="competitor-card__row">
+                <dt>Механика</dt>
+                <dd>{{ row.mechanic }}</dd>
+              </div>
+              <div class="competitor-card__row">
+                <dt>Проблема</dt>
+                <dd>{{ row.problem }}</dd>
+              </div>
+              <div class="competitor-card__row">
+                <dt>Что взяли</dt>
+                <dd>{{ row.takeaway }}</dd>
+              </div>
+            </dl>
+          </article>
+        </div>
+
         <div v-if="item.hasFlowArchitecture" class="flow-slider-wrap">
           <div class="segmented" role="group" aria-label="Раздел флоу">
             <button

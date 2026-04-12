@@ -39,6 +39,7 @@
     display: flex;
     flex-direction: column;
     gap: var(--spacing-3);
+    min-width: 0;
   }
   .card__body {
     display: flex;
@@ -93,6 +94,8 @@
     color: var(--color-text-primary);
   }
   .competitor-table-wrap {
+    min-width: 0;
+    max-width: 100%;
     overflow-x: auto;
     overflow-y: hidden;
     overscroll-behavior-x: contain;
@@ -130,6 +133,54 @@
   .competitor-table td:first-child {
     font-weight: var(--font-weight-heading);
     color: var(--color-text-primary);
+  }
+  .competitor-cards {
+    display: none;
+  }
+  .competitor-card {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-3);
+    padding: var(--spacing-4);
+    border: 1px solid var(--color-border-subtle);
+    border-radius: var(--radius-lg);
+    background: var(--color-bg-surface-muted);
+  }
+  .competitor-card__title {
+    font-size: var(--text-body);
+    font-weight: var(--font-weight-heading);
+    line-height: var(--line-height-heading);
+    color: var(--color-text-primary);
+  }
+  .competitor-card__list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-3);
+    margin: 0;
+  }
+  .competitor-card__row {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-1);
+    padding-top: var(--spacing-3);
+    border-top: 1px solid var(--color-border-subtle);
+  }
+  .competitor-card__row:first-child {
+    padding-top: 0;
+    border-top: none;
+  }
+  .competitor-card dt {
+    font-size: var(--text-caption);
+    font-weight: var(--font-weight-heading);
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: var(--color-text-tertiary);
+  }
+  .competitor-card dd {
+    margin: 0;
+    font-size: var(--text-body-sm);
+    line-height: var(--line-height-body-relaxed);
+    color: var(--color-text-secondary);
   }
   .flow-slider-wrap,
   .card__slider-wrap {
@@ -251,8 +302,14 @@
       padding: var(--case-card-padding);
     }
 
-    .competitor-table {
-      min-width: 640px;
+    .competitor-table-wrap {
+      display: none;
+    }
+
+    .competitor-cards {
+      display: flex;
+      flex-direction: column;
+      gap: var(--spacing-3);
     }
   }
   @media (max-width: 480px) {
