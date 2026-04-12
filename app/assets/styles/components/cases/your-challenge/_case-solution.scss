@@ -133,19 +133,21 @@
     align-items: start;
   }
   .compare__col {
+    position: relative;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
     gap: var(--case-grid-gap);
-    padding: var(--case-grid-gap);
-    border: 1px solid
-      color-mix(in srgb, var(--color-border-subtle) 78%, transparent);
-    border-radius: var(--radius-lg);
-    background: color-mix(
-      in srgb,
-      var(--color-bg-surface-muted) 36%,
-      transparent
-    );
+    min-width: 0;
+  }
+  .compare__col + .compare__col::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: calc(var(--case-card-gap) / -2);
+    width: 1px;
+    background: var(--color-border-subtle);
   }
   .flow-list {
     display: flex;
@@ -222,6 +224,8 @@
     flex-shrink: 0;
   }
   .table-wrap {
+    min-width: 0;
+    max-width: 100%;
     border: 1px solid var(--color-border-subtle);
     border-radius: var(--radius-xl);
     overflow-x: auto;
@@ -231,6 +235,7 @@
   }
   .materials-card {
     gap: var(--case-related-gap);
+    min-width: 0;
   }
   .insight {
     display: flex;
@@ -270,6 +275,73 @@
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr));
     gap: var(--case-grid-gap);
+  }
+  .mechanic-cards {
+    display: none;
+  }
+  .mechanic-card {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-3);
+    padding: var(--spacing-4);
+    border: 1px solid var(--color-border-subtle);
+    border-radius: var(--radius-lg);
+    background: var(--color-bg-surface-muted);
+  }
+  .mechanic-card--win {
+    border-color: color-mix(
+      in srgb,
+      var(--color-success-border) 60%,
+      var(--color-border-subtle)
+    );
+    background: color-mix(
+      in srgb,
+      var(--color-success-bg) 42%,
+      var(--color-bg-surface)
+    );
+  }
+  .mechanic-card__title {
+    font-size: var(--text-body);
+    font-weight: var(--font-weight-heading);
+    line-height: var(--line-height-heading);
+    color: var(--color-text-primary);
+  }
+  .mechanic-card--win .mechanic-card__title {
+    color: var(--color-success-text);
+  }
+  .mechanic-card__list {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-3);
+    margin: 0;
+  }
+  .mechanic-card__row {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-1);
+    padding-top: var(--spacing-3);
+    border-top: 1px solid var(--color-border-subtle);
+  }
+  .mechanic-card__row:first-child {
+    padding-top: 0;
+    border-top: none;
+  }
+  .mechanic-card dt {
+    font-size: var(--text-caption);
+    font-weight: var(--font-weight-heading);
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: var(--color-text-tertiary);
+  }
+  .mechanic-card dd {
+    margin: 0;
+    font-size: var(--text-body-sm);
+    line-height: var(--line-height-body-relaxed);
+    color: var(--color-text-secondary);
+  }
+  .mechanic-card__value--win {
+    color: var(--color-success-text);
+    font-weight: var(--font-weight-heading);
   }
   .table {
     min-width: 680px;
@@ -339,6 +411,16 @@
       margin-top: var(--spacing-3);
     }
 
+    .table-wrap {
+      display: none;
+    }
+
+    .mechanic-cards {
+      display: flex;
+      flex-direction: column;
+      gap: var(--spacing-3);
+    }
+
     .step {
       flex-direction: column;
       align-items: flex-start;
@@ -346,6 +428,19 @@
 
     .step__tag {
       align-self: flex-start;
+    }
+
+    .compare {
+      gap: var(--case-related-gap);
+    }
+
+    .compare__col + .compare__col {
+      padding-top: var(--case-related-gap);
+      border-top: 1px solid var(--color-border-subtle);
+    }
+
+    .compare__col + .compare__col::before {
+      display: none;
     }
   }
 }

@@ -42,6 +42,24 @@ const mechanics = [
   },
   { label: "Повторяемость", old1: "Низкая", old2: "Низкая", good: "Высокая" },
 ];
+
+const mechanicCards = [
+  {
+    title: "Челленджи",
+    values: mechanics.map(row => ({ label: row.label, value: row.old1, isWin: false })),
+    isWin: false,
+  },
+  {
+    title: "Турниры",
+    values: mechanics.map(row => ({ label: row.label, value: row.old2, isWin: false })),
+    isWin: false,
+  },
+  {
+    title: "Быстрые матчи",
+    values: mechanics.map(row => ({ label: row.label, value: row.good, isWin: true })),
+    isWin: true,
+  },
+];
 </script>
 
 <template>
@@ -117,6 +135,29 @@ const mechanics = [
             </tr>
           </tbody>
         </table>
+      </div>
+
+      <div class="mechanic-cards" aria-label="Сравнение механик">
+        <article
+          v-for="card in mechanicCards"
+          :key="card.title"
+          class="mechanic-card"
+          :class="{ 'mechanic-card--win': card.isWin }"
+        >
+          <h3 class="mechanic-card__title">{{ card.title }}</h3>
+          <dl class="mechanic-card__list">
+            <div
+              v-for="item in card.values"
+              :key="item.label"
+              class="mechanic-card__row"
+            >
+              <dt>{{ item.label }}</dt>
+              <dd :class="{ 'mechanic-card__value--win': item.isWin }">
+                {{ item.value }}
+              </dd>
+            </div>
+          </dl>
+        </article>
       </div>
 
       <div class="materials-grid">
