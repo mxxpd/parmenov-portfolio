@@ -1,8 +1,8 @@
-﻿.yc-results {
+.yc-results {
   &.section {
     display: flex;
     flex-direction: column;
-    gap: var(--spacing-8);
+    gap: var(--case-section-gap);
     opacity: 0;
     transform: translateY(12px);
     transition:
@@ -17,7 +17,7 @@
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    gap: var(--spacing-3);
+    gap: var(--case-section-header-gap);
   }
   .heading {
     font-size: var(--text-h1);
@@ -30,7 +30,10 @@
     line-height: var(--line-height-body-relaxed);
     color: var(--color-text-secondary);
   }
-  .table-wrap {
+
+  // Единая карточка: таблица + проценты
+  .results-card {
+    margin: 0;
     border: 1px solid var(--color-border-subtle);
     border-radius: var(--radius-xl);
     overflow: hidden;
@@ -60,9 +63,6 @@
     padding: var(--spacing-3) var(--spacing-4);
     border-bottom: 1px solid var(--color-border-subtle);
   }
-  .table tr:last-child .td {
-    border-bottom: none;
-  }
   .td--label {
     font-weight: var(--font-weight-body-strong);
     color: var(--color-text-primary);
@@ -79,20 +79,19 @@
     font-size: var(--text-body);
     font-weight: var(--font-weight-heading);
   }
-  .reasons-block {
-    background: var(--color-bg-surface);
-    border: 1px solid var(--color-border-subtle);
-    border-radius: var(--radius-xl);
-    box-shadow: var(--shadow-subtle);
-    padding: var(--spacing-8);
+
+  // Нижняя секция: проценты + подпись
+  .results-card__body {
+    padding: var(--case-related-gap) var(--case-card-padding);
     display: flex;
     flex-direction: column;
-    gap: var(--spacing-6);
+    gap: var(--spacing-4);
+    background: var(--color-bg-surface);
   }
   .reasons {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: var(--spacing-4);
+    gap: var(--case-grid-gap);
   }
   .reason {
     display: flex;
@@ -100,10 +99,25 @@
     gap: var(--spacing-2);
   }
   .reason__pct {
-    font-size: clamp(28px, 4vw, 40px);
+    font-size: clamp(20px, 2.5vw, 28px);
     font-weight: var(--font-weight-display);
     line-height: 1;
     color: var(--color-brand-primary);
+  }
+  .reason--dominant .reason__pct {
+    font-size: clamp(36px, 5vw, 56px);
+  }
+  .reason__bar-track {
+    width: 100%;
+    height: 4px;
+    border-radius: 2px;
+    background: color-mix(in srgb, var(--color-brand-primary) 12%, transparent);
+  }
+  .reason__bar {
+    height: 4px;
+    border-radius: 2px;
+    background: var(--color-brand-primary);
+    min-width: 4px;
   }
   .reason__label {
     font-size: var(--text-body-sm);
@@ -117,7 +131,11 @@
     border-top: 1px solid var(--color-border-subtle);
     padding-top: var(--spacing-4);
   }
+
   @media (max-width: 640px) {
+    .results-card__body {
+      padding: var(--case-card-padding);
+    }
     .reasons {
       grid-template-columns: 1fr;
     }

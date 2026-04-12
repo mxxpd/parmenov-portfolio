@@ -25,7 +25,7 @@
   position: absolute;
   top: 12%;
   bottom: 14%;
-  border-radius: var(--radius-lg);
+  border-radius: var(--radius-lg) var(--radius-lg) 0 0;
   background: color-mix(in srgb, var(--color-brand-primary) 16%, transparent);
   border: 1px solid
     color-mix(in srgb, var(--color-brand-primary) 10%, transparent);
@@ -44,7 +44,7 @@
 .activity-chart__tag {
   position: absolute;
   z-index: 3;
-  top: 8%;
+  top: 2%;
   transform: translateX(-50%);
   color: var(--color-text-primary);
   box-shadow: var(--shadow-subtle);
@@ -53,7 +53,7 @@
 }
 
 .activity-chart__tag--first {
-  left: 31%;
+  left: 35.5%;
 }
 
 .activity-chart__tag--second {

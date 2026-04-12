@@ -54,7 +54,7 @@ const improvements = [
           <path
             d="M2 7h32M27 2l7 5-7 5"
             stroke="currentColor"
-            stroke-width="1.5"
+            stroke-width="1"
             stroke-linecap="round"
             stroke-linejoin="round"
           />
@@ -68,7 +68,7 @@ const improvements = [
           <path
             d="M7 38V6M2 11l5-7 5 7"
             stroke="currentColor"
-            stroke-width="1.5"
+            stroke-width="1"
             stroke-linecap="round"
             stroke-linejoin="round"
           />
@@ -78,7 +78,7 @@ const improvements = [
           <path
             d="M7 2v32M2 29l5 7 5-7"
             stroke="currentColor"
-            stroke-width="1.5"
+            stroke-width="1"
             stroke-linecap="round"
             stroke-linejoin="round"
           />
@@ -92,7 +92,7 @@ const improvements = [
           <path
             d="M38 7H6M13 2L6 7l7 5"
             stroke="currentColor"
-            stroke-width="1.5"
+            stroke-width="1"
             stroke-linecap="round"
             stroke-linejoin="round"
           />

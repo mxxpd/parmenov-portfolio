@@ -1,18 +1,29 @@
 ﻿.yc-hero {
+  // Shared grid tokens — оба ряда используют одно определение
+  --hero-cols: repeat(4, minmax(0, 1fr));
+  --hero-gap:  var(--spacing-3);
+  --hero-w:    min(calc(100vw - 48px), 1432px);
+
   &.hero {
     display: flex;
     flex-direction: column;
-    gap: var(--spacing-6);
+    gap: var(--case-related-gap);
     padding-top: var(--spacing-8);
   }
   .hero__intro {
     display: grid;
-    grid-template-columns: minmax(0, 1.02fr) minmax(420px, 0.98fr);
-    gap: var(--spacing-4);
+    grid-template-columns: var(--hero-cols);
+    gap: var(--hero-gap);
     align-items: stretch;
-    width: min(calc(100vw - 48px), 1432px);
+    width: var(--hero-w);
     margin-left: 50%;
     transform: translateX(-50%);
+  }
+  .hero__copy {
+    grid-column: 1 / 3;
+  }
+  .hero__preview {
+    grid-column: 3 / 5;
   }
   .hero__copy,
   .hero__preview {
@@ -22,8 +33,8 @@
   .hero__copy {
     display: flex;
     flex-direction: column;
-    gap: var(--spacing-6);
-    padding: var(--spacing-8);
+    gap: var(--case-related-gap);
+    padding: var(--case-card-padding);
     border: 1px solid
       color-mix(in srgb, var(--color-border-subtle) 72%, transparent);
     background: color-mix(in srgb, var(--color-bg-surface) 92%, transparent);
@@ -87,9 +98,9 @@
   }
   .stats {
     display: grid;
-    grid-template-columns: repeat(4, minmax(0, 1fr));
-    gap: var(--spacing-3);
-    width: min(calc(100vw - 48px), 1432px);
+    grid-template-columns: var(--hero-cols);
+    gap: var(--hero-gap);
+    width: var(--hero-w);
     margin-left: 50%;
     transform: translateX(-50%);
   }
@@ -98,7 +109,7 @@
     border: 1px solid var(--color-border-subtle);
     border-radius: var(--radius-xl);
     box-shadow: var(--shadow-subtle);
-    padding: var(--spacing-6);
+    padding: var(--case-related-gap);
     display: flex;
     flex-direction: column;
     gap: var(--spacing-2);
@@ -120,6 +131,10 @@
       width: 100%;
       margin-left: 0;
       transform: none;
+    }
+    .hero__copy,
+    .hero__preview {
+      grid-column: unset;
     }
     .stats {
       width: 100%;
@@ -144,7 +159,7 @@
   }
   @media (max-width: 640px) {
     .hero {
-      gap: var(--spacing-4);
+      gap: var(--case-grid-gap);
       padding-top: var(--spacing-4);
     }
     .hero__copy,
@@ -152,7 +167,7 @@
       border-radius: var(--radius-xl);
     }
     .hero__copy {
-      padding: var(--spacing-6);
+      padding: var(--case-card-padding);
     }
     .hero__title {
       max-width: 100%;

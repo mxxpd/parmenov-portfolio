@@ -3,36 +3,49 @@ import { useScrollReveal } from "../../../composables/useScrollReveal";
 
 const { bind, isVisible } = useScrollReveal();
 
+const workTabs = [
+  { id: "interface", label: "Новый интерфейс", placeholderLabel: "Скриншот: новый интерфейс" },
+  { id: "design-system", label: "Дизайн-система", placeholderLabel: "Скриншот: дизайн-система" },
+];
+
+const activeWorkTabId = ref("interface");
+const activeWorkTab = computed(() => workTabs.find(t => t.id === activeWorkTabId.value)!);
+
 const items = [
   {
     n: "01",
     title: "Конкурентный анализ",
-    text: "Нашёл 3 рабочие модели у конкурентов, зафиксировал точки трения — что работает, что отталкивает пользователей.",
+    text: "Изучил рынок, зафиксировал что работает и что отталкивает пользователей.",
+    hasSlider: false,
+    metric: null,
   },
   {
     n: "02",
     title: "Инициировал пивот",
-    text: "Предложил механику быстрых матчей. Обосновал через поведенческую логику и конкурентный ландшафт.",
+    text: "Сформировал документ концепций и смыслов по стратегическому развитию продукта.",
+    hasSlider: false,
+    metric: null,
   },
   {
     n: "03",
     title: "User flows и архитектура",
-    text: "Спроектировал все сценарии: онбординг, поиск матча, игровой цикл, вывод средств, спорные ситуации.",
+    text: "Спроектировал сценарии: онбординг, поиск матча, игровой цикл.",
+    hasSlider: false,
+    metric: null,
   },
   {
     n: "04",
-    title: "CJM и JTBD",
-    text: "Зафиксировал точки трения и мотивационные крюки на пути от первого визита до повторной игры.",
+    title: "Визуальный дизайн",
+    text: "Отрисовал веб-версию продукта и выстроил дизайн-систему.",
+    hasSlider: true,
+    metric: null,
   },
   {
     n: "05",
-    title: "Визуальный дизайн",
-    text: "Отрисовал весь UI продукта — от первых wireframes до финального дизайна в высокой детализации.",
-  },
-  {
-    n: "06",
-    title: "Бренд-стратегия",
-    text: "Совместно с маркетингом формировал позиционирование и визуальный голос продукта.",
+    title: "Доведение до прода",
+    text: "Совместно с разработкой привёл дизайн-систему к компонентной базе.",
+    hasSlider: false,
+    metric: { from: "12 мес", to: "3 мес", label: "скорость разработки новой версии" },
   },
 ];
 </script>
@@ -49,30 +62,50 @@ const items = [
     </div>
 
     <div class="grid">
-      <div v-for="item in items" :key="item.n" class="card">
-        <span class="card__n">{{ item.n }}</span>
-        <h3 class="card__title">{{ item.title }}</h3>
-        <p class="card__text">{{ item.text }}</p>
+      <div
+        v-for="item in items"
+        :key="item.n"
+        class="card"
+        :class="{
+          'card--featured': item.hasSlider,
+          'card--metric': item.metric,
+        }"
+      >
+        <div class="card__body">
+          <span class="card__n">{{ item.n }}</span>
+          <h3 class="card__title">{{ item.title }}</h3>
+          <p class="card__text">{{ item.text }}</p>
+        </div>
+
+        <div v-if="item.hasSlider" class="card__slider-wrap">
+          <div class="segmented" role="group" aria-label="Раздел материалов">
+            <button
+              v-for="tab in workTabs"
+              :key="tab.id"
+              class="segmented__btn"
+              :class="{ 'segmented__btn--active': activeWorkTabId === tab.id }"
+              type="button"
+              :aria-pressed="activeWorkTabId === tab.id"
+              @click="activeWorkTabId = tab.id"
+            >
+              {{ tab.label }}
+            </button>
+          </div>
+          <AppImageSlider
+            :slides="[]"
+            :placeholder-label="activeWorkTab.placeholderLabel"
+            aria-label="Материалы: визуальный дизайн"
+          />
+        </div>
+
+        <div v-if="item.metric" class="card__metric">
+          <p class="card__metric-value">
+            {{ item.metric.from }}<span class="card__metric-arrow">→</span>{{ item.metric.to }}
+          </p>
+          <p class="card__metric-label">{{ item.metric.label }}</p>
+        </div>
       </div>
     </div>
-
-    <figure class="work-media">
-      <div class="work-media__header">
-        <AppTag size="s" appearance="tonal">Рабочие материалы</AppTag>
-        <p>
-          Фрагменты CJM, JTBD или UI-скриншоты лучше смотрятся здесь: они
-          раскрывают этапы работы, а не живут отдельным хвостом.
-        </p>
-      </div>
-      <div class="work-media__grid">
-        <PlaceholderImage
-          label="CJM — путь пользователя, фрагмент"
-          :height="260"
-        />
-        <PlaceholderImage label="Скриншот: главный экран" :height="260" />
-        <PlaceholderImage label="Скриншот: поиск матча" :height="260" />
-      </div>
-    </figure>
 
     <blockquote class="insight">
       <AppTag size="s" appearance="tonal">Ключевой инсайт</AppTag>

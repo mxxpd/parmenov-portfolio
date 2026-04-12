@@ -13,13 +13,13 @@ const rows = [
   { label: "Конверсия в 1-й матч", before: "—", after: "~40%" },
   { label: "Конверсия в повтор", before: "—", after: "~10%" },
   { label: "Макс. активность", before: "—", after: "300 матчей/мес" },
-  { label: "Частота возврата", before: "—", after: "ежедневно" },
+  { label: "Частота возврата", before: "—", after: "каждый день или через день" },
 ];
 
 const reasons = [
-  { pct: "90%", label: "Зарабатывать на скилле" },
-  { pct: "8%", label: "Тестировали продукт" },
-  { pct: "2%", label: "Азарт" },
+  { pct: "90%", label: "Зарабатывать на скилле", bar: "90%", dominant: true },
+  { pct: "8%", label: "Тестировали продукт", bar: "8%", dominant: false },
+  { pct: "2%", label: "Азарт", bar: "2%", dominant: false },
 ];
 </script>
 
@@ -39,12 +39,8 @@ const reasons = [
       пользователей за 2 месяца.
     </p>
 
-    <div
-      class="table-wrap"
-      role="region"
-      aria-label="Результаты до и после пивота"
-    >
-      <table class="table">
+    <figure class="results-card" aria-label="Результаты и мотивация пользователей">
+      <table class="table" aria-label="Результаты до и после пивота">
         <thead>
           <tr>
             <th class="th" />
@@ -65,20 +61,28 @@ const reasons = [
           </tr>
         </tbody>
       </table>
-    </div>
 
-    <div class="reasons-block">
-      <AppTag size="s" appearance="tonal">Почему платили</AppTag>
-      <div class="reasons">
-        <div v-for="r in reasons" :key="r.pct" class="reason">
-          <p class="reason__pct">{{ r.pct }}</p>
-          <p class="reason__label">{{ r.label }}</p>
+      <div class="results-card__body">
+        <AppTag size="s" appearance="tonal">Почему платили</AppTag>
+        <div class="reasons">
+          <div
+            v-for="r in reasons"
+            :key="r.pct"
+            class="reason"
+            :class="{ 'reason--dominant': r.dominant }"
+          >
+            <p class="reason__pct">{{ r.pct }}</p>
+            <div class="reason__bar-track">
+              <div class="reason__bar" :style="{ width: r.bar }" />
+            </div>
+            <p class="reason__label">{{ r.label }}</p>
+          </div>
         </div>
+        <p class="reasons__note">
+          Аудитория пришла за монетизацией скилла, а не за азартом — это
+          определяло все продуктовые решения.
+        </p>
       </div>
-      <p class="reasons__note">
-        Аудитория пришла за монетизацией скилла, а не за азартом — это
-        определяло все продуктовые решения.
-      </p>
-    </div>
+    </figure>
   </section>
 </template>

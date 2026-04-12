@@ -2,7 +2,7 @@
   &.context {
     display: flex;
     flex-direction: column;
-    gap: var(--spacing-6);
+    gap: var(--case-section-gap);
     opacity: 0;
     transform: translateY(12px);
     transition:
@@ -16,7 +16,7 @@
   .context__main {
     display: flex;
     flex-direction: column;
-    gap: var(--spacing-6);
+    gap: var(--case-related-gap);
   }
   .context__body {
     max-width: 62ch;
@@ -27,15 +27,15 @@
   .context__meta {
     display: flex;
     flex-direction: row;
-    gap: var(--spacing-4);
+    gap: var(--case-grid-gap);
   }
   .info-card {
     flex: 1;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    gap: var(--spacing-4);
-    padding: var(--spacing-6);
+    gap: var(--case-grid-gap);
+    padding: var(--case-related-gap);
     border: 1px solid var(--color-border-subtle);
     border-radius: var(--radius-xl);
     background:
@@ -51,12 +51,12 @@
     list-style: none;
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: var(--spacing-3) var(--spacing-6);
+    gap: var(--case-section-header-gap) var(--case-related-gap);
   }
   .role {
     display: flex;
     align-items: center;
-    gap: var(--spacing-3);
+    gap: var(--case-section-header-gap);
     font-size: var(--text-body-sm);
     color: var(--color-text-primary);
   }

@@ -2,7 +2,7 @@
   &.section {
     display: flex;
     flex-direction: column;
-    gap: var(--spacing-8);
+    gap: var(--case-section-gap);
     opacity: 0;
     transform: translateY(12px);
     transition:
@@ -17,7 +17,7 @@
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    gap: var(--spacing-3);
+    gap: var(--case-section-header-gap);
   }
   .heading {
     font-size: var(--text-h1);
@@ -28,14 +28,15 @@
   .issues {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: var(--spacing-3);
+    gap: var(--case-grid-gap);
+    align-items: stretch;
   }
   .issue {
     background: var(--color-bg-surface);
     border: 1px solid var(--color-border-subtle);
     border-radius: var(--radius-xl);
     box-shadow: var(--shadow-subtle);
-    padding: var(--spacing-6);
+    padding: var(--case-related-gap);
     display: flex;
     flex-direction: column;
     gap: var(--spacing-3);
@@ -55,11 +56,11 @@
     border: 1px solid var(--color-border-subtle);
     border-radius: var(--radius-xl);
     box-shadow: var(--shadow-subtle);
-    padding: var(--spacing-8);
+    padding: var(--case-card-padding);
     margin: 0;
     display: flex;
     flex-direction: column;
-    gap: var(--spacing-6);
+    gap: var(--case-card-gap);
   }
   .cycle {
     display: grid;
@@ -75,13 +76,15 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: center;
     gap: var(--spacing-2);
     text-align: center;
     background: var(--color-bg-surface-muted);
     border: 1.5px solid var(--color-border-default);
     border-radius: var(--radius-lg);
     padding: var(--spacing-4) var(--spacing-4);
-    width: 100%;
+    width: 180px;
+    height: 112px;
     font-size: var(--text-body-sm);
     font-weight: var(--font-weight-body-strong);
     color: var(--color-text-primary);
@@ -101,7 +104,7 @@
     height: 40px;
   }
   .arrow {
-    color: var(--color-text-tertiary);
+    color: var(--color-text-secondary);
   }
   .arrow--h {
     width: 40px;
@@ -114,9 +117,10 @@
   .future {
     display: flex;
     flex-direction: column;
-    gap: var(--spacing-4);
+    gap: var(--case-related-gap);
   }
   .future__list {
+    counter-reset: future-list;
     list-style: none;
     display: flex;
     flex-direction: column;
@@ -126,18 +130,39 @@
     font-size: var(--text-body);
     line-height: var(--line-height-body);
     color: var(--color-text-secondary);
-    padding-left: var(--spacing-6);
+    padding-left: calc(var(--spacing-6) + var(--spacing-3));
     position: relative;
+    counter-increment: future-list;
   }
   .future__list li::before {
-    content: ">";
+    content: counter(future-list);
     position: absolute;
     left: 0;
-    color: var(--color-text-accent);
+    top: 0;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 24px;
+    height: 24px;
+    border: 1px solid var(--color-border-accent);
+    border-radius: var(--radius-pill);
+    background: var(--color-bg-accent-soft);
+    color: var(--color-brand-primary);
+    font-size: var(--text-label);
+    font-weight: var(--font-weight-heading);
+    line-height: 1;
   }
   @media (max-width: 640px) {
     .issues {
       grid-template-columns: 1fr;
+    }
+    .cycle {
+      grid-template-columns: 1fr 32px 1fr;
+      grid-template-rows: auto 32px auto;
+    }
+    .cycle__node {
+      width: 132px;
+      height: 104px;
     }
   }
 }

@@ -1,8 +1,8 @@
-﻿.yc-work {
+.yc-work {
   &.section {
     display: flex;
     flex-direction: column;
-    gap: clamp(var(--spacing-8), 3vw, var(--spacing-12));
+    gap: var(--case-section-gap);
     opacity: 0;
     transform: translateY(12px);
     transition:
@@ -17,7 +17,7 @@
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    gap: var(--spacing-3);
+    gap: var(--case-section-header-gap);
   }
   .heading {
     font-size: var(--text-h1);
@@ -28,17 +28,24 @@
   .grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
-    gap: var(--spacing-3);
+    gap: var(--case-grid-gap);
   }
   .card {
     background: var(--color-bg-surface);
     border: 1px solid var(--color-border-subtle);
     border-radius: var(--radius-xl);
     box-shadow: var(--shadow-subtle);
-    padding: var(--spacing-6);
+    padding: var(--case-related-gap);
     display: flex;
     flex-direction: column;
     gap: var(--spacing-3);
+  }
+  .card__body {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-3);
+    flex: 1;
+    min-width: 0;
   }
   .card__n {
     font-size: var(--text-label);
@@ -57,48 +64,102 @@
     line-height: var(--line-height-body-relaxed);
     color: var(--color-text-secondary);
   }
-  .insight {
-    background: var(--color-bg-accent-soft);
-    border: 1px solid var(--color-border-accent);
-    border-radius: var(--radius-xl);
-    padding: var(--spacing-8);
-    margin: 0;
+
+  // Карточка 04 — полная ширина, текст слева, переключатель + слайдер справа
+  .card--featured {
+    grid-column: 1 / -1;
+    flex-direction: row;
+    align-items: flex-start;
+    gap: var(--case-content-gap);
+  }
+  .card--featured .card__body {
+    flex: 0 0 240px;
+  }
+  .card__slider-wrap {
+    flex: 1;
+    min-width: 0;
     display: flex;
     flex-direction: column;
     gap: var(--spacing-3);
   }
-  .work-media {
+  .segmented {
     display: flex;
-    flex-direction: column;
-    gap: var(--spacing-5);
-    margin: 0;
-    padding: var(--spacing-6);
+    width: fit-content;
+    padding: 3px;
     border: 1px solid var(--color-border-subtle);
-    border-radius: var(--radius-xl);
-    background:
-      radial-gradient(
-        circle at 100% 0%,
-        color-mix(in srgb, var(--color-brand-primary) 7%, transparent),
-        transparent 30%
-      ),
-      var(--color-bg-surface);
+    border-radius: var(--radius-lg);
+    background: var(--color-bg-surface-muted);
+    gap: 2px;
+  }
+  .segmented__btn {
+    padding: 5px 14px;
+    border: none;
+    border-radius: calc(var(--radius-lg) - 3px);
+    background: transparent;
+    font-family: var(--font-sans);
+    font-size: var(--text-body-sm);
+    font-weight: var(--font-weight-body-strong);
+    color: var(--color-text-secondary);
+    cursor: pointer;
+    transition:
+      background 0.15s,
+      color 0.15s,
+      box-shadow 0.15s;
+    white-space: nowrap;
+  }
+  .segmented__btn--active {
+    background: var(--color-bg-surface);
+    color: var(--color-text-primary);
     box-shadow: var(--shadow-subtle);
   }
-  .work-media__header {
+  .segmented__btn:not(.segmented__btn--active):hover {
+    color: var(--color-text-primary);
+    background: color-mix(in srgb, var(--color-bg-surface) 60%, transparent);
+  }
+
+  // Карточка 05 — полная ширина, текст + метрика в строку
+  .card--metric {
+    grid-column: 1 / -1;
+    flex-direction: row;
+    align-items: center;
+    gap: var(--case-content-gap);
+  }
+  .card__metric {
     display: flex;
-    align-items: end;
-    justify-content: space-between;
-    gap: var(--spacing-6);
+    flex-direction: column;
+    align-items: flex-end;
+    gap: var(--spacing-2);
+    flex-shrink: 0;
+    text-align: right;
   }
-  .work-media__header p {
-    max-width: 58ch;
-    color: var(--color-text-secondary);
+  .card__metric-value {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-3);
+    font-size: clamp(28px, 4vw, 48px);
+    font-weight: var(--font-weight-display);
+    line-height: 1;
+    color: var(--color-brand-primary);
+    white-space: nowrap;
+  }
+  .card__metric-arrow {
+    font-size: 0.7em;
+    color: var(--color-text-tertiary);
+  }
+  .card__metric-label {
     font-size: var(--text-body-sm);
-    line-height: var(--line-height-body-relaxed);
+    color: var(--color-text-secondary);
+    line-height: var(--line-height-body);
   }
-  .work-media__grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
+
+  .insight {
+    background: var(--color-bg-accent-soft);
+    border: 1px solid var(--color-border-accent);
+    border-radius: var(--radius-xl);
+    padding: var(--case-card-padding);
+    margin: 0;
+    display: flex;
+    flex-direction: column;
     gap: var(--spacing-3);
   }
   .insight__text {
@@ -107,21 +168,32 @@
     line-height: var(--line-height-body-relaxed);
     color: var(--color-text-primary);
   }
+
   @media (max-width: 768px) {
     .grid {
       grid-template-columns: repeat(2, 1fr);
     }
-    .work-media__grid {
-      grid-template-columns: 1fr;
-    }
-    .work-media__header {
-      align-items: flex-start;
+    .card--featured {
       flex-direction: column;
+    }
+    .card--featured .card__body {
+      flex: unset;
+      width: 100%;
+    }
+    .card--metric {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+    .card__metric {
+      align-items: flex-start;
+      text-align: left;
+    }
+    .card__metric-value {
+      font-size: clamp(24px, 5vw, 36px);
     }
   }
   @media (max-width: 480px) {
-    .grid,
-    .work-media__grid {
+    .grid {
       grid-template-columns: 1fr;
     }
     .insight__text {

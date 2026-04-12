@@ -1,4 +1,12 @@
 .case-page {
+  --case-section-gap: clamp(var(--spacing-8), 3vw, var(--spacing-12));
+  --case-section-header-gap: var(--spacing-3);
+  --case-content-gap: var(--spacing-8);
+  --case-related-gap: var(--spacing-6);
+  --case-grid-gap: var(--spacing-4);
+  --case-card-gap: var(--spacing-6);
+  --case-card-padding: var(--spacing-8);
+
   display: flex;
   flex-direction: column;
   gap: clamp(var(--spacing-16), 8vw, var(--spacing-24));
@@ -59,6 +67,13 @@
 }
 
 @media (max-width: 760px) {
+  .case-page {
+    --case-section-gap: var(--spacing-8);
+    --case-content-gap: var(--spacing-6);
+    --case-related-gap: var(--spacing-4);
+    --case-card-padding: var(--spacing-6);
+  }
+
   .reading-progress {
     left: var(--spacing-4);
     bottom: var(--spacing-4);

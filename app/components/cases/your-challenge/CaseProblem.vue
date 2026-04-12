@@ -51,12 +51,12 @@ const steps = [
   { n: 3, text: "Дождаться, пока кто-то примет вызов", isWork: true },
   { n: 4, text: "Самому провести игру", isWork: true },
   { n: 5, text: "Загрузить результаты", isWork: true },
-  { n: 6, text: "Согласовать победителя или пройти модерацию", isWork: false },
+  { n: 6, text: "Согласовать победителя или пройти модерацию", isWork: true },
 ];
 
 const signals = [
   { value: "2", label: "рекламные кампании дали всплеск" },
-  { value: "0", label: "органических волн после кампаний" },
+  { value: "0", label: "органического роста между кампаниями" },
   { value: "150", label: "регистраций за 5 месяцев" },
 ];
 </script>
@@ -136,7 +136,6 @@ const signals = [
             </li>
           </ol>
 
-          <div class="flow__divider" aria-hidden="true" />
 
           <ol class="flow__col">
             <li
@@ -152,7 +151,7 @@ const signals = [
         </div>
 
         <figcaption class="card__caption">
-          4 из 6 шагов — это работа пользователя, а не удовольствие.
+          5 из 6 шагов — это работа пользователя, а не удовольствие.
         </figcaption>
       </figure>
     </div>

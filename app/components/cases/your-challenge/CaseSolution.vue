@@ -9,15 +9,16 @@ const oldFlow = [
   { n: 3, text: "Дождаться, пока кто-то примет вызов", isWork: true },
   { n: 4, text: "Самому провести игру", isWork: true },
   { n: 5, text: "Загрузить результаты", isWork: true },
-  { n: 6, text: "Согласовать победителя / пройти модерацию", isWork: false },
+  { n: 6, text: "Согласовать победителя / пройти модерацию", isWork: true },
 ];
 
 const newFlow = [
-  { n: 1, text: "Выбрал игру" },
-  { n: 2, text: "Выбрал взнос" },
-  { n: 3, text: "Нажал «найти матч»" },
-  { n: 4, text: "Сыграл" },
-  { n: 5, text: "Получил деньги" },
+  { n: 1, text: "Зарегистрировался", tag: null, isOk: false },
+  { n: 2, text: "Выбрал игру", tag: "выбор", isOk: true },
+  { n: 3, text: "Выбрал взнос", tag: "выбор", isOk: true },
+  { n: 4, text: "Нажал «найти матч»", tag: "1 действие", isOk: true },
+  { n: 5, text: "Сыграл", tag: "ценность", isOk: true },
+  { n: 6, text: "Получил деньги", tag: "результат", isOk: true },
 ];
 
 const mechanics = [
@@ -37,7 +38,7 @@ const mechanics = [
     label: "Сложность реализации",
     old1: "Средняя",
     old2: "Высокая",
-    good: "Низкая",
+    good: "Средняя",
   },
   { label: "Повторяемость", old1: "Низкая", old2: "Низкая", good: "Высокая" },
 ];
@@ -88,18 +89,25 @@ const mechanics = [
         </div>
         <div class="compare__col">
           <AppTag size="s" variant="success" appearance="tonal"
-            >Новый флоу — 5 шагов</AppTag
+            >Новый флоу — 6 шагов</AppTag
           >
           <div class="flow-list">
-            <div v-for="s in newFlow" :key="s.n" class="step step--ok">
-              <span class="step__n step__n--ok">{{ s.n }}</span>
-              <span class="step__text step__text--ok">{{ s.text }}</span>
+            <div v-for="s in newFlow" :key="s.n" class="step" :class="{ 'step--ok': s.isOk }">
+              <span class="step__n" :class="{ 'step__n--ok': s.isOk }">{{ s.n }}</span>
+              <span class="step__text" :class="{ 'step__text--ok': s.isOk }">{{ s.text }}</span>
+              <AppTag
+                v-if="s.tag"
+                class="step__tag"
+                size="s"
+                variant="success"
+                appearance="tonal"
+              >{{ s.tag }}</AppTag>
             </div>
           </div>
         </div>
       </div>
       <figcaption class="card__caption">
-        В старом флоу 4 из 6 шагов — это работа пользователя. В новом — 0.
+        Новый флоу: пользователь только играет — всё остальное берёт на себя продукт.
       </figcaption>
     </figure>
 
@@ -109,42 +117,31 @@ const mechanics = [
       давали мгновенный цикл и возможность играть в любое время.
     </p>
 
-    <figure class="materials-card">
-      <div class="materials-card__header">
-        <AppTag size="s" appearance="tonal">Материалы решения</AppTag>
-        <p>
-          Сюда можно положить фрагменты user flow, схему матчмейкинга или первые
-          wireframes нового сценария.
-        </p>
-      </div>
-      <div class="materials-card__grid">
-        <PlaceholderImage
-          label="User flow — онбординг и поиск матча"
-          :height="240"
-        />
-        <PlaceholderImage label="Схема: быстрый 1v1 матч" :height="240" />
-      </div>
-    </figure>
+    <figure class="card materials-card" aria-label="Материалы решения">
+      <AppTag size="s" appearance="tonal">Материалы решения</AppTag>
 
-    <div class="table-wrap" role="region" aria-label="Сравнение механик">
-      <table class="table">
-        <thead>
-          <tr>
-            <th class="th th--label" />
-            <th class="th">Челленджи</th>
-            <th class="th">Турниры</th>
-            <th class="th th--win">Быстрые матчи</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr v-for="row in mechanics" :key="row.label">
-            <td class="td td--label">{{ row.label }}</td>
-            <td class="td td--bad">{{ row.old1 }}</td>
-            <td class="td td--bad">{{ row.old2 }}</td>
-            <td class="td td--win">{{ row.good }}</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
+      <div class="table-wrap" role="region" aria-label="Сравнение механик">
+        <table class="table">
+          <thead>
+            <tr>
+              <th class="th th--label" />
+              <th class="th">Челленджи</th>
+              <th class="th">Турниры</th>
+              <th class="th th--win">Быстрые матчи</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr v-for="row in mechanics" :key="row.label">
+              <td class="td td--label">{{ row.label }}</td>
+              <td class="td td--bad">{{ row.old1 }}</td>
+              <td class="td td--bad">{{ row.old2 }}</td>
+              <td class="td td--win">{{ row.good }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <PlaceholderImage label="Wireframe: экран поиска матча" :height="280" />
+    </figure>
   </section>
 </template>
