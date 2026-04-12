@@ -1,6 +1,7 @@
 ﻿.yc-hero {
-  // Shared grid tokens — оба ряда используют одно определение
-  --hero-cols: repeat(4, minmax(0, 1fr));
+  --hero-card-min: min(100%, 340px);
+  --hero-intro-cols: repeat(auto-fit, minmax(var(--hero-card-min), 1fr));
+  --hero-stat-cols: repeat(auto-fit, minmax(min(100%, 220px), 1fr));
   --hero-gap:  var(--spacing-3);
   --hero-w:    min(calc(100vw - 48px), 1432px);
 
@@ -12,22 +13,16 @@
   }
   .hero__intro {
     display: grid;
-    grid-template-columns: var(--hero-cols);
+    grid-template-columns: var(--hero-intro-cols);
     gap: var(--hero-gap);
     align-items: stretch;
     width: var(--hero-w);
     margin-left: 50%;
     transform: translateX(-50%);
   }
-  .hero__copy {
-    grid-column: 1 / 3;
-  }
-  .hero__preview {
-    grid-column: 3 / 5;
-  }
   .hero__copy,
   .hero__preview {
-    min-height: 560px;
+    min-height: clamp(420px, 42vw, 560px);
     border-radius: 32px;
   }
   .hero__copy {
@@ -98,7 +93,7 @@
   }
   .stats {
     display: grid;
-    grid-template-columns: var(--hero-cols);
+    grid-template-columns: var(--hero-stat-cols);
     gap: var(--hero-gap);
     width: var(--hero-w);
     margin-left: 50%;
@@ -125,39 +120,14 @@
     color: var(--color-text-secondary);
     line-height: var(--line-height-body);
   }
-  @media (max-width: 1080px) {
-    .hero__intro {
-      grid-template-columns: 1fr;
-      width: 100%;
-      margin-left: 0;
-      transform: none;
-    }
-    .hero__copy,
-    .hero__preview {
-      grid-column: unset;
-    }
-    .stats {
-      width: 100%;
-      margin-left: 0;
-      transform: none;
-    }
-    .hero__copy,
-    .hero__preview {
-      min-height: unset;
-    }
-    .hero__title {
-      max-width: 100%;
-    }
-    .hero__preview {
-      min-height: 460px;
-    }
-  }
   @media (max-width: 760px) {
-    .stats {
-      grid-template-columns: repeat(2, minmax(0, 1fr));
+    .hero__preview {
+      order: -1;
     }
   }
   @media (max-width: 640px) {
+    --hero-w: 100%;
+
     .hero {
       gap: var(--case-grid-gap);
       padding-top: var(--spacing-4);
@@ -171,9 +141,6 @@
     }
     .hero__title {
       max-width: 100%;
-    }
-    .hero__intro {
-      width: 100%;
     }
     .hero__preview {
       min-height: 320px;

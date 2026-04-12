@@ -2,6 +2,7 @@
 import { useScrollReveal } from "../../../composables/useScrollReveal";
 
 const { bind, isVisible } = useScrollReveal();
+const workSliderPlaceholderHeight = ref(360);
 
 const workTabs = [
   { id: "interface", label: "Новый интерфейс", placeholderLabel: "Скриншот: новый интерфейс" },
@@ -10,6 +11,12 @@ const workTabs = [
 
 const activeWorkTabId = ref("interface");
 const activeWorkTab = computed(() => workTabs.find(t => t.id === activeWorkTabId.value)!);
+
+const updateWorkSliderPlaceholderHeight = () => {
+  if (!import.meta.client) return;
+
+  workSliderPlaceholderHeight.value = window.matchMedia("(max-width: 640px)").matches ? 240 : 360;
+};
 
 const items = [
   {
@@ -48,6 +55,15 @@ const items = [
     metric: { from: "12 мес", to: "3 мес", label: "скорость разработки новой версии" },
   },
 ];
+
+onMounted(() => {
+  updateWorkSliderPlaceholderHeight();
+  window.addEventListener("resize", updateWorkSliderPlaceholderHeight);
+});
+
+onBeforeUnmount(() => {
+  window.removeEventListener("resize", updateWorkSliderPlaceholderHeight);
+});
 </script>
 
 <template>
@@ -94,6 +110,7 @@ const items = [
           <AppImageSlider
             :slides="[]"
             :placeholder-label="activeWorkTab.placeholderLabel"
+            :placeholder-height="workSliderPlaceholderHeight"
             aria-label="Материалы: визуальный дизайн"
           />
         </div>

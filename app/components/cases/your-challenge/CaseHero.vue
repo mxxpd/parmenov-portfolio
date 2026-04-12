@@ -52,6 +52,8 @@ const accents = [
           :src="heroPreviewUrl"
           alt="Главный экран Your Challenge"
           class="hero__preview-image"
+          loading="lazy"
+          decoding="async"
         >
       </div>
     </div>

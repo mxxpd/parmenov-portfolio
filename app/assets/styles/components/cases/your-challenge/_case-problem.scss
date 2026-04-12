@@ -290,9 +290,9 @@
   }
   .activity-card__stats {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: var(--spacing-3);
-    padding-bottom: var(--spacing-6);
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 160px), 1fr));
+    gap: var(--case-grid-gap);
+    padding-bottom: var(--case-related-gap);
     border-bottom: 1px solid var(--color-border-subtle);
   }
   .activity-stat {
@@ -326,10 +326,6 @@
     margin-top: calc(-1 * var(--spacing-4));
   }
   @media (max-width: 760px) {
-    .activity-card__header,
-    .activity-card__stats {
-      grid-template-columns: 1fr;
-    }
     .activity-card__header {
       flex-direction: column;
     }
@@ -337,8 +333,10 @@
   @media (max-width: 640px) {
     .flow {
       flex-direction: column;
+      gap: var(--spacing-2);
     }
     .flow__col {
+      gap: var(--spacing-2);
       width: 100%;
     }
   }
@@ -348,7 +346,12 @@
       padding: var(--case-card-padding);
     }
     .chart-shell {
+      overflow-x: auto;
+      overscroll-behavior-x: contain;
       min-height: 260px;
+    }
+    .activity-card__caption {
+      margin-top: 0;
     }
   }
 }

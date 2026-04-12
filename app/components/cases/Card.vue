@@ -51,6 +51,8 @@ const handleClick = (event: MouseEvent) => {
         alt=""
         class="case-card__cover case-card__cover-image"
         aria-hidden="true"
+        loading="lazy"
+        decoding="async"
       >
       <div v-else class="case-card__cover" :style="coverStyle" />
       <AppTag class="case-card__tag" size="s" variant="brand" appearance="tonal">{{ type }}</AppTag>

@@ -69,6 +69,8 @@ const handleClick = (event: MouseEvent) => {
         alt=""
         class="case-hero__cover case-hero__cover-image"
         aria-hidden="true"
+        loading="lazy"
+        decoding="async"
       >
       <div v-else class="case-hero__cover" :style="coverStyle" />
     </div>

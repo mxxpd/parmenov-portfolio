@@ -25,7 +25,7 @@
 }
 
 // Mobile: hide nav + actions, show menu button
-@media (max-width: 768px) {
+@media (max-width: 1024px) {
   .header .header__nav,
   .header .header__actions {
     display: none;

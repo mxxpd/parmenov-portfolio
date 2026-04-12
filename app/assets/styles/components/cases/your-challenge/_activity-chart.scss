@@ -161,6 +161,7 @@
 
 @media (max-width: 640px) {
   .activity-chart {
+    min-width: 500px;
     min-height: 260px;
     padding: var(--spacing-4) var(--spacing-2);
   }
@@ -171,7 +172,20 @@
 
   .activity-chart__tag {
     padding: 6px 9px;
+    font-size: 0;
+    white-space: nowrap;
+  }
+
+  .activity-chart__tag::before {
     font-size: 10px;
+  }
+
+  .activity-chart__tag--first::before {
+    content: "Кампания 1";
+  }
+
+  .activity-chart__tag--second::before {
+    content: "Кампания 2";
   }
 
   .activity-chart__point {

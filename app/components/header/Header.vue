@@ -62,7 +62,7 @@ watch(menuOpen, (val) => {
 onMounted(() => {
   if (!import.meta.client) return
 
-  mobileQuery = window.matchMedia('(max-width: 768px)')
+  mobileQuery = window.matchMedia('(max-width: 1024px)')
   lastScrollY = window.scrollY
 
   window.addEventListener('scroll', onScroll, { passive: true })

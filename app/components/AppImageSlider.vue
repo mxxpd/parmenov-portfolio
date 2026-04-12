@@ -8,18 +8,18 @@ const props = withDefaults(defineProps<{
   slides: ImageSliderSlide[]
   placeholderLabel?: string
   placeholderHeight?: number
-  zoomBreakpoint?: number
   ariaLabel?: string
 }>(), {
   placeholderLabel: 'Изображение скоро появится',
   placeholderHeight: 640,
-  zoomBreakpoint: 1024,
   ariaLabel: 'Галерея изображений',
 })
 
 const slideIndex = ref(0)
 const slideDirection = ref<'next' | 'prev'>('next')
 const lightboxOpen = ref(false)
+
+let previousBodyOverflow = ''
 
 const currentSlide = computed(() => props.slides[slideIndex.value] ?? null)
 const hasSlider = computed(() => props.slides.length > 1)
@@ -31,14 +31,19 @@ watch(() => props.slides, () => {
 
 watch(lightboxOpen, (isOpen) => {
   if (isOpen) {
+    previousBodyOverflow = document.body.style.overflow
+    document.body.style.overflow = 'hidden'
     window.addEventListener('keydown', onKeydown)
   }
   else {
+    document.body.style.overflow = previousBodyOverflow
     window.removeEventListener('keydown', onKeydown)
   }
 })
 
 onBeforeUnmount(() => {
+  if (lightboxOpen.value) document.body.style.overflow = previousBodyOverflow
+
   window.removeEventListener('keydown', onKeydown)
 })
 
@@ -66,9 +71,7 @@ function goTo(index: number) {
 function openLightbox() {
   if (!currentSlide.value) return
 
-  if (window.matchMedia(`(min-width: ${props.zoomBreakpoint}px)`).matches) {
-    lightboxOpen.value = true
-  }
+  lightboxOpen.value = true
 }
 
 function closeLightbox() {
@@ -92,6 +95,8 @@ function onKeydown(event: KeyboardEvent) {
           :src="currentSlide.src"
           :alt="currentSlide.alt"
           class="image-slider__img"
+          loading="lazy"
+          decoding="async"
           @click="openLightbox"
         >
         <PlaceholderImage
@@ -175,6 +180,8 @@ function onKeydown(event: KeyboardEvent) {
             :src="currentSlide.src"
             :alt="currentSlide.alt"
             class="image-slider-lightbox__img"
+            loading="lazy"
+            decoding="async"
           >
         </Transition>
 
