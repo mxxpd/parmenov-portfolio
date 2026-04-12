@@ -62,6 +62,9 @@
     flex-direction: column;
     gap: var(--case-card-gap);
   }
+  .cycle-card {
+    margin-top: calc(-1 * var(--spacing-4));
+  }
   .cycle {
     display: grid;
     grid-template-columns: 1fr 40px 1fr;

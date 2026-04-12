@@ -59,6 +59,39 @@ const signals = [
   { value: "0", label: "органического роста между кампаниями" },
   { value: "150", label: "регистраций за 5 месяцев" },
 ];
+
+const dataTimeline = [
+  {
+    title: "Релиз платформы",
+    text: "Первая версия продукта с механикой челленджей запущена.",
+    badge: null,
+    state: "neutral",
+  },
+  {
+    title: "Кампания 1 — сбор обратной связи",
+    text: "Твич-стримеры играли на платформе в прямом эфире.",
+    badge: "Неудобно, непонятно, криво",
+    state: "neutral",
+  },
+  {
+    title: "Редизайн",
+    text: "Улучшили интерфейс — платформой стало удобнее пользоваться. Но решение роста не дало: мы лечили симптом, а не причину. Зато редизайн убрал интерфейсный шум — и во второй кампании пользователи смогли добраться до настоящей проблемы.",
+    badge: "❌ Ошибка диагноза",
+    state: "wrong",
+  },
+  {
+    title: "Кампания 2 — сбор обратной связи",
+    text: "Интерфейс уже не мешал — выплыло главное.",
+    badge: "Создавать челлендж — это работа, никто не хочет",
+    state: "neutral",
+  },
+  {
+    title: "Пивот механики",
+    text: "Проблема не в дизайне, а в core-механике. Инициировали смену модели на быстрые матчи.",
+    badge: "✓ Верный диагноз",
+    state: "success",
+  },
+];
 </script>
 
 <template>
@@ -192,6 +225,35 @@ const signals = [
 
         <div class="chart-shell">
           <CasesYourChallengeActivityChart />
+        </div>
+
+        <div class="data-timeline" aria-labelledby="data-timeline-title">
+          <h4 id="data-timeline-title" class="data-timeline__title">
+            Как мы читали данные
+          </h4>
+
+          <ol class="data-timeline__list">
+            <li
+              v-for="item in dataTimeline"
+              :key="item.title"
+              class="data-timeline__item"
+              :class="`data-timeline__item--${item.state}`"
+            >
+              <div class="data-timeline__content">
+                <div class="data-timeline__head">
+                  <h5 class="data-timeline__step-title">{{ item.title }}</h5>
+                  <span
+                    v-if="item.badge"
+                    class="data-timeline__badge"
+                  >
+                    {{ item.badge }}
+                  </span>
+                </div>
+                <p class="data-timeline__text">{{ item.text }}</p>
+              </div>
+            </li>
+          </ol>
+
         </div>
 
         <figcaption class="activity-card__caption">

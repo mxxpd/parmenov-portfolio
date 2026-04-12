@@ -64,28 +64,92 @@
     line-height: var(--line-height-body-relaxed);
     color: var(--color-text-secondary);
   }
-
-  // Карточка 04 — полная ширина, текст слева, переключатель + слайдер справа
-  .card--featured {
+  .card--analysis {
     grid-column: 1 / -1;
-    flex-direction: row;
-    align-items: flex-start;
-    gap: var(--case-content-gap);
   }
-  .card--featured .card__body {
-    flex: 0 0 240px;
+  .card--pivot {
+    grid-column: 1 / -1;
   }
-  .card__slider-wrap {
-    flex: 1;
-    min-width: 0;
+  .card--flow {
+    grid-column: 1 / -1;
+  }
+  .card__link {
+    width: fit-content;
+    margin-top: var(--spacing-1);
+    font-size: var(--text-body-sm);
+    font-weight: var(--font-weight-body-strong);
+    line-height: var(--line-height-body);
+    color: var(--color-text-accent);
+    text-decoration: none;
+    transition:
+      color 0.15s,
+      opacity 0.15s;
+  }
+  .card__link::after {
+    content: "→";
+    margin-left: var(--spacing-2);
+  }
+  .card__link:hover {
+    color: var(--color-text-primary);
+  }
+  .competitor-table-wrap {
+    overflow-x: auto;
+    overflow-y: hidden;
+    overscroll-behavior-x: contain;
+    border: 1px solid var(--color-border-subtle);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-subtle);
+  }
+  .competitor-table {
     width: 100%;
+    min-width: 760px;
+    border-collapse: collapse;
+    font-size: var(--text-body-sm);
+  }
+  .competitor-table th {
+    padding: var(--spacing-3) var(--spacing-4);
+    text-align: left;
+    font-size: var(--text-caption);
+    font-weight: var(--font-weight-heading);
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: var(--color-text-tertiary);
+    background: var(--color-bg-surface-muted);
+    border-bottom: 1px solid var(--color-border-subtle);
+  }
+  .competitor-table td {
+    padding: var(--spacing-3) var(--spacing-4);
+    color: var(--color-text-secondary);
+    line-height: var(--line-height-body-relaxed);
+    vertical-align: top;
+    border-bottom: 1px solid var(--color-border-subtle);
+  }
+  .competitor-table tr:last-child td {
+    border-bottom: none;
+  }
+  .competitor-table td:first-child {
+    font-weight: var(--font-weight-heading);
+    color: var(--color-text-primary);
+  }
+  .flow-slider-wrap,
+  .card__slider-wrap {
     display: flex;
     flex-direction: column;
     gap: var(--spacing-3);
+    min-width: 0;
+    width: 100%;
+  }
+
+  // Карточка 04 — полная ширина, как карточка 03: текст сверху, слайдер ниже
+  .card--featured {
+    grid-column: 1 / -1;
   }
   .segmented {
     display: flex;
     width: fit-content;
+    max-width: 100%;
+    overflow-x: auto;
+    overscroll-behavior-x: contain;
     padding: 3px;
     border: 1px solid var(--color-border-subtle);
     border-radius: var(--radius-lg);
@@ -152,36 +216,14 @@
     color: var(--color-text-secondary);
     line-height: var(--line-height-body);
   }
-
-  .insight {
-    background: var(--color-bg-accent-soft);
-    border: 1px solid var(--color-border-accent);
-    border-radius: var(--radius-xl);
-    padding: var(--case-card-padding);
-    margin: 0;
-    display: flex;
-    flex-direction: column;
-    gap: var(--spacing-3);
-  }
-  .insight__text {
-    font-size: var(--text-h3);
-    font-weight: var(--font-weight-body-strong);
-    line-height: var(--line-height-body-relaxed);
-    color: var(--color-text-primary);
+  .card__metric-note {
+    max-width: 360px;
+    font-size: var(--text-caption);
+    line-height: var(--line-height-body);
+    color: var(--color-text-tertiary);
   }
 
-  @media (max-width: 768px) {
-    .grid {
-      grid-template-columns: repeat(2, 1fr);
-    }
-    .card--featured {
-      flex-direction: column;
-      align-items: stretch;
-    }
-    .card--featured .card__body {
-      flex: unset;
-      width: 100%;
-    }
+  @media (max-width: 960px) {
     .card--metric {
       flex-direction: column;
       align-items: flex-start;
@@ -189,17 +231,44 @@
     .card__metric {
       align-items: flex-start;
       text-align: left;
+      width: 100%;
+    }
+  }
+  @media (max-width: 768px) {
+    .grid {
+      grid-template-columns: repeat(2, 1fr);
     }
     .card__metric-value {
       font-size: clamp(24px, 5vw, 36px);
     }
   }
-  @media (max-width: 480px) {
+  @media (max-width: 640px) {
     .grid {
       grid-template-columns: 1fr;
     }
-    .insight__text {
-      font-size: var(--text-body);
+
+    .card {
+      padding: var(--case-card-padding);
+    }
+
+    .competitor-table {
+      min-width: 640px;
+    }
+  }
+  @media (max-width: 480px) {
+    .segmented {
+      width: 100%;
+    }
+
+    .segmented__btn {
+      flex: 1 0 auto;
+      padding-inline: var(--spacing-3);
+      text-align: center;
+    }
+
+    .card__metric-value {
+      gap: var(--spacing-2);
+      font-size: clamp(24px, 8vw, 32px);
     }
   }
 }

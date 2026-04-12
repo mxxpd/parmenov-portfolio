@@ -46,6 +46,7 @@ const mechanics = [
 
 <template>
   <section
+    id="hypothesis-solution"
     :ref="bind"
     class="yc-solution section"
     :class="{ 'is-visible': isVisible }"
@@ -55,11 +56,74 @@ const mechanics = [
       <h2 class="heading">Как я пришёл к идее быстрых матчей</h2>
     </div>
 
-    <blockquote class="quote">
-      Пользователь не должен «работать» — продукт должен развлекать. Если убрать
-      всё, что не создаёт ценность, и оставить только путь к дофамину —
-      удержание вырастет.
-    </blockquote>
+    <div class="narrative">
+      <p>
+        Когда платформа не показывала роста, команда приняла решение двигаться к
+        турнирам — следующей большой фиче. Передо мной поставили задачу:
+        спроектировать турниры.
+      </p>
+      <p>
+        Прежде чем рисовать, я изучил как это работает у конкурентов. На Fastcup,
+        Cybershoke и других платформах я увидел системную проблему: большинство
+        турниров мёртвые — не набирают участников, не стартуют. Исключение —
+        Faceit, но это самая крупная платформа в нише, конкурировать с ней на
+        нашем этапе нереально.
+      </p>
+      <div class="risk-flow" aria-label="Проблемы турнирной механики">
+        <div class="risk-flow__item">Маленькая аудитория</div>
+        <div class="risk-flow__item">Маленькие взносы</div>
+        <div class="risk-flow__item">Маленькие призовые</div>
+        <div class="risk-flow__item">Маленький доход платформы</div>
+        <p class="risk-flow__note">
+          Для нормального турнира по CS2 нужны собственные игровые серверы — без
+          них организация снова ложится на пользователя.
+        </p>
+      </div>
+      <p>
+        Я понял: если мы запустим турниры в таком виде — повторим ту же ошибку,
+        что с челленджами. Механика снова потребует от пользователя слишком много
+        работы до первой ценности.
+      </p>
+      <p>
+        Тогда я принял решение выйти за рамки задачи. Параллельно с турнирами я
+        самостоятельно спроектировал быстрые матчи — изучил как это устроено у
+        конкурентов, выстроил user flow, нарисовал screen flow. На презентации я
+        показал оба варианта рядом. Увидев интерфейсы, команда сама сделала
+        выбор: быстрые матчи — это то, что нужно в первую очередь. Реализовать
+        проще, серверов нужно меньше, не нужно собирать 16+ игроков. И главное —
+        пользователь сразу получает ценность.
+      </p>
+    </div>
+
+    <figure class="card materials-card" aria-label="Материалы решения">
+      <AppTag size="s" appearance="tonal">Материалы решения</AppTag>
+
+      <div class="table-wrap" role="region" aria-label="Сравнение механик">
+        <table class="table">
+          <thead>
+            <tr>
+              <th class="th th--label" />
+              <th class="th">Челленджи</th>
+              <th class="th">Турниры</th>
+              <th class="th th--win">Быстрые матчи</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr v-for="row in mechanics" :key="row.label">
+              <td class="td td--label">{{ row.label }}</td>
+              <td class="td td--bad">{{ row.old1 }}</td>
+              <td class="td td--bad">{{ row.old2 }}</td>
+              <td class="td td--win">{{ row.good }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="materials-grid">
+        <PlaceholderImage label="Wireframe: турнирная механика" :height="260" />
+        <PlaceholderImage label="Wireframe: экран поиска матча" :height="260" />
+      </div>
+    </figure>
 
     <figure class="card" aria-label="Сравнение старого и нового флоу">
       <div class="compare">
@@ -111,37 +175,14 @@ const mechanics = [
       </figcaption>
     </figure>
 
-    <p class="body">
-      Мы рассмотрели альтернативу — турниры — и отклонили её: сложная логистика,
-      риск не набрать участников, длинный цикл до результата. Быстрые 1v1-матчи
-      давали мгновенный цикл и возможность играть в любое время.
-    </p>
-
-    <figure class="card materials-card" aria-label="Материалы решения">
-      <AppTag size="s" appearance="tonal">Материалы решения</AppTag>
-
-      <div class="table-wrap" role="region" aria-label="Сравнение механик">
-        <table class="table">
-          <thead>
-            <tr>
-              <th class="th th--label" />
-              <th class="th">Челленджи</th>
-              <th class="th">Турниры</th>
-              <th class="th th--win">Быстрые матчи</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr v-for="row in mechanics" :key="row.label">
-              <td class="td td--label">{{ row.label }}</td>
-              <td class="td td--bad">{{ row.old1 }}</td>
-              <td class="td td--bad">{{ row.old2 }}</td>
-              <td class="td td--win">{{ row.good }}</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-
-      <PlaceholderImage label="Wireframe: экран поиска матча" :height="280" />
-    </figure>
+    <blockquote class="insight">
+      <AppTag size="s" appearance="tonal">Ключевой инсайт</AppTag>
+      <p class="insight__text">
+        Анализ поведения пользователей дал ключевое понимание: люди приходят на
+        платформу не "поиграть", а доказать себе, что они лучше — и заработать на
+        этом. Монетизация скилла была сутью платформы с первого дня. Вопрос был
+        только в том, какая механика даёт к этому самый короткий путь.
+      </p>
+    </blockquote>
   </section>
 </template>
