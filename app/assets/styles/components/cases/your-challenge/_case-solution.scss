@@ -13,23 +13,6 @@
     opacity: 1;
     transform: translateY(0);
   }
-  .section__header {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: var(--case-section-header-gap);
-  }
-  .heading {
-    font-size: var(--text-h1);
-    font-weight: var(--font-weight-display);
-    line-height: var(--line-height-heading);
-    color: var(--color-text-primary);
-  }
-  .body {
-    font-size: var(--text-body);
-    line-height: var(--line-height-body-relaxed);
-    color: var(--color-text-secondary);
-  }
   .narrative {
     display: flex;
     flex-direction: column;
@@ -38,10 +21,10 @@
     line-height: var(--line-height-body-relaxed);
     color: var(--color-text-secondary);
   }
-  .narrative > p {
+  .narrative__text {
     max-width: 880px;
   }
-  .narrative p:first-child {
+  .narrative__text--lead {
     color: var(--color-text-primary);
   }
   .risk-flow {
@@ -204,7 +187,7 @@
     border-color: var(--color-error-border);
     color: var(--color-error-text);
   }
-  .step__n--ok {
+  .step--ok .step__n {
     border-color: var(--color-success-border);
     color: var(--color-success-text);
   }
@@ -217,7 +200,7 @@
   .step--work .step__text {
     color: var(--color-error-text);
   }
-  .step__text--ok {
+  .step--ok .step__text {
     color: var(--color-text-primary);
   }
   .step__tag {
@@ -326,14 +309,14 @@
     padding-top: 0;
     border-top: none;
   }
-  .mechanic-card dt {
+  .mechanic-card__term {
     font-size: var(--text-caption);
     font-weight: var(--font-weight-heading);
     letter-spacing: 0.05em;
     text-transform: uppercase;
     color: var(--color-text-tertiary);
   }
-  .mechanic-card dd {
+  .mechanic-card__value {
     margin: 0;
     font-size: var(--text-body-sm);
     line-height: var(--line-height-body-relaxed);

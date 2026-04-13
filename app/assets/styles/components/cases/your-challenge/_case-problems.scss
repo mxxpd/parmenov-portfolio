@@ -13,18 +13,6 @@
     opacity: 1;
     transform: translateY(0);
   }
-  .section__header {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: var(--case-section-header-gap);
-  }
-  .heading {
-    font-size: var(--text-h1);
-    font-weight: var(--font-weight-display);
-    line-height: var(--line-height-heading);
-    color: var(--color-text-primary);
-  }
   .issues {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -129,7 +117,7 @@
     flex-direction: column;
     gap: var(--spacing-3);
   }
-  .future__list li {
+  .future__item {
     font-size: var(--text-body);
     line-height: var(--line-height-body);
     color: var(--color-text-secondary);
@@ -137,7 +125,7 @@
     position: relative;
     counter-increment: future-list;
   }
-  .future__list li::before {
+  .future__item::before {
     content: counter(future-list);
     position: absolute;
     left: 0;

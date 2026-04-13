@@ -34,6 +34,7 @@
 @use 'components/hero/hero';
 @use 'components/cases/card';
 @use 'components/cases/hero' as cases-hero;
+@use 'components/cases/your-challenge/case-section-base';
 @use 'components/cases/your-challenge/activity-chart';
 @use 'components/cases/your-challenge/case-context';
 @use 'components/cases/your-challenge/case-hero' as yc-case-hero;

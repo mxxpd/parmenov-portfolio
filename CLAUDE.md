@@ -1,5 +1,17 @@
 # Portfolio Project - Claude Reference
 
+## Wiki
+
+При работе над проектом всегда обращаться к личной вики Максима:
+
+- Индекс: `D:\my data\My\wiki\index.md`
+- Обзор: `D:\my data\My\wiki\overview.md`
+- Лог: `D:\my data\My\wiki\log.md`
+- Концепции: `D:\my data\My\wiki\concepts\`
+- Источники: `D:\my data\My\wiki\sources\`
+
+Читать индекс (`index.md`) в начале каждой сессии. При изменениях, затрагивающих архитектуру, паттерны или принятые решения — обновлять соответствующие страницы вики и добавлять запись в `log.md`.
+
 ## Owner
 
 **Максим Парменов** — Product дизайнер.

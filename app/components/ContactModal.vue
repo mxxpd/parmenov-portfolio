@@ -2,6 +2,7 @@
 const { isContactOpen, closeContact } = useModal()
 const isContactSuccess = ref(false)
 const dialogRef = ref<HTMLElement | null>(null)
+const { lock: lockBodyScroll, unlock: unlockBodyScroll } = useBodyScrollLock()
 let triggerElement: HTMLElement | null = null
 
 const focusableSelector = [
@@ -93,9 +94,8 @@ watch(isContactOpen, (isOpen) => {
     isContactSuccess.value = false
   }
 
-  document.body.classList.toggle('contact-modal-open', isOpen)
-
   if (isOpen) {
+    lockBodyScroll()
     triggerElement = document.activeElement instanceof HTMLElement ? document.activeElement : null
 
     nextTick(() => {
@@ -105,6 +105,7 @@ watch(isContactOpen, (isOpen) => {
     return
   }
 
+  unlockBodyScroll()
   restoreTriggerFocus()
 })
 
@@ -116,13 +117,7 @@ watch(isContactSuccess, (isSuccess) => {
   }
 })
 
-onBeforeUnmount(() => {
-  if (!import.meta.client) {
-    return
-  }
-
-  document.body.classList.remove('contact-modal-open')
-})
+onBeforeUnmount(unlockBodyScroll)
 </script>
 
 <template>

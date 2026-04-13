@@ -1,6 +1,4 @@
 <script setup lang="ts">
-import { useScrollReveal } from "../../../composables/useScrollReveal";
-
 const { bind, isVisible } = useScrollReveal();
 const workMediaHeight = ref(520);
 
@@ -132,9 +130,7 @@ onBeforeUnmount(() => {
         :class="{
           'card--featured': item.hasSlider,
           'card--metric': item.metric,
-          'card--analysis': item.hasCompetitorTable,
-          'card--flow': item.hasFlowArchitecture,
-          'card--pivot': item.isPivot,
+          'card--full': item.hasCompetitorTable || item.hasFlowArchitecture || item.isPivot,
         }"
       >
         <div class="card__body">
@@ -159,18 +155,22 @@ onBeforeUnmount(() => {
           <table class="competitor-table">
             <thead>
               <tr>
-                <th>Платформа</th>
-                <th>Механика</th>
-                <th>Проблема</th>
-                <th>Что взяли</th>
+                <th class="competitor-table__header">Платформа</th>
+                <th class="competitor-table__header">Механика</th>
+                <th class="competitor-table__header">Проблема</th>
+                <th class="competitor-table__header">Что взяли</th>
               </tr>
             </thead>
             <tbody>
-              <tr v-for="row in competitorRows" :key="row.platform">
-                <td>{{ row.platform }}</td>
-                <td>{{ row.mechanic }}</td>
-                <td>{{ row.problem }}</td>
-                <td>{{ row.takeaway }}</td>
+              <tr
+                v-for="row in competitorRows"
+                :key="row.platform"
+                class="competitor-table__row"
+              >
+                <td class="competitor-table__cell competitor-table__cell--platform">{{ row.platform }}</td>
+                <td class="competitor-table__cell">{{ row.mechanic }}</td>
+                <td class="competitor-table__cell">{{ row.problem }}</td>
+                <td class="competitor-table__cell">{{ row.takeaway }}</td>
               </tr>
             </tbody>
           </table>
@@ -189,16 +189,16 @@ onBeforeUnmount(() => {
             <h4 class="competitor-card__title">{{ row.platform }}</h4>
             <dl class="competitor-card__list">
               <div class="competitor-card__row">
-                <dt>Механика</dt>
-                <dd>{{ row.mechanic }}</dd>
+                <dt class="competitor-card__term">Механика</dt>
+                <dd class="competitor-card__value">{{ row.mechanic }}</dd>
               </div>
               <div class="competitor-card__row">
-                <dt>Проблема</dt>
-                <dd>{{ row.problem }}</dd>
+                <dt class="competitor-card__term">Проблема</dt>
+                <dd class="competitor-card__value">{{ row.problem }}</dd>
               </div>
               <div class="competitor-card__row">
-                <dt>Что взяли</dt>
-                <dd>{{ row.takeaway }}</dd>
+                <dt class="competitor-card__term">Что взяли</dt>
+                <dd class="competitor-card__value">{{ row.takeaway }}</dd>
               </div>
             </dl>
           </article>

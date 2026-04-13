@@ -1,6 +1,4 @@
 <script setup lang="ts">
-import { useScrollReveal } from "../../../composables/useScrollReveal";
-
 const { bind, isVisible } = useScrollReveal();
 
 const oldFlow = [
@@ -75,12 +73,12 @@ const mechanicCards = [
     </div>
 
     <div class="narrative">
-      <p>
+      <p class="narrative__text narrative__text--lead">
         Когда платформа не показывала роста, команда приняла решение двигаться к
         турнирам — следующей большой фиче. Передо мной поставили задачу:
         спроектировать турниры.
       </p>
-      <p>
+      <p class="narrative__text">
         Прежде чем рисовать, я изучил как это работает у конкурентов. На Fastcup,
         Cybershoke и других платформах я увидел системную проблему: большинство
         турниров мёртвые — не набирают участников, не стартуют. Исключение —
@@ -97,12 +95,12 @@ const mechanicCards = [
           них организация снова ложится на пользователя.
         </p>
       </div>
-      <p>
+      <p class="narrative__text">
         Я понял: если мы запустим турниры в таком виде — повторим ту же ошибку,
         что с челленджами. Механика снова потребует от пользователя слишком много
         работы до первой ценности.
       </p>
-      <p>
+      <p class="narrative__text">
         Тогда я принял решение выйти за рамки задачи. Параллельно с турнирами я
         самостоятельно спроектировал быстрые матчи — изучил как это устроено у
         конкурентов, выстроил user flow, нарисовал screen flow. На презентации я
@@ -151,8 +149,11 @@ const mechanicCards = [
               :key="item.label"
               class="mechanic-card__row"
             >
-              <dt>{{ item.label }}</dt>
-              <dd :class="{ 'mechanic-card__value--win': item.isWin }">
+              <dt class="mechanic-card__term">{{ item.label }}</dt>
+              <dd
+                class="mechanic-card__value"
+                :class="{ 'mechanic-card__value--win': item.isWin }"
+              >
                 {{ item.value }}
               </dd>
             </div>
@@ -198,8 +199,8 @@ const mechanicCards = [
           >
           <div class="flow-list">
             <div v-for="s in newFlow" :key="s.n" class="step" :class="{ 'step--ok': s.isOk }">
-              <span class="step__n" :class="{ 'step__n--ok': s.isOk }">{{ s.n }}</span>
-              <span class="step__text" :class="{ 'step__text--ok': s.isOk }">{{ s.text }}</span>
+              <span class="step__n">{{ s.n }}</span>
+              <span class="step__text">{{ s.text }}</span>
               <AppTag
                 v-if="s.tag"
                 class="step__tag"

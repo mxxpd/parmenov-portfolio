@@ -13,18 +13,6 @@
     opacity: 1;
     transform: translateY(0);
   }
-  .section__header {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: var(--case-section-header-gap);
-  }
-  .heading {
-    font-size: var(--text-h1);
-    font-weight: var(--font-weight-display);
-    line-height: var(--line-height-heading);
-    color: var(--color-text-primary);
-  }
   .grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -65,13 +53,7 @@
     line-height: var(--line-height-body-relaxed);
     color: var(--color-text-secondary);
   }
-  .card--analysis {
-    grid-column: 1 / -1;
-  }
-  .card--pivot {
-    grid-column: 1 / -1;
-  }
-  .card--flow {
+  .card--full {
     grid-column: 1 / -1;
   }
   .card__link {
@@ -109,7 +91,7 @@
     border-collapse: collapse;
     font-size: var(--text-body-sm);
   }
-  .competitor-table th {
+  .competitor-table__header {
     padding: var(--spacing-3) var(--spacing-4);
     text-align: left;
     font-size: var(--text-caption);
@@ -120,17 +102,17 @@
     background: var(--color-bg-surface-muted);
     border-bottom: 1px solid var(--color-border-subtle);
   }
-  .competitor-table td {
+  .competitor-table__cell {
     padding: var(--spacing-3) var(--spacing-4);
     color: var(--color-text-secondary);
     line-height: var(--line-height-body-relaxed);
     vertical-align: top;
     border-bottom: 1px solid var(--color-border-subtle);
   }
-  .competitor-table tr:last-child td {
+  .competitor-table__row:last-child .competitor-table__cell {
     border-bottom: none;
   }
-  .competitor-table td:first-child {
+  .competitor-table__cell--platform {
     font-weight: var(--font-weight-heading);
     color: var(--color-text-primary);
   }
@@ -169,14 +151,14 @@
     padding-top: 0;
     border-top: none;
   }
-  .competitor-card dt {
+  .competitor-card__term {
     font-size: var(--text-caption);
     font-weight: var(--font-weight-heading);
     letter-spacing: 0.05em;
     text-transform: uppercase;
     color: var(--color-text-tertiary);
   }
-  .competitor-card dd {
+  .competitor-card__value {
     margin: 0;
     font-size: var(--text-body-sm);
     line-height: var(--line-height-body-relaxed);

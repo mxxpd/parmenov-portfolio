@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { useScrollReveal } from "../../../composables/useScrollReveal";
 import releaseV1_1Url from "~/assets/images/cases/your-challenge/release-v1-1.png";
 import releaseV1_2Url from "~/assets/images/cases/your-challenge/release-v1-2.png";
 
@@ -195,10 +194,10 @@ const dataTimeline = [
           <AppTag size="s" appearance="tonal">Данные</AppTag>
           <h3 class="subheading">Поведение подтверждало диагноз</h3>
         </div>
-        <ul class="list">
-          <li>Пользователи появлялись только во время рекламных кампаний.</li>
-          <li>После окончания рекламы активность почти сразу исчезала.</li>
-          <li>Признаков самостоятельного органического роста не было.</li>
+        <ul class="data-list">
+          <li class="data-list__item">Пользователи появлялись только во время рекламных кампаний.</li>
+          <li class="data-list__item">После окончания рекламы активность почти сразу исчезала.</li>
+          <li class="data-list__item">Признаков самостоятельного органического роста не было.</li>
         </ul>
       </div>
 

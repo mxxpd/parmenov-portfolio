@@ -1,6 +1,4 @@
 <script setup lang="ts">
-import { useScrollReveal } from "../../../composables/useScrollReveal";
-
 const { bind, isVisible } = useScrollReveal();
 
 const improvements = [
@@ -110,7 +108,7 @@ const improvements = [
     <div class="future">
       <AppTag size="s" appearance="tonal">Что бы я сделал сейчас</AppTag>
       <ul class="future__list">
-        <li v-for="item in improvements" :key="item">{{ item }}</li>
+        <li v-for="item in improvements" :key="item" class="future__item">{{ item }}</li>
       </ul>
     </div>
   </section>

@@ -18,8 +18,8 @@ const props = withDefaults(defineProps<{
 const slideIndex = ref(0)
 const slideDirection = ref<'next' | 'prev'>('next')
 const lightboxOpen = ref(false)
+const { lock: lockBodyScroll, unlock: unlockBodyScroll } = useBodyScrollLock()
 
-let previousBodyOverflow = ''
 let dragStartX = 0
 let dragStartY = 0
 let dragPointerId: number | null = null
@@ -39,18 +39,17 @@ watch(() => props.slides, () => {
 
 watch(lightboxOpen, (isOpen) => {
   if (isOpen) {
-    previousBodyOverflow = document.body.style.overflow
-    document.body.style.overflow = 'hidden'
+    lockBodyScroll()
     window.addEventListener('keydown', onKeydown)
   }
   else {
-    document.body.style.overflow = previousBodyOverflow
+    unlockBodyScroll()
     window.removeEventListener('keydown', onKeydown)
   }
 })
 
 onBeforeUnmount(() => {
-  if (lightboxOpen.value) document.body.style.overflow = previousBodyOverflow
+  unlockBodyScroll()
 
   window.removeEventListener('keydown', onKeydown)
 })

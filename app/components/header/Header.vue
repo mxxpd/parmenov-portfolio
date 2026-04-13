@@ -2,6 +2,7 @@
 const menuOpen = ref(false)
 const isHeaderHidden = ref(false)
 const route = useRoute()
+const { lock: lockBodyScroll, unlock: unlockBodyScroll } = useBodyScrollLock()
 
 let lastScrollY = 0
 let scrollRaf = 0
@@ -52,11 +53,13 @@ watch(() => route.path, () => { menuOpen.value = false })
 
 // Body scroll lock
 watch(menuOpen, (val) => {
-  if (import.meta.client) {
-    document.body.style.overflow = val ? 'hidden' : ''
+  if (val) {
+    lockBodyScroll()
+    showHeader()
+    return
   }
 
-  if (val) showHeader()
+  unlockBodyScroll()
 })
 
 onMounted(() => {
@@ -70,7 +73,7 @@ onMounted(() => {
 })
 
 onUnmounted(() => {
-  if (import.meta.client) document.body.style.overflow = ''
+  unlockBodyScroll()
 
   window.removeEventListener('scroll', onScroll)
   mobileQuery?.removeEventListener('change', onViewportChange)

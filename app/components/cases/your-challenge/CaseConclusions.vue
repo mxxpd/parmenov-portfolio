@@ -1,6 +1,4 @@
 <script setup lang="ts">
-import { useScrollReveal } from "../../../composables/useScrollReveal";
-
 const { bind, isVisible } = useScrollReveal();
 const { cases, toCaseCard } = useCases();
 const relatedCases = ref<ReturnType<typeof toCaseCard>[]>([]);
