@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import DiagnosisCheckIcon from "~/assets/icons/diagnosis-check.svg";
+import DiagnosisCloseIcon from "~/assets/icons/diagnosis-close.svg";
 import releaseV1_1Url from "~/assets/images/cases/your-challenge/release-v1-1.png";
 import releaseV1_2Url from "~/assets/images/cases/your-challenge/release-v1-2.png";
 
@@ -75,7 +77,7 @@ const dataTimeline = [
   {
     title: "Редизайн",
     text: "Улучшили интерфейс — платформой стало удобнее пользоваться. Но решение роста не дало: мы лечили симптом, а не причину. Зато редизайн убрал интерфейсный шум — и во второй кампании пользователи смогли добраться до настоящей проблемы.",
-    badge: "❌ Ошибка диагноза",
+    badge: "Ошибка диагноза",
     state: "wrong",
   },
   {
@@ -87,7 +89,7 @@ const dataTimeline = [
   {
     title: "Пивот механики",
     text: "Проблема не в дизайне, а в core-механике. Инициировали смену модели на быстрые матчи.",
-    badge: "✓ Верный диагноз",
+    badge: "Верный диагноз",
     state: "success",
   },
 ];
@@ -245,6 +247,16 @@ const dataTimeline = [
                     v-if="item.badge"
                     class="data-timeline__badge"
                   >
+                    <DiagnosisCloseIcon
+                      v-if="item.state === 'wrong'"
+                      class="data-timeline__badge-icon"
+                      aria-hidden="true"
+                    />
+                    <DiagnosisCheckIcon
+                      v-else-if="item.state === 'success'"
+                      class="data-timeline__badge-icon"
+                      aria-hidden="true"
+                    />
                     {{ item.badge }}
                   </span>
                 </div>

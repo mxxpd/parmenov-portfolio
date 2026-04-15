@@ -2,6 +2,8 @@
   <component
     :is="href ? 'a' : 'button'"
     :href="isDisabled ? undefined : href || undefined"
+    :target="href ? target : undefined"
+    :rel="target === '_blank' ? 'noopener noreferrer' : undefined"
     :type="href ? undefined : nativeType"
     :disabled="href ? undefined : isDisabled"
     :aria-disabled="isDisabled || undefined"
@@ -43,6 +45,7 @@ const props = withDefaults(
     icon?: boolean
     iconPosition?: 'left' | 'right'
     href?: string
+    target?: '_blank' | '_self'
     nativeType?: 'button' | 'submit' | 'reset'
     disabled?: boolean
     loading?: boolean
@@ -53,6 +56,7 @@ const props = withDefaults(
     icon: false,
     iconPosition: 'right',
     href: undefined,
+    target: '_self',
     nativeType: 'button',
     disabled: false,
     loading: false,

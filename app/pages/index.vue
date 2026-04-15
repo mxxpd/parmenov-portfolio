@@ -1,4 +1,5 @@
 <template>
+  <SiteWip />
   <Hero />
 </template>
 

@@ -1,0 +1,41 @@
+// ─── Site WIP Banner ──────────────────────────────────────────────────────────
+
+.site-wip {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--spacing-6);
+  padding: var(--spacing-6) var(--spacing-8);
+  margin-bottom: var(--spacing-4);
+  border: 1px solid var(--color-border-accent);
+  border-radius: var(--radius-xl);
+  background: var(--color-bg-accent-soft);
+}
+
+.site-wip__copy {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-4);
+}
+
+.site-wip__text {
+  font-size: var(--text-body-sm);
+  line-height: var(--line-height-body-relaxed);
+  color: var(--color-text-secondary);
+  max-width: 68ch;
+}
+
+@media (max-width: 768px) {
+  .site-wip {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--spacing-4);
+    padding: var(--spacing-6);
+  }
+
+  .site-wip__copy {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--spacing-3);
+  }
+}
