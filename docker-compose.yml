@@ -2,9 +2,7 @@ services:
   app:
     build:
       context: .
-      target: production
-      args:
-        NODE_VERSION: 22-alpine
+      dockerfile: Dockerfile.prod
     init: true
     environment:
       NODE_ENV: production
