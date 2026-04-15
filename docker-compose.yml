@@ -2,7 +2,6 @@ services:
   app:
     build:
       context: .
-      dockerfile: Dockerfile
       target: production
       args:
         NODE_VERSION: 22-alpine
@@ -24,5 +23,4 @@ services:
       timeout: 5s
       start_period: 20s
       retries: 3
-    command: node .output/server/index.mjs
     restart: unless-stopped
