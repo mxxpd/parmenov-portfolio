@@ -11,6 +11,14 @@
   grid-column: 1 / -1;
 }
 
+.contact-form__contact-error {
+  grid-column: 1 / -1;
+  margin-top: calc(var(--spacing-1) * -1);
+  color: var(--color-error-text);
+  font-size: var(--text-label);
+  line-height: var(--line-height-body);
+}
+
 .contact-form__submit {
   grid-column: 1 / -1;
   width: 100%;

@@ -9,6 +9,7 @@ const props = withDefaults(
     name?: string
     error?: string
     disabled?: boolean
+    prefix?: string
   }>(),
   {
     type: 'text',
@@ -17,6 +18,7 @@ const props = withDefaults(
     name: undefined,
     error: '',
     disabled: false,
+    prefix: undefined,
   },
 )
 
@@ -35,7 +37,24 @@ const updateValue = (event: Event) => {
 <template>
   <label class="app-field">
     <span class="app-field__label">{{ label }}</span>
+    <div v-if="prefix" class="app-control-wrap" :class="{ 'app-control-wrap--error': error }">
+      <span class="app-control-wrap__prefix">{{ prefix }}</span>
+      <input
+        :id="id"
+        class="app-control app-control--bare"
+        :name="name"
+        :type="type"
+        :value="modelValue"
+        :placeholder="placeholder"
+        :disabled="disabled"
+        :aria-invalid="!!error"
+        :aria-describedby="error ? errorId : undefined"
+        @input="updateValue"
+        @blur="emit('blur')"
+      >
+    </div>
     <input
+      v-else
       :id="id"
       class="app-control"
       :class="{ 'app-control--error': error }"

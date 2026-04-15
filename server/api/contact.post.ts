@@ -1,6 +1,6 @@
 export default defineEventHandler(async (event) => {
   const body = await readBody(event)
-  const { name, email, topic, message } = body
+  const { name, email, telegram, topic, message } = body
 
   const token = process.env.TELEGRAM_BOT_TOKEN
   const chatId = process.env.TELEGRAM_CHAT_ID
@@ -13,7 +13,8 @@ export default defineEventHandler(async (event) => {
     `📩 <b>Новая заявка с сайта</b>`,
     ``,
     `👤 <b>Имя:</b> ${name}`,
-    `📧 <b>Email:</b> ${email}`,
+    email ? `📧 <b>Email:</b> ${email}` : null,
+    telegram ? `✈️ <b>Telegram:</b> t.me/${telegram}` : null,
     `💬 <b>Тема:</b> ${topic}`,
     message ? `📝 <b>Сообщение:</b> ${message}` : null,
   ]
