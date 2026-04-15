@@ -33,7 +33,6 @@ const touched = reactive<Record<ContactField, boolean>>({
 })
 
 const submitState = ref<SubmitState>('default')
-let submitTimer: ReturnType<typeof setTimeout> | undefined
 let closeTimer: ReturnType<typeof setTimeout> | undefined
 
 const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
@@ -70,30 +69,28 @@ const resetForm = () => {
 
   submitState.value = 'default'
 
-  if (submitTimer) {
-    clearTimeout(submitTimer)
-    submitTimer = undefined
-  }
-
   if (closeTimer) {
     clearTimeout(closeTimer)
     closeTimer = undefined
   }
 }
 
-const handleSubmit = () => {
+const handleSubmit = async () => {
   if (!isFormValid.value || isSubmitting.value) {
     return
   }
 
   submitState.value = 'loading'
 
-  submitTimer = setTimeout(() => {
-    console.log({
-      name: form.name.trim(),
-      email: form.email.trim(),
-      topic: form.topic,
-      message: form.message.trim(),
+  try {
+    await $fetch('/api/contact', {
+      method: 'POST',
+      body: {
+        name: form.name.trim(),
+        email: form.email.trim(),
+        topic: form.topic,
+        message: form.message.trim(),
+      },
     })
 
     submitState.value = 'success'
@@ -101,7 +98,10 @@ const handleSubmit = () => {
     closeTimer = setTimeout(() => {
       closeContact()
     }, 4000)
-  }, 1500)
+  }
+  catch {
+    submitState.value = 'default'
+  }
 }
 
 watch(isContactOpen, (isOpen) => {
@@ -115,10 +115,6 @@ watch(isSuccess, (value) => {
 })
 
 onBeforeUnmount(() => {
-  if (submitTimer) {
-    clearTimeout(submitTimer)
-  }
-
   if (closeTimer) {
     clearTimeout(closeTimer)
   }
