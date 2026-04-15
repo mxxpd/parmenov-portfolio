@@ -1,6 +1,8 @@
 <template>
-  <SiteWip />
-  <Hero />
+  <div>
+    <SiteWip />
+    <Hero />
+  </div>
 </template>
 
 <script setup lang="ts">

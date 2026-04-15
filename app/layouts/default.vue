@@ -4,6 +4,7 @@
     <main class="layout__main">
       <slot />
     </main>
+    <AppFooter />
     <ContactModal />
   </div>
 </template>

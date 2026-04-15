@@ -37,7 +37,7 @@ const { openContact } = useModal()
     </div>
 
     <AppButton label="Связаться со мной" size="md" :icon="true" @click="openContact" />
-    <AppButton class="header-actions__cv" label="CV" variant="secondary" size="md" :icon="true">
+    <AppButton class="header-actions__cv" label="CV" variant="secondary" size="md" :icon="true" href="/Maxim_Parmenov_Resume.pdf" target="_blank">
       <template #icon>
         <ArrowDownIcon class="app-btn__icon" />
       </template>

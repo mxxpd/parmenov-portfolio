@@ -162,6 +162,8 @@
 // ── States: secondary ─────────────────────────────────────────────────────────
 
 .app-btn--secondary:hover {
+  --btn-icon-fg: var(--color-brand-primary);
+
   transform: translateY(-2px);
   background: var(--color-bg-surface);
   box-shadow: 0 4px 16px color-mix(in srgb, var(--color-border-default) 30%, transparent);
