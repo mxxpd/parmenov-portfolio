@@ -50,7 +50,7 @@ This repository is prepared for deployment through Docker Compose.
 Important points for Timeweb:
 
 1. Keep `Dockerfile` and `docker-compose.yml` in the repository root.
-2. The web service is exposed on port `3000`, which is the internal app port expected by the containerized runtime here.
+2. The web service listens on port `3000` inside the container and is published as host port `8080` in `docker-compose.yml`, which matches Timeweb App Platform examples and keeps host ports `80`/`443` free for the platform web server.
 3. The production compose file does not use bind mounts, which keeps it compatible with managed platform restrictions.
 4. The primary HTTP service is the first service in `docker-compose.yml`, here it is `app`.
 

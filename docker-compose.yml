@@ -16,5 +16,5 @@ services:
       TELEGRAM_BOT_TOKEN: ${TELEGRAM_BOT_TOKEN}
       TELEGRAM_CHAT_ID: ${TELEGRAM_CHAT_ID}
     ports:
-      - "3000:3000"
+      - "8080:3000"
     restart: unless-stopped

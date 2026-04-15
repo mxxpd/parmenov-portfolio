@@ -16,7 +16,7 @@ services:
       NUXT_PORT: 3000
       CHOKIDAR_USEPOLLING: "true"
       WATCHPACK_POLLING: "true"
-    ports:
+    ports: !override
       - "3000:3000"
     volumes:
       - .:/app
