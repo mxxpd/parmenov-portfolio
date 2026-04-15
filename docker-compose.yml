@@ -17,10 +17,4 @@ services:
       TELEGRAM_CHAT_ID: ${TELEGRAM_CHAT_ID}
     ports:
       - "3000:3000"
-    healthcheck:
-      test: ["CMD-SHELL", "wget -q --spider http://127.0.0.1:3000/ || exit 1"]
-      interval: 30s
-      timeout: 5s
-      start_period: 20s
-      retries: 3
     restart: unless-stopped
