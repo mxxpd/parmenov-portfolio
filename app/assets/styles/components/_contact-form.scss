@@ -19,6 +19,16 @@
   line-height: var(--line-height-body);
 }
 
+.contact-form__privacy-link {
+  color: var(--color-text-accent);
+  text-decoration: none;
+  font-weight: var(--font-weight-body-strong);
+
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
 .contact-form__submit {
   grid-column: 1 / -1;
   width: 100%;

@@ -5,6 +5,7 @@
       <slot />
     </main>
     <AppFooter />
+    <AppCookieBanner />
     <ContactModal />
   </div>
 </template>

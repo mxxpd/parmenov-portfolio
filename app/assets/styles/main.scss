@@ -12,6 +12,7 @@
 
 // ── Pages ─────────────────────────────────────────────────────────────────────
 @use 'pages/stub';
+@use 'pages/privacy';
 @use 'pages/case-stub';
 @use 'pages/cases-index';
 @use 'pages/your-challenge';
@@ -20,12 +21,14 @@
 // ── Components ────────────────────────────────────────────────────────────────
 @use 'components/app-button';
 @use 'components/app-field';
+@use 'components/app-checkbox';
 @use 'components/app-image-slider';
 @use 'components/app-tag';
 @use 'components/contact-form';
 @use 'components/contact-modal';
 @use 'components/placeholder-image';
 @use 'components/site-wip';
+@use 'components/cookie-banner';
 @use 'components/footer';
 @use 'components/header/header';
 @use 'components/header/header-logo';

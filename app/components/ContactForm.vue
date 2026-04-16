@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import CheckIcon from '~/assets/icons/check.svg'
 
-type ContactField = 'name' | 'email' | 'telegram' | 'topic' | 'message'
+type ContactField = 'name' | 'email' | 'telegram' | 'topic' | 'message' | 'privacy'
 type SubmitState = 'default' | 'loading' | 'success'
 
 const topics = [
@@ -23,15 +23,17 @@ const initialForm = {
   telegram: '',
   topic: defaultTopic,
   message: '',
+  privacy: false,
 }
 
 const form = reactive({ ...initialForm })
-const touched = reactive<Record<ContactField, boolean>>({
+const touched = reactive<Record<ContactField | 'privacy', boolean>>({
   name: false,
   email: false,
   telegram: false,
   topic: false,
   message: false,
+  privacy: false,
 })
 
 const submitState = ref<SubmitState>('default')
@@ -76,7 +78,8 @@ const isFormValid = computed(() =>
   !errors.value.name
   && !errors.value.email
   && hasContact.value
-  && !errors.value.topic,
+  && !errors.value.topic
+  && form.privacy,
 )
 const isSubmitting = computed(() => submitState.value === 'loading')
 const isSuccess = computed(() => submitState.value === 'success')
@@ -217,6 +220,17 @@ onBeforeUnmount(() => {
       :disabled="isSubmitting"
       @blur="markTouched('message')"
     />
+
+    <AppCheckbox
+      id="contact-privacy"
+      v-model="form.privacy"
+      class="contact-form__field--wide"
+      :disabled="isSubmitting"
+    >
+      <template #default>
+        Я согласен с <NuxtLink to="/privacy" class="contact-form__privacy-link" target="_blank">политикой конфиденциальности</NuxtLink>
+      </template>
+    </AppCheckbox>
 
     <AppButton
       class="contact-form__submit"

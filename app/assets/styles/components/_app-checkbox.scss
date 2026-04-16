@@ -1,0 +1,125 @@
+// ─── AppCheckbox ──────────────────────────────────────────────────────────────
+
+.app-checkbox {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-2);
+}
+
+.app-checkbox__label {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--spacing-3);
+  cursor: pointer;
+  user-select: none;
+}
+
+.app-checkbox--disabled .app-checkbox__label {
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+// ── Hidden native input ───────────────────────────────────────────────────────
+
+.app-checkbox__input {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  border: 0;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+// ── Custom box ────────────────────────────────────────────────────────────────
+
+.app-checkbox__box {
+  flex-shrink: 0;
+  width: 20px;
+  height: 20px;
+  margin-top: 1px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid color-mix(in srgb, var(--color-border-default) 62%, var(--color-bg-surface));
+  border-radius: var(--radius-xs);
+  background: color-mix(in srgb, var(--color-bg-surface) 92%, var(--color-bg-canvas-alt));
+  color: transparent;
+  transition:
+    background 0.15s ease,
+    border-color 0.15s ease,
+    color 0.15s ease,
+    box-shadow 0.15s ease;
+}
+
+.app-checkbox__check {
+  width: 10px;
+  height: 8px;
+}
+
+// Checked state
+.app-checkbox__input:checked + .app-checkbox__box {
+  background: var(--color-brand-primary);
+  border-color: var(--color-brand-primary);
+  color: var(--color-bg-surface);
+}
+
+// Focus state
+.app-checkbox__input:focus-visible + .app-checkbox__box {
+  outline: none;
+  box-shadow: 0 0 0 4px color-mix(in srgb, var(--color-brand-primary) 18%, transparent);
+  border-color: var(--color-brand-primary);
+}
+
+// Error state
+.app-checkbox--error .app-checkbox__box {
+  border-color: color-mix(in srgb, var(--color-error) 72%, var(--color-border-subtle));
+  background: color-mix(in srgb, var(--color-error-bg) 34%, var(--color-bg-surface));
+}
+
+// Hover
+.app-checkbox__label:hover .app-checkbox__box {
+  border-color: color-mix(in srgb, var(--color-brand-primary) 64%, var(--color-border-default));
+}
+
+.app-checkbox__input:checked:hover + .app-checkbox__box,
+.app-checkbox__input:checked + .app-checkbox__box:hover {
+  background: var(--color-brand-primary-hover);
+  border-color: var(--color-brand-primary-hover);
+}
+
+// ── Text ──────────────────────────────────────────────────────────────────────
+
+.app-checkbox__text {
+  font-size: var(--text-body-sm);
+  line-height: var(--line-height-body-relaxed);
+  color: var(--color-text-secondary);
+
+  a {
+    color: var(--color-text-accent);
+    text-decoration: none;
+    font-weight: var(--font-weight-body-strong);
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}
+
+// ── Error message ─────────────────────────────────────────────────────────────
+
+.app-checkbox__error {
+  padding-left: calc(20px + var(--spacing-3));
+  color: var(--color-error-text);
+  font-size: var(--text-label);
+  line-height: var(--line-height-body);
+}
+
+// ── Dark theme ────────────────────────────────────────────────────────────────
+
+html[data-theme='dark'] .app-checkbox__box {
+  background: color-mix(in srgb, var(--color-bg-surface-muted) 88%, var(--color-bg-surface));
+  border-color: color-mix(in srgb, var(--color-border-default) 74%, transparent);
+}

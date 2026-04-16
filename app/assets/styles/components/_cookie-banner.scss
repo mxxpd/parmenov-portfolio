@@ -1,0 +1,56 @@
+// ─── Cookie Banner ────────────────────────────────────────────────────────────
+
+.cookie-banner {
+  position: fixed;
+  bottom: var(--spacing-6);
+  right: var(--spacing-6);
+  z-index: 90;
+
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-4);
+
+  max-width: 380px;
+  padding: var(--spacing-4) var(--spacing-4) var(--spacing-4) var(--spacing-6);
+  border-radius: var(--radius-lg);
+  border: 1px solid color-mix(in srgb, var(--color-border-subtle) 72%, transparent);
+  background: color-mix(in srgb, var(--color-bg-surface) 98%, var(--color-bg-canvas-alt));
+  box-shadow: var(--shadow-overlay);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+}
+
+html[data-theme='dark'] .cookie-banner {
+  background: color-mix(in srgb, var(--color-bg-surface) 94%, transparent);
+}
+
+.cookie-banner__text {
+  font-size: var(--text-body-sm);
+  line-height: var(--line-height-body-relaxed);
+  color: var(--color-text-secondary);
+  flex: 1;
+}
+
+// ── Transition ────────────────────────────────────────────────────────────────
+
+.cookie-banner-enter-active,
+.cookie-banner-leave-active {
+  transition: opacity 0.25s ease, transform 0.25s ease;
+}
+
+.cookie-banner-enter-from,
+.cookie-banner-leave-to {
+  opacity: 0;
+  transform: translateY(8px);
+}
+
+// ── Mobile ────────────────────────────────────────────────────────────────────
+
+@media (max-width: 640px) {
+  .cookie-banner {
+    right: var(--spacing-3);
+    bottom: var(--spacing-3);
+    left: var(--spacing-3);
+    max-width: none;
+  }
+}
