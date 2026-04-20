@@ -7,6 +7,7 @@ const typograf = new Typograf({
 typograf.enableRule('common/nbsp/replaceNbsp')
 
 const SKIP_TAGS = new Set([
+  'A',
   'CODE',
   'KBD',
   'NOSCRIPT',
@@ -23,6 +24,22 @@ const typo = (text: string) => {
   }
 
   return typograf.execute(text)
+}
+
+const typoTextNode = (text: string) => {
+  const match = text.match(/^(\s*)([\s\S]*?)(\s*)$/)
+
+  if (!match) {
+    return typo(text)
+  }
+
+  const [, leadingSpace, content, trailingSpace] = match
+
+  if (!content) {
+    return text
+  }
+
+  return `${leadingSpace}${typo(content)}${trailingSpace}`
 }
 
 const shouldSkipNode = (node: Node | null) => {
@@ -54,7 +71,7 @@ const applyTypografToElement = (element: HTMLElement) => {
   }
 
   for (const node of textNodes) {
-    node.textContent = typo(node.textContent ?? '')
+    node.textContent = typoTextNode(node.textContent ?? '')
   }
 }
 
