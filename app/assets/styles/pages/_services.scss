@@ -1,0 +1,14 @@
+// ─── Services Page ────────────────────────────────────────────────────────────
+
+.services-page {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-6);
+}
+
+.services-page__title {
+  font-size: clamp(48px, 6vw, 72px);
+  font-weight: var(--font-weight-display);
+  line-height: var(--line-height-display);
+  color: var(--color-text-primary);
+}

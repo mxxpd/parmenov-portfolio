@@ -1,9 +1,9 @@
 // ─── Design Tokens ────────────────────────────────────────────────────────────
 // Primitive → Semantic CSS custom properties.
-// Light theme (default). Dark theme overrides live in _dark.scss.
+// Dark theme tokens.
 
 :root {
-  color-scheme: light;
+  color-scheme: dark;
 
   // ── Primitive: typography ──────────────────────────────────────────────────
   --primitive-font-family-sans: 'Onest', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
@@ -139,58 +139,58 @@
   --text-caption: var(--primitive-type-100);
 
   // ── Semantic: brand ────────────────────────────────────────────────────────
-  --color-brand-primary:        var(--primitive-color-peach-500);
-  --color-brand-primary-hover:  var(--primitive-color-peach-400);
-  --color-brand-primary-active: var(--primitive-color-peach-600);
-  --color-brand-muted:          var(--primitive-color-peach-50);
-  --color-brand-soft:           var(--primitive-color-peach-100);
-  --color-brand-strong:         var(--primitive-color-peach-700);
-  --color-brand-contrast:       var(--primitive-color-ink-900);
+  --color-brand-primary:        #f19a74;
+  --color-brand-primary-hover:  #f4ab8b;
+  --color-brand-primary-active: #db7f57;
+  --color-brand-muted:          #2b1c17;
+  --color-brand-soft:           #3a261f;
+  --color-brand-strong:         #f8bf9f;
+  --color-brand-contrast:       #fff6f1;
 
   // ── Semantic: text ─────────────────────────────────────────────────────────
-  --color-text-primary:   var(--primitive-color-ink-900);
-  --color-text-secondary: var(--primitive-color-ink-400);
-  --color-text-tertiary:  #858482;
-  --color-text-inverse:   var(--primitive-color-ink-0);
-  --color-text-accent:    var(--primitive-color-peach-600);
+  --color-text-primary:   #f6efe9;
+  --color-text-secondary: #b8aea7;
+  --color-text-tertiary:  #8a7f77;
+  --color-text-inverse:   #101010;
+  --color-text-accent:    #f4ab8b;
 
   // ── Semantic: backgrounds ──────────────────────────────────────────────────
-  --color-bg-canvas:            var(--primitive-color-sand-50);
-  --color-bg-canvas-alt:        var(--primitive-color-sand-100);
-  --color-bg-surface:           var(--primitive-color-ink-0);
-  --color-bg-surface-muted:     var(--primitive-color-ink-50);
-  --color-bg-inverse:           var(--primitive-color-ink-900);
-  --color-bg-accent:            var(--primitive-color-peach-300);
-  --color-bg-accent-hover:      var(--primitive-color-peach-400);
-  --color-bg-accent-soft:       var(--primitive-color-peach-50);
-  --color-bg-accent-soft-strong: var(--primitive-color-peach-100);
+  --color-bg-canvas:             #111313;
+  --color-bg-canvas-alt:         #171919;
+  --color-bg-surface:            #1b1f1f;
+  --color-bg-surface-muted:      #242828;
+  --color-bg-inverse:            #f6efe9;
+  --color-bg-accent:             #c06a45;
+  --color-bg-accent-hover:       #d47e58;
+  --color-bg-accent-soft:        #2c211d;
+  --color-bg-accent-soft-strong: #402a21;
 
   // ── Semantic: borders ──────────────────────────────────────────────────────
-  --color-border-subtle:  var(--primitive-color-ink-100);
-  --color-border-default: var(--primitive-color-ink-200);
-  --color-border-strong:  var(--primitive-color-ink-300);
-  --color-border-accent:  var(--primitive-color-peach-200);
+  --color-border-subtle:  #2e3434;
+  --color-border-default: #3d4444;
+  --color-border-strong:  #5d6666;
+  --color-border-accent:  #785243;
 
   // ── Semantic: status ───────────────────────────────────────────────────────
-  --color-success-bg:     var(--primitive-color-green-50);
-  --color-success-border: var(--primitive-color-green-200);
-  --color-success-text:   var(--primitive-color-green-700);
-  --color-success:        var(--primitive-color-green-600);
+  --color-success-bg:     #142117;
+  --color-success-border: #27472c;
+  --color-success-text:   #8ed092;
+  --color-success:        #62c06a;
 
-  --color-error-bg:     var(--primitive-color-red-50);
-  --color-error-border: var(--primitive-color-red-200);
-  --color-error-text:   var(--primitive-color-red-700);
-  --color-error:        var(--primitive-color-red-600);
+  --color-error-bg:     #251616;
+  --color-error-border: #5b2a2a;
+  --color-error-text:   #f19b9b;
+  --color-error:        #ec7373;
 
-  --color-warning-bg:     var(--primitive-color-amber-50);
-  --color-warning-border: var(--primitive-color-amber-200);
-  --color-warning-text:   var(--primitive-color-amber-700);
-  --color-warning:        var(--primitive-color-amber-600);
+  --color-warning-bg:     #2a1f12;
+  --color-warning-border: #6b4721;
+  --color-warning-text:   #f4c27a;
+  --color-warning:        #eca140;
 
-  --color-info-bg:     var(--primitive-color-blue-50);
-  --color-info-border: var(--primitive-color-blue-200);
-  --color-info-text:   var(--primitive-color-blue-700);
-  --color-info:        var(--primitive-color-blue-600);
+  --color-info-bg:     #131d2b;
+  --color-info-border: #294564;
+  --color-info-text:   #8fbcf0;
+  --color-info:        #5d98dd;
 
   // ── Semantic: radii ────────────────────────────────────────────────────────
   --radius-xs:   var(--primitive-radius-100);
@@ -227,8 +227,8 @@
   --layout-gutter:  var(--primitive-layout-gutter);
 
   // ── Semantic: elevation ────────────────────────────────────────────────────
-  --shadow-subtle:  var(--primitive-shadow-100);
-  --shadow-surface: var(--primitive-shadow-200);
-  --shadow-raised:  var(--primitive-shadow-300);
-  --shadow-overlay: var(--primitive-shadow-400);
+  --shadow-subtle:  0 1px 2px rgba(0, 0, 0, 0.28);
+  --shadow-surface: 0 10px 24px rgba(0, 0, 0, 0.28);
+  --shadow-raised:  0 22px 48px rgba(0, 0, 0, 0.34);
+  --shadow-overlay: 0 26px 60px rgba(0, 0, 0, 0.42);
 }

@@ -117,9 +117,7 @@
   line-height: var(--line-height-body);
 }
 
-// ── Dark theme ────────────────────────────────────────────────────────────────
-
-html[data-theme='dark'] .app-checkbox__box {
+.app-checkbox__box {
   background: color-mix(in srgb, var(--color-bg-surface-muted) 88%, var(--color-bg-surface));
   border-color: color-mix(in srgb, var(--color-border-default) 74%, transparent);
 }

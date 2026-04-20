@@ -22,14 +22,10 @@
   padding: clamp(var(--spacing-6), 5vw, var(--spacing-8));
   border: 1px solid color-mix(in srgb, var(--color-border-subtle) 72%, transparent);
   border-radius: 32px;
-  background: color-mix(in srgb, var(--color-bg-surface) 98%, var(--color-bg-canvas-alt));
+  background: color-mix(in srgb, var(--color-bg-surface) 94%, transparent);
   box-shadow: var(--shadow-overlay);
   backdrop-filter: blur(18px);
   -webkit-backdrop-filter: blur(18px);
-}
-
-html[data-theme='dark'] .contact-modal__dialog {
-  background: color-mix(in srgb, var(--color-bg-surface) 94%, transparent);
 }
 
 .contact-modal__close {

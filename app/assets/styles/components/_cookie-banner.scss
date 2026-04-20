@@ -14,14 +14,10 @@
   padding: var(--spacing-4) var(--spacing-4) var(--spacing-4) var(--spacing-6);
   border-radius: var(--radius-lg);
   border: 1px solid color-mix(in srgb, var(--color-border-subtle) 72%, transparent);
-  background: color-mix(in srgb, var(--color-bg-surface) 98%, var(--color-bg-canvas-alt));
+  background: color-mix(in srgb, var(--color-bg-surface) 94%, transparent);
   box-shadow: var(--shadow-overlay);
   backdrop-filter: blur(18px);
   -webkit-backdrop-filter: blur(18px);
-}
-
-html[data-theme='dark'] .cookie-banner {
-  background: color-mix(in srgb, var(--color-bg-surface) 94%, transparent);
 }
 
 .cookie-banner__text {

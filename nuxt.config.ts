@@ -16,6 +16,7 @@ export default defineNuxtConfig({
     head: {
       title: 'Максим Парменов — Product дизайнер',
       meta: [
+        { name: 'color-scheme', content: 'dark' },
         { name: 'description', content: 'UX-архитектура, сценарии, визуальная система — и понимание, зачем всё это нужно бизнесу.' },
         { property: 'og:type', content: 'website' },
         { property: 'og:site_name', content: 'Максим Парменов' },
@@ -27,20 +28,6 @@ export default defineNuxtConfig({
         { name: 'twitter:title', content: 'Максим Парменов — Product дизайнер' },
         { name: 'twitter:description', content: 'UX-архитектура, сценарии, визуальная система — и понимание, зачем всё это нужно бизнесу.' },
         { name: 'twitter:image', content: 'https://parmenov.com/og.png' },
-      ],
-      script: [
-        {
-          innerHTML: `
-            (() => {
-              const storageKey = 'nova-theme';
-              const storedTheme = localStorage.getItem(storageKey);
-              const systemTheme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
-              const resolvedTheme = storedTheme === 'dark' || storedTheme === 'light' ? storedTheme : systemTheme;
-              document.documentElement.dataset.theme = resolvedTheme;
-              document.documentElement.style.colorScheme = resolvedTheme;
-            })();
-          `,
-        },
       ],
       link: [
         { rel: 'icon', type: 'image/svg+xml', href: '/favicon.svg' },

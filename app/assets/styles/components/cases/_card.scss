@@ -32,13 +32,13 @@
 }
 
 .case-card__cover {
+  display: block;
   aspect-ratio: 4 / 3;
   width: 100%;
   transition: transform 0.5s ease;
 }
 
 .case-card__cover-image {
-  display: block;
   object-fit: cover;
 }
 

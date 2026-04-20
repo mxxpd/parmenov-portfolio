@@ -1,17 +1,18 @@
 // ─── Entry Point ──────────────────────────────────────────────────────────────
-// Load order: tokens → reset → base → dark → layout → components
+// Load order: tokens → reset → base → layout → components
 
 // ── Base ──────────────────────────────────────────────────────────────────────
 @use 'base/vars';
 @use 'base/reset';
 @use 'base/base';
-@use 'base/dark';
 
 // ── Layouts ───────────────────────────────────────────────────────────────────
 @use 'layouts/default';
 
 // ── Pages ─────────────────────────────────────────────────────────────────────
 @use 'pages/stub';
+@use 'pages/services';
+@use 'pages/verso';
 @use 'pages/privacy';
 @use 'pages/case-stub';
 @use 'pages/cases-index';

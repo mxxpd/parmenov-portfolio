@@ -1,0 +1,469 @@
+// ─── Verso Landing Page ───────────────────────────────────────────────────────
+
+.verso-page {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-20);
+  padding-bottom: var(--spacing-20);
+}
+
+// ── Hero ──────────────────────────────────────────────────────────────────────
+
+.verso-hero {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.4fr);
+  gap: var(--spacing-4);
+  align-items: stretch;
+  min-height: 560px;
+}
+
+.verso-hero__copy {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-6);
+  padding: var(--spacing-8);
+  border: 1px solid color-mix(in srgb, var(--color-border-subtle) 72%, transparent);
+  border-radius: 32px;
+  background: color-mix(in srgb, var(--color-bg-surface) 92%, transparent);
+  box-shadow: var(--shadow-raised);
+}
+
+.verso-hero__meta {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-3);
+}
+
+.verso-hero__year {
+  font-size: var(--text-body-sm);
+  color: var(--color-text-tertiary);
+}
+
+.verso-hero__title {
+  font-size: clamp(28px, 3vw, 44px);
+  font-weight: var(--font-weight-display);
+  line-height: var(--line-height-display);
+  color: var(--color-text-primary);
+  letter-spacing: -0.02em;
+}
+
+.verso-hero__description {
+  font-size: var(--text-body);
+  line-height: var(--line-height-body-relaxed);
+  color: var(--color-text-secondary);
+}
+
+.verso-hero__copy .app-btn {
+  align-self: flex-start;
+  margin-top: auto;
+}
+
+// ── Visual ────────────────────────────────────────────────────────────────────
+
+.verso-hero__visual {
+  position: relative;
+  overflow: hidden;
+  border-radius: 32px;
+  background: linear-gradient(
+    160deg,
+    color-mix(in srgb, var(--color-bg-inverse) 94%, transparent) 0%,
+    color-mix(in srgb, #2E2147 60%, var(--color-bg-inverse)) 100%
+  );
+  border: 1px solid color-mix(in srgb, var(--color-border-subtle) 40%, transparent);
+
+  .placeholder {
+    height: 100%;
+    background: transparent;
+    border-radius: 0;
+    border: none;
+    box-shadow: none;
+  }
+}
+
+.verso-media {
+  display: block;
+  width: 100%;
+  height: 100%;
+  min-height: inherit;
+  object-fit: cover;
+}
+
+// ── Features with screenshots ─────────────────────────────────────────────────
+
+.verso-features {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-4);
+}
+
+.verso-feature {
+  display: grid;
+  grid-template-columns: 1fr 1.4fr;
+  gap: var(--spacing-4);
+  align-items: stretch;
+}
+
+.verso-feature--reverse {
+  grid-template-columns: 1.4fr 1fr;
+
+  .verso-feature__copy { order: 2; }
+  .verso-feature__visual { order: 1; }
+}
+
+.verso-feature__copy {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-6);
+  justify-content: flex-start;
+  align-items: flex-start;
+  padding: var(--spacing-8);
+  border: 1px solid color-mix(in srgb, var(--color-border-subtle) 72%, transparent);
+  border-radius: 32px;
+  background: color-mix(in srgb, var(--color-bg-surface) 92%, transparent);
+}
+
+.verso-feature__icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 56px;
+  height: 56px;
+  border: 1px solid color-mix(in srgb, var(--color-border-subtle) 78%, transparent);
+  border-radius: var(--radius-lg);
+  background:
+    linear-gradient(
+      135deg,
+      color-mix(in srgb, var(--color-bg-accent-soft) 88%, var(--color-bg-surface)) 0%,
+      color-mix(in srgb, var(--color-bg-surface) 92%, transparent) 100%
+  );
+  box-shadow: var(--shadow-subtle);
+  color: var(--color-text-accent);
+}
+
+.verso-feature__icon :where(svg, img) {
+  display: block;
+  width: 24px;
+  height: 24px;
+}
+
+.verso-feature__text {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-4);
+  margin-top: auto;
+  max-width: 56ch;
+}
+
+.verso-feature__title {
+  font-size: var(--text-h2);
+  font-weight: var(--font-weight-display);
+  line-height: var(--line-height-heading);
+  color: var(--color-text-primary);
+}
+
+.verso-feature__desc {
+  font-size: var(--text-body-sm);
+  line-height: var(--line-height-body-relaxed);
+  color: var(--color-text-secondary);
+}
+
+.verso-feature__visual {
+  overflow: hidden;
+  min-height: 380px;
+  border-radius: 32px;
+  border: 1px solid var(--color-border-subtle);
+  background: color-mix(in srgb, var(--color-bg-surface-muted) 80%, transparent);
+
+  .placeholder {
+    height: 100%;
+    background: transparent;
+    border-radius: 0;
+    border: none;
+    box-shadow: none;
+  }
+}
+
+// ── Mini features grid ────────────────────────────────────────────────────────
+
+.verso-mini-features {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--spacing-4);
+}
+
+.verso-mini-feature {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-3);
+  padding: var(--spacing-8);
+  border: 1px solid color-mix(in srgb, var(--color-border-subtle) 72%, transparent);
+  border-radius: 32px;
+  background: color-mix(in srgb, var(--color-bg-surface) 92%, transparent);
+}
+
+.verso-mini-feature__title {
+  font-size: var(--text-h3);
+  font-weight: var(--font-weight-display);
+  line-height: var(--line-height-heading);
+  color: var(--color-text-primary);
+}
+
+.verso-mini-feature__desc {
+  font-size: var(--text-body-sm);
+  line-height: var(--line-height-body-relaxed);
+  color: var(--color-text-secondary);
+}
+
+// ── FAQ ───────────────────────────────────────────────────────────────────────
+
+.verso-faq {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-6);
+}
+
+.verso-faq__title {
+  font-size: var(--text-h2);
+  font-weight: var(--font-weight-display);
+  line-height: var(--line-height-heading);
+  color: var(--color-text-primary);
+}
+
+.verso-faq__list {
+  display: flex;
+  flex-direction: column;
+  border-top: 1px solid var(--color-border-subtle);
+}
+
+.verso-faq__item {
+  border-bottom: 1px solid var(--color-border-subtle);
+}
+
+.verso-faq__question {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--spacing-4);
+  width: 100%;
+  padding: var(--spacing-6) 0;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-family: var(--font-sans);
+  font-size: var(--text-body);
+  font-weight: var(--font-weight-body-strong);
+  color: var(--color-text-primary);
+  text-align: left;
+  transition: color 0.15s ease;
+
+  &:hover {
+    color: var(--color-text-accent);
+  }
+}
+
+.verso-faq__icon {
+  flex-shrink: 0;
+  width: 10px;
+  height: 10px;
+  border-right: 2px solid currentColor;
+  border-bottom: 2px solid currentColor;
+  color: var(--color-text-tertiary);
+  transform: translateY(-3px) rotate(45deg);
+  transition: transform 0.22s ease, color 0.15s ease;
+}
+
+.verso-faq__item--open .verso-faq__icon {
+  color: var(--color-text-accent);
+  transform: translateY(2px) rotate(225deg);
+}
+
+.verso-faq__answer {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 0.25s ease;
+
+  p {
+    overflow: hidden;
+    font-size: var(--text-body-sm);
+    line-height: var(--line-height-body-relaxed);
+    color: var(--color-text-secondary);
+    padding-bottom: 0;
+    transition: padding-bottom 0.25s ease;
+  }
+
+  a {
+    color: var(--color-text-accent);
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 0.18em;
+    transition: color 0.15s ease;
+
+    &:hover {
+      color: var(--color-text-primary);
+    }
+  }
+}
+
+.verso-faq__item--open .verso-faq__answer {
+  grid-template-rows: 1fr;
+
+  p {
+    padding-bottom: var(--spacing-6);
+  }
+}
+
+// ── CTA ───────────────────────────────────────────────────────────────────────
+
+.verso-cta {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--spacing-8);
+  padding: var(--spacing-12) var(--spacing-8);
+  border: 1px solid color-mix(in srgb, var(--color-border-subtle) 72%, transparent);
+  border-radius: 32px;
+  background: color-mix(in srgb, var(--color-bg-surface) 92%, transparent);
+  text-align: center;
+}
+
+.verso-cta__pricing {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-3);
+  max-width: 52ch;
+}
+
+.verso-cta__pricing-title {
+  font-size: var(--text-h3);
+  font-weight: var(--font-weight-display);
+  line-height: var(--line-height-heading);
+  color: var(--color-text-primary);
+}
+
+.verso-cta__pricing-text {
+  font-size: var(--text-body-sm);
+  line-height: var(--line-height-body-relaxed);
+  color: var(--color-text-secondary);
+}
+
+.verso-cta__action {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--spacing-3);
+}
+
+.verso-cta__hint {
+  font-size: var(--text-body-sm);
+  color: var(--color-text-tertiary);
+}
+
+// ── Mobile ────────────────────────────────────────────────────────────────────
+
+@media (max-width: 1024px) {
+  .verso-page {
+    gap: var(--spacing-16);
+    padding-bottom: var(--spacing-16);
+  }
+
+  .verso-hero {
+    grid-template-columns: 1fr;
+    min-height: unset;
+  }
+
+  .verso-hero__copy {
+    order: 2;
+  }
+
+  .verso-hero__visual {
+    order: 1;
+    min-height: 320px;
+  }
+
+  .verso-feature,
+  .verso-feature--reverse {
+    grid-template-columns: 1fr;
+
+    .verso-feature__copy { order: 2; }
+    .verso-feature__visual { order: 1; }
+  }
+
+  .verso-feature__visual {
+    min-height: 280px;
+  }
+}
+
+@media (max-width: 640px) {
+  .verso-page {
+    gap: var(--spacing-12);
+    padding-bottom: var(--spacing-12);
+  }
+
+  .verso-feature__copy {
+    padding: var(--spacing-6);
+    border-radius: var(--radius-xl);
+    gap: var(--spacing-4);
+  }
+
+  .verso-feature__icon {
+    width: 48px;
+    height: 48px;
+    border-radius: var(--radius-md);
+  }
+
+  .verso-feature__visual {
+    display: none;
+    border-radius: var(--radius-xl);
+  }
+
+  .verso-mini-features {
+    grid-template-columns: 1fr;
+  }
+
+  .verso-mini-feature {
+    padding: var(--spacing-6);
+    border-radius: var(--radius-xl);
+  }
+
+  .verso-hero__copy {
+    padding: var(--spacing-6);
+    border-radius: var(--radius-xl);
+    gap: var(--spacing-4);
+  }
+
+  .verso-hero__title {
+    font-size: clamp(24px, 6.5vw, 32px);
+  }
+
+  .verso-hero__description {
+    font-size: var(--text-body-sm);
+  }
+
+  .verso-hero__visual {
+    aspect-ratio: 1800 / 1220;
+    min-height: 0;
+    border-radius: var(--radius-xl);
+  }
+
+  .verso-cta {
+    padding: var(--spacing-8) var(--spacing-6);
+    border-radius: var(--radius-xl);
+  }
+
+  .verso-cta__action {
+    width: 100%;
+  }
+
+  .verso-cta__action .app-btn {
+    width: 100%;
+    min-height: 56px;
+    height: auto;
+    white-space: normal;
+  }
+
+  .verso-cta__action .app-btn__label {
+    min-width: 0;
+    white-space: normal;
+  }
+}
